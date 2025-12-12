@@ -14,11 +14,11 @@ const Trial = () => {
     <div className="flex w-full max-w-7xl h-[300px] mx-auto rounded-lg overflow-hidden shadow-2xl bg-white">
       {/* --- Section 1: Image Background (Left Side) --- */}
       <div
-        className="flex-3 bg-cover bg-center"
+        className="flex-6 bg-cover bg-center"
         style={{
           // Replace with your actual image URL/path
-          backgroundImage: "url('https://example.com/your-decor-image.jpg')",
-          flex: "2", // Custom flex basis to approximate the 70/30 split
+          backgroundImage: "url('https://i.ibb.co.com/ccw4sDWr/banner-5.png')",
+          flex: "8", // Custom flex basis to approximate the 70/30 split
         }}
       >
         {/* Optional: Overlay content like "Happy Anniversary" text if needed */}
