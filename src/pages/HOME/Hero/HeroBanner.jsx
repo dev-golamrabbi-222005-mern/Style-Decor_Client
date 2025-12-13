@@ -1,81 +1,85 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 import banner1 from "../../../assets/banner-2.png";
 import banner2 from "../../../assets/banner-3.png";
 import banner3 from "../../../assets/banner-4.png";
-import { Autoplay } from 'swiper/modules';
-import { Link, useNavigate } from 'react-router-dom';
-import { Carousel } from 'react-responsive-carousel';
-import { BsArrowUpRightCircleFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+// 1. Define the slide content in a single data structure
+const slideData = [
+  {
+    image: banner1,
+    title: "Book Your Decoration Service Seamlessly",
+    description:
+      "Explore packages, check availability, choose a date & time, and confirm appointments—all within a smooth and modern online booking system.",
+  },
+  {
+    image: banner2,
+    title: "Transform Your Space with Elegant Decor",
+    description:
+      "Bring your dream decoration to life with premium home and event styling services. From subtle elegance to luxury—your vision becomes our creation.",
+  },
+  {
+    image: banner3,
+    title: "Make Every Occasion Unforgettable",
+    description:
+      "From weddings to corporate events, our decorators craft stunning experiences that leave lasting memories.",
+  },
+];
 
 const HeroBanner = () => {
-    const navigate = useNavigate();
-    const ResponsiveButtons = (
-       <div
-         className="
-        absolute z-50
-        flex items-center gap-3
-        left-1/20
-        bottom-3.5
-        md:bottom-14 md:left-1/15
-        lg:bottom-26 lg:left-1/15
+  // 2. Define the responsive buttons once
+  const ResponsiveButtons = (
+    <div
+      className="
+        absolute z-50 flex items-center gap-3
+        left-[5%] bottom-4
+        md:bottom-12 md:left-[11%]
+        lg:bottom-[10rem]
       "
-       >
-         {/* Track Parcel */}
-         <button
-           className="
-          px-2 py-1 rounded-xl bg-primary text-white text-sm
-          md:px-5 md:py-2 md:btn
-          lg:text-xl lg:px-8 lg:py-6 lg:btn
-        "
-         >
-           Track Your Parcel
-         </button>
+    >
+      <button className="btn btn-primary text-white">Explore Packages</button>
 
-         {/* Arrow Icon */}
-         <BsArrowUpRightCircleFill
-           className="
-          text-xl
-          md:text-3xl
-          lg:text-5xl
-        "
-         />
+      <Link to="/consultation">
+        <button className="btn bg-white text-gray-700">
+          Book a Consultation
+        </button>
+      </Link>
+    </div>
+  );
 
-         {/* Rider button */}
-         <Link to="/beArider">
-           <button
-             className="
-          px-2 py-1 bg-white rounded-xl text-sm
-          md:px-5 md:py-2 md:btn
-          lg:text-lg lg:px-8 lg:py-6 lg:btn
-        "
-           >
-             Be a rider
-           </button>
-         </Link>
-       </div>
-    )
+  return (
+    <div>
+      <Carousel
+        showThumbs={false}
+        autoPlay={true}
+        infiniteLoop={true}
+        showStatus={false}
+      >
+        {/* 3. Map over the data array to render all slides */}
+        {slideData.map((slide, index) => (
+          <div key={index} className="relative p-5">
+            <img
+              src={slide.image}
+              className="w-full h-56 md:h-96 lg:h-[32rem] object-cover rounded-xl"
+              alt={slide.title}
+            />
 
-    return (
-      <div className="my-8">
-        <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true}>
-          <div className="relative my-5 md:my-10 lg:my-15">
-            <img src={banner1} className="w-full" />
+            <div className="absolute top-8 left-8 z-50 max-w-3xl text-left text-white lg:p-27 space-y-3">
+              <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg">
+                {slide.title}
+              </h1>
+              <p className="text-sm md:text-lg drop-shadow-md">
+                {slide.description}
+              </p>
+            </div>
+
             {ResponsiveButtons}
           </div>
-
-          <div className="relative  my-5 md:my-10 lg:my-15">
-            <img src={banner2} className="w-full" />
-            {ResponsiveButtons}
-          </div>
-
-          <div className="relative  my-5 md:my-10 lg:my-15">
-            <img src={banner3} className="w-full" />
-            {ResponsiveButtons}
-          </div>
-        </Carousel>
-      </div>
-    );
+        ))}
+      </Carousel>
+    </div>
+  );
 };
 
 export default HeroBanner;

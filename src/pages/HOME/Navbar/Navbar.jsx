@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Home from "../Home";
-import Logo from "../../../../components/Logo/Logo";
+import Logo from "../../../components/Logo/Logo";
 
 // Active link style function
 const getLinkStyle = ({ isActive }) => {
