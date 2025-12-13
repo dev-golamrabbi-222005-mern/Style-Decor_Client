@@ -1,14 +1,16 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Home from "../../pages/HOME/Home/Home";
-import Logo from "../Logo/Logo";
+import Home from "../Home";
+import Logo from "../../../../components/Logo/Logo";
 
 // Active link style function
 const getLinkStyle = ({ isActive }) => {
   return {
-    color: isActive ? "#2563eb" : "", // Blue color when active
+    color: isActive ? "#2563eb" : "#000000", // Blue color when active
     borderBottom: isActive ? "2px solid #2563eb" : "none", // Underline when active
     paddingBottom: "2px",
+    fontSize: '15px',
+    fontWeight: '600'
   };
 };
 
@@ -21,22 +23,22 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/profile" style={getLinkStyle}>
+        <NavLink to="/services" style={getLinkStyle}>
           Services
         </NavLink>
       </li>
       <li>
-        <NavLink to="/profile" style={getLinkStyle}>
+        <NavLink to="/about" style={getLinkStyle}>
           About
         </NavLink>
       </li>
       <li>
-        <NavLink to="/profile" style={getLinkStyle}>
+        <NavLink to="/contact" style={getLinkStyle}>
           Contact
         </NavLink>
       </li>
       <li>
-        <NavLink to="/profile" style={getLinkStyle}>
+        <NavLink to="/dashboard" style={getLinkStyle}>
           Dashboard
         </NavLink>
       </li>
@@ -77,7 +79,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end lg:pr-15">
           <button className="btn bg-primary rounded">Sign In</button>
         </div>
       </div>

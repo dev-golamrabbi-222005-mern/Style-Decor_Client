@@ -4,10 +4,11 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: blue;
+  --color-primary: #605DFF;
   --color-secondary: teal;
 }
 
 body{
     background-color: rgb(245, 245, 245);
+    color: #000000;
 }

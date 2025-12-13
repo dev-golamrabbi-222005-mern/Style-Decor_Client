@@ -1,9 +1,9 @@
 import React from "react";
-import footerLine from "../../assets/footer-Line-1.png";
-import newsletter from "../../assets/newsletter.png";
+import footerLine from "../../../../assets/footer-Line-1.png";
+import newsletter from "../../../../assets/newsletter.png";
 import { Newspaper } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import Logo from "../Logo/Logo";
+import Logo from "../../../../components/Logo/Logo";
 
 const Footer = () => {
   const location = useLocation();
@@ -31,7 +31,7 @@ const Footer = () => {
                 offers, and exclusive discounts. Thanks for staying with us.{" "}
               </p>
             </div>
-            <div className="flex justify-center items-center my-5 mb-10">
+            <div className="flex justify-center items-center my-5 pb-10 border-b-2 border-gray-300">
               <Newspaper />
               <input
                 className="w-55 md:w-77 lg:w-111 ml-2 outline-0 bg-white p-4 rounded-3xl"
@@ -46,7 +46,7 @@ const Footer = () => {
           </newsletter>
         )}
 
-        <div className="max-w-10/12 mx-auto footer sm:footer-horizontal mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div className="max-w-10/12 mx-auto footer sm:footer-horizontal mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           <nav>
             <Logo />
             <p className="text-[15px] mb-5">
