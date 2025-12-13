@@ -21,13 +21,13 @@ export const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-20">
+    <section className="py-10 md:py-15 lg:py-22">
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-2xl md:text-4xl font-semibold text-center mb-12">
           How StyleDecor Works
         </h2>
 
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, i) => (
             <div key={i} className="bg-white p-6 rounded-2xl shadow-sm">
               <span className="text-primary font-bold text-xl">0{i + 1}</span>

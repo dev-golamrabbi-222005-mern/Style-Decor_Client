@@ -32,10 +32,10 @@ const HeroBanner = () => {
   const ResponsiveButtons = (
     <div
       className="
-        absolute z-50 flex items-center gap-3
-        left-[5%] bottom-4
-        md:bottom-12 md:left-[11%]
-        lg:bottom-[10rem]
+        absolute z-50 flex items-center gap-1 md:gap-5
+        left-[7%] bottom-8
+        md:bottom-22 md:left-[5%]
+        lg:bottom-33 lg:left-[11%]
       "
     >
       <button className="btn btn-primary text-white">Explore Packages</button>
@@ -65,7 +65,7 @@ const HeroBanner = () => {
               alt={slide.title}
             />
 
-            <div className="absolute top-8 left-8 z-50 max-w-3xl text-left text-white lg:p-27 space-y-3">
+            <div className="absolute top-8 md:top-22 lg:top-11 left-8 z-50 md:max-w-xl lg:max-w-3xl text-left text-white pr-8 lg:p-27 space-y-3">
               <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg">
                 {slide.title}
               </h1>

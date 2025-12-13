@@ -6,8 +6,8 @@ const RootLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen bg-linear-to-b from-purple-100 via-[#FCFAE0] to-purple-100">
-        <div className="max-w-7xl mx-auto">
+      <div className="min-h-screen bg-linear-to-b from-purple-100 via-[#FFFCE8] to-purple-100">
+        <div className="max-w-7xl mx-auto py-11">
           <Outlet />
         </div>
       </div>
