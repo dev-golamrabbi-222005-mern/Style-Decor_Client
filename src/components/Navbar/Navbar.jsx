@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 // Active link style function
 const getLinkStyle = ({ isActive }) => {
@@ -14,6 +16,19 @@ const getLinkStyle = ({ isActive }) => {
 };
 
 const Navbar = () => {
+
+  const { user, logOutUser } = useAuth();
+
+  const handleLogOut = async () =>{
+    try{
+      const result = await logOutUser();
+      console.log(result);
+      toast.success('You have logged out successfully.')
+    }catch(error){
+      console.log(error);
+    }
+  }
+
   const links = (
     <>
       <li>
@@ -36,11 +51,13 @@ const Navbar = () => {
           Contact
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/dashboard" style={getLinkStyle}>
-          Dashboard
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink to="/dashboard" style={getLinkStyle}>
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -79,9 +96,13 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end lg:pr-15">
-          <Link to='/auth/login'>
-            <button className="btn bg-primary rounded">Sign In</button>
-          </Link>
+          {user ? (
+              <button onClick={handleLogOut} className="btn bg-primary rounded">Sign Out</button>
+          ) : (
+            <Link to="/auth/login">
+              <button className="btn bg-primary rounded">Sign In</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
