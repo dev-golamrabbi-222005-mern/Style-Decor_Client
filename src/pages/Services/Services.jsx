@@ -38,9 +38,9 @@ const services = [
 
 const Services = () => {
   return (
-    <div>
+    <div className="py-10 md:py-11 lg:py-22">
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16 text-center">
+      <section className="max-w-7xl mx-auto px-6 pb-11 text-center">
         <h1 className="text-2xl md:text-4xl font-semibold mb-4">
           Our Decoration Services
           <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>

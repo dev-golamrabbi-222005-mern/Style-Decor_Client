@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Logo from "../../../components/Logo/Logo";
+import Logo from "../Logo/Logo";
 
 // Active link style function
 const getLinkStyle = ({ isActive }) => {
@@ -79,7 +79,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end lg:pr-15">
-          <button className="btn bg-primary rounded">Sign In</button>
+          <Link to='/auth/login'>
+            <button className="btn bg-primary rounded">Sign In</button>
+          </Link>
         </div>
       </div>
     </div>

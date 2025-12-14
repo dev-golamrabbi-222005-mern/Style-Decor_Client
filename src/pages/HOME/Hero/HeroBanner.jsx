@@ -58,7 +58,7 @@ const HeroBanner = () => {
       >
         {/* 3. Map over the data array to render all slides */}
         {slideData.map((slide, index) => (
-          <div key={index} className="relative p-5">
+          <div key={index} className="relative">
             <img
               src={slide.image}
               className="w-full h-56 md:h-96 lg:h-[32rem] object-cover rounded-xl"

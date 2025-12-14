@@ -11,7 +11,7 @@ import PopularPacks from "../Popular Packages/PopularPacks";
 
 const Home = () => {
   return (
-    <div>
+    <div className="py-11">
       <HeroBanner />
       <HowItWorks/>
       <PopularPacks/>

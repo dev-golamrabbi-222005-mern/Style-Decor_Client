@@ -1,9 +1,9 @@
 import React from "react";
-import footerLine from "../../../assets/footer-Line-1.png";
-import newsletter from "../../../assets/newsletter.png";
+import footerLine from "../../assets/footer-Line-1.png";
+import newsletter from "../../assets/newsletter.png";
 import { Newspaper } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import Logo from "../../../components/Logo/Logo";
+import Logo from "../Logo/Logo";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {

@@ -1,6 +1,6 @@
 const Contact = () => {
     return (
-      <section className="bg-gradient-to-br from-[#FCFAE0] via-[#F3E8FF] to-purple-100 py-20">
+      <section className="py-10 md:py-11 lg:py-22">
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <div className="text-center mb-16">
