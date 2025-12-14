@@ -8,6 +8,7 @@ import Contact from "../pages/Contact/Contact";
 import AuthLayout from "../Layouts/AuthLayout";
 import LoginPage from "../pages/Auth/Auth Pages/LoginPage";
 import RegistrationPage from "../pages/Auth/Auth Pages/RegistrationPage";
+import PassRecoverPage from "../pages/Auth/Auth Pages/PassRecoverPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
     children: [
       {path: 'auth/login', element: <LoginPage/>},
       {path: 'auth/register', element: <RegistrationPage/>},
-      // {path: 'auth/login', element: <LoginPage/>}
+      {path: 'auth/recover-password', element: <PassRecoverPage/>}
     ]
   }
 ]);

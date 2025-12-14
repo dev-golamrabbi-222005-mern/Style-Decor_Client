@@ -12,14 +12,15 @@ import PopularPacks from "../Popular Packages/PopularPacks";
 const Home = () => {
   return (
     <div className="py-11">
+      <title>Style Decor || Home</title>
       <HeroBanner />
-      <HowItWorks/>
-      <PopularPacks/>
-      <Features/>
-      <ServedBrands/>
-      <TrustStats/>
-      <Testimonials/>
-      <HomeCTA/>
+      <HowItWorks />
+      <PopularPacks />
+      <Features />
+      <ServedBrands />
+      <TrustStats />
+      <Testimonials />
+      <HomeCTA />
     </div>
   );
 };

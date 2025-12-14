@@ -40,6 +40,8 @@ const Services = () => {
   return (
     <div className="py-10 md:py-11 lg:py-22">
       {/* Hero Section */}
+      <title>Style Decor | Services</title>
+
       <section className="max-w-7xl mx-auto px-6 pb-11 text-center">
         <h1 className="text-2xl md:text-4xl font-semibold mb-4">
           Our Decoration Services
