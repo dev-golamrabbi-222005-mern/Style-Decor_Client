@@ -4,6 +4,7 @@ import newsletter from "../../../assets/newsletter.png";
 import { Newspaper } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import Logo from "../../../components/Logo/Logo";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const Footer = () => {
         className="bg-[#FCFAE0] text-black pt-10"
       >
         {location.pathname === "/" && (
+          // Newsletter Section 
           <newsletter>
             <div className="text-center">
               <img className="mx-auto" src={newsletter} alt="" />
@@ -59,6 +61,7 @@ const Footer = () => {
               holiday.
             </strong>
           </nav>
+
           <nav>
             <h6 className="footer-title">Services</h6>
             <a className="link link-hover">Home Decoration</a>
@@ -72,6 +75,7 @@ const Footer = () => {
             <a className="link link-hover">Custom Decoration Package</a>
             <a className="link link-hover">Rental Items</a>
           </nav>
+
           <nav>
             <h6 className="footer-title">Contact Us</h6>
             <p className="">
@@ -113,6 +117,7 @@ const Footer = () => {
               </a>
             </p>
           </nav>
+
           <nav>
             <h6 className="footer-title">Legal</h6>
             <a className="link link-hover">Terms & Conditions</a>
@@ -121,15 +126,12 @@ const Footer = () => {
             <a className="link link-hover">Service Agreement</a>
             <a className="link link-hover">Compliance & Safety</a>
           </nav>
+
           <nav>
             <h6 className="footer-title">Social</h6>
             <div className="grid grid-flow-col gap-4">
               <a className="cursor-pointer">
-                <img
-                  alt="svgImg"
-                  className="hover:text-blue-400"
-                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgMzAgMzAiIHdpZHRoPSIzMHB4IiBoZWlnaHQ9IjMwcHgiPjxwYXRoIGQ9Ik0yNi4zNywyNmwtOC43OTUtMTIuODIybDAuMDE1LDAuMDEyTDI1LjUyLDRoLTIuNjVsLTYuNDYsNy40OEwxMS4yOCw0SDQuMzNsOC4yMTEsMTEuOTcxTDEyLjU0LDE1Ljk3TDMuODgsMjZoMi42NSBsNy4xODItOC4zMjJMMTkuNDIsMjZIMjYuMzd6IE0xMC4yMyw2bDEyLjM0LDE4aC0yLjFMOC4xMiw2SDEwLjIzeiIvPjwvc3ZnPg=="
-                />
+                <FaXTwitter className="hover:text-blue-400 text-2xl" />
               </a>
               <a className="hover:text-blue-400 cursor-pointer">
                 <svg

@@ -29,7 +29,7 @@ export const HowItWorks = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl shadow-sm">
+            <div key={i} className="bg-white p-6 rounded-2xl shadow-xl">
               <span className="text-primary font-bold text-xl">0{i + 1}</span>
               <h3 className="text-lg font-semibold mt-3">{step.title}</h3>
               <p className="text-gray-600 text-sm mt-2">{step.desc}</p>

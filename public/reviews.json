@@ -1,0 +1,101 @@
+[
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4d5",
+    "user_email": "sarah.k@webmail.com",
+    "userName": "Sarah K.",
+    "ratings": 5.0,
+    "review": "Absolutely stunning event decoration! The on-site team was professional, prompt, and exceeded all expectations. Booking the package through the app was simple.",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/44.jpg",
+    "date": "2024-06-15T10:00:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4d6",
+    "user_email": "michael_t@home.net",
+    "userName": "Michael T.",
+    "ratings": 4.0,
+    "review": "The in-studio consultation was very informative. They helped me pick the perfect home decor package. The availability checker is a lifesaver!",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/22.jpg",
+    "date": "2024-05-20T12:45:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4d7",
+    "user_email": "aisha.ali@work.org",
+    "userName": "Aisha Ali",
+    "ratings": 4.8,
+    "review": "Used the 'Wedding Luxe' package. Tracking the service status in the app was very convenient. Minor delay on setup, but the final look was flawless.",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/61.jpg",
+    "date": "2024-07-01T17:10:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4d8",
+    "user_email": "davidsmith@email.com",
+    "userName": "David S.",
+    "ratings": 5.0,
+    "review": "Seamless payment process and real-time updates on my decoration booking. Highly recommend StyleDecor for ceremony services!",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/5.jpg",
+    "date": "2024-06-03T09:15:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4d9",
+    "user_email": "linda.chen@mail.com",
+    "userName": "Linda Chen",
+    "ratings": 3.5,
+    "review": "Good value for money. The decorator was friendly, but the initial online booking process felt a little slow. Overall happy with the final result.",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/19.jpg",
+    "date": "2024-04-18T16:00:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4da",
+    "user_email": "robert_g@yahoo.com",
+    "userName": "Robert G.",
+    "ratings": 5.0,
+    "review": "Needed a quick corporate event setup. The 'Business Blitz' package was delivered flawlessly and the online status tracking was very useful.",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/88.jpg",
+    "date": "2024-07-10T11:00:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4db",
+    "user_email": "jasmine.p@email.net",
+    "userName": "Jasmine P.",
+    "ratings": 4.5,
+    "review": "The in-studio mock-up was great! The decorator (Maria) was super helpful. The web app made scheduling and paying a breeze.",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/3.jpg",
+    "date": "2024-05-01T14:30:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4dc",
+    "user_email": "sam.wilson@mail.com",
+    "userName": "Sam Wilson",
+    "ratings": 4.2,
+    "review": "Excellent service and responsive customer support when I needed to adjust my booking date. The calendar availability feature worked perfectly.",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/77.jpg",
+    "date": "2024-06-25T13:00:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4dd",
+    "user_email": "olivia_m@web.ca",
+    "userName": "Olivia M.",
+    "ratings": 5.0,
+    "review": "My home consultation was fantastic. The decorator arrived on time and offered creative, budget-friendly ideas. Top-notch service!",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/11.jpg",
+    "date": "2024-07-05T08:45:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4de",
+    "user_email": "george.h@test.com",
+    "userName": "George H.",
+    "ratings": 4.0,
+    "review": "The decoration was good, but the initial confusion between 'in-studio' and 'on-site' modes during booking caused a slight issue. Needs clearer labeling.",
+    "user_photoURL": "https://randomuser.me/api/portraits/men/4.jpg",
+    "date": "2024-04-29T19:00:00.000Z"
+  },
+  {
+    "id": "60a4e7c8d9e7d2a5f1b3c4df",
+    "user_email": "kate.jones@net.co",
+    "userName": "Kate Jones",
+    "ratings": 4.7,
+    "review": "Love the ability to track service status after payment. It gave me peace of mind. The decorator's work was beautiful for my anniversary party.",
+    "user_photoURL": "https://randomuser.me/api/portraits/women/8.jpg",
+    "date": "2024-05-12T15:30:00.000Z"
+  }
+]

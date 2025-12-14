@@ -1,6 +1,8 @@
 import React from 'react';
 
-const AllPacks = () => {
+const PrivateRoute = ({children}) => {
+
+    
     return (
         <div>
             
@@ -8,4 +10,4 @@ const AllPacks = () => {
     );
 };
 
-export default AllPacks;
+export default PrivateRoute;

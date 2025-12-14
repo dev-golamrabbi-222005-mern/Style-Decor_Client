@@ -10,7 +10,7 @@ const services = [
   {
     title: "Wedding Decoration",
     desc: "Luxurious wedding stage, floral, and venue decoration to make your big day unforgettable.",
-    image: "https://images.unsplash.com/photo-1529634899049-188f7fe5f7c5",
+    image: "https://i.ibb.co.com/jvDsYLfD/b4f6590f3f0f80749c2fd601a2be5bf0.jpg",
   },
   {
     title: "Birthday & Party Decor",
@@ -20,7 +20,8 @@ const services = [
   {
     title: "Corporate & Event Styling",
     desc: "Professional event styling for corporate programs, launches, and formal events.",
-    image: "https://images.unsplash.com/photo-1515169067865-5387ec356754",
+    image:
+      "https://i.ibb.co.com/hRsrqwLr/living-room-decor-ideas-5442837-hero-8b6e540e13f9457a84fe9f9e26ea2e5c.jpg",
   },
   {
     title: "Floral & Lighting Setup",
