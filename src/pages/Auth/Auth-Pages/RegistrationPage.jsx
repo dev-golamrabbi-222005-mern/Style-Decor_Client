@@ -5,14 +5,15 @@ import { Mail, Lock, Eye, EyeOff, User, Image, ArrowRight, Sparkles, Wrench } fr
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import GoogleLogin from "./GoogleLogin";
+import useLoading from "../../../hooks/useLoading";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState("user");
-  const navigate = useNavigate();
-  const location = useLocation();
+   const navigate = useNavigate();
+   const location = useLocation();
     const { registerUser, updateUserProfile, signInWithGoogle } = useAuth();
-
+    const { startLoading, stopLoading } = useLoading();
   const {
     register,
     handleSubmit,
@@ -29,6 +30,7 @@ const RegisterPage = () => {
     // await new Promise((resolve) => setTimeout(resolve, 1500));
     // console.log("Register data:", data);
     // Handle registration logic here
+    startLoading();
     try{
         const result = await registerUser(data.email, data.password);
         console.log("user created", result);
@@ -43,6 +45,8 @@ const RegisterPage = () => {
         navigate(location?.state || '/');
     }catch(error){
         console.log("registration error.", error);
+    }finally{
+        stopLoading();
     }
   }
 

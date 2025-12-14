@@ -5,12 +5,14 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import GoogleLogin from "./GoogleLogin";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useLoading from "../../../hooks/useLoading";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
     const {signInUser} = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const { startLoading, stopLoading } = useLoading();
 
   const {
     register,
@@ -23,6 +25,7 @@ const LoginPage = () => {
     // await new Promise((resolve) => setTimeout(resolve, 1500));
     // console.log("Login data:", data);
     // Handle login logic here
+    startLoading();
     try {
       const result = await signInUser(data.email, data.password);
       console.log("sign in done", result);
@@ -30,8 +33,9 @@ const LoginPage = () => {
       navigate(location?.state || "/");
     } catch (error) {
       console.log("login error.", error);
+    }finally{
+        stopLoading();
     }
-
   };
 
   return (
