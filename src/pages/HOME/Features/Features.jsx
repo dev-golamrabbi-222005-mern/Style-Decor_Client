@@ -16,6 +16,7 @@ const Features = () => {
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-2xl md:text-4xl font-semibold text-center mb-12">
           Why Choose StyleDecor
+          <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
         </h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">

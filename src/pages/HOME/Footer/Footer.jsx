@@ -19,7 +19,7 @@ const Footer = () => {
         className="bg-[#FCFAE0] text-black pt-10"
       >
         {location.pathname === "/" && (
-          // Newsletter Section 
+          // Newsletter Section
           <newsletter>
             <div className="text-center">
               <img className="mx-auto" src={newsletter} alt="" />
@@ -33,7 +33,7 @@ const Footer = () => {
                 offers, and exclusive discounts. Thanks for staying with us.{" "}
               </p>
             </div>
-            <div className="flex justify-center items-center my-5 pb-10 border-b-2 border-gray-300">
+            <div className="flex justify-center items-center my-5 pb-10">
               <Newspaper />
               <input
                 className="w-55 md:w-77 lg:w-111 ml-2 outline-0 bg-white p-4 rounded-3xl"
@@ -45,6 +45,7 @@ const Footer = () => {
                 Subscribe
               </button>
             </div>
+            <div className="border-b-5 border-[#577F84] max-w-full mt-5"></div>
           </newsletter>
         )}
 

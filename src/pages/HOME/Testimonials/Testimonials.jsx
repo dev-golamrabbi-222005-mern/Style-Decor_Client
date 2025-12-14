@@ -34,6 +34,7 @@ const Testimonials = () => {
           </div>
           <h2 className="text-2xl md:text-4xl font-semibold text-gray-900 mb-4">
             What Our Clients Say
+            <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Don't just take our word for it – hear from our satisfied clients
@@ -61,8 +62,8 @@ const Testimonials = () => {
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-yellow-100 to-pink-100 rounded-tr-full opacity-30" />
 
               {/* Quote Icon */}
-              <div className="relative mb-6">
-                <Quote className="w-16 h-16 text-blue-500 opacity-20" />
+              <div className="relative">
+                <Quote className="w-15 h-15 text-blue-500 opacity-22" />
               </div>
 
               {/* Stars */}

@@ -15,6 +15,7 @@ const ServedBrands = () => {
       <div className="my-5 md:my-10 lg:my-15 pb-10 lg:pb-20">
         <h1 className="text-2xl md:text-4xl font-semibold my-15 lg:my-20 text-center">
           All of our Partners
+          <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
         </h1>
         <div className="w-full overflow-hidden">
           <Marquee

@@ -1,11 +1,12 @@
 const About = () => {
   return (
-    <section className="bg-white py-20">
+    <section className="py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl md:text-4xl font-semibold mb-4">
             About StyleDecor
+            <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
             A modern appointment and service management system designed to
@@ -43,8 +44,9 @@ const About = () => {
 
         {/* Why Develop */}
         <div className="mb-20">
-          <h3 className="text-3xl font-semibold mb-8 text-center">
+          <h3 className="text-2xl md:text-4xl font-semibold mb-8 text-center">
             Why Develop This System?
+            <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
           </h3>
 
           <div className="grid md:grid-cols-2 gap-10">

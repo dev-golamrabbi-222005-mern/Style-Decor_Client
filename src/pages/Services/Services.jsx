@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import CTA_bg from '../../assets/banner-1.png'
 
 const services = [
   {
@@ -37,11 +38,12 @@ const services = [
 
 const Services = () => {
   return (
-    <div className="bg-gradient-to-br from-[#FCFAE0] via-[#F3E8FF] to-purple-100">
+    <div>
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="text-2xl md:text-4xl font-semibold mb-4">
           Our Decoration Services
+          <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
           From intimate home setups to grand ceremonies, StyleDecor provides
@@ -80,12 +82,19 @@ const Services = () => {
       </section>
 
       {/* Call To Action */}
-      <section className="bg-white py-16">
+      <section
+        style={{
+          backgroundImage: `url(${CTA_bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className="py-16 rounded-2xl text-white"
+      >
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ready to Decorate Your Special Moment?
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="mb-8">
             Explore our packages or book a consultation to get started with
             StyleDecor today.
           </p>

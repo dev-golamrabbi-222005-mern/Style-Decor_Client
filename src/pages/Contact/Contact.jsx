@@ -4,7 +4,10 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
+            <h1 className="text-2xl md:text-4xl font-semibold mb-4">
+              Contact Us
+              <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
+            </h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Have questions or want to book a decoration service? Reach out to
               StyleDecor — we’re here to help you every step of the way.
