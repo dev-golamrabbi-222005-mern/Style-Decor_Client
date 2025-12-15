@@ -32,7 +32,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#FCFAE0] via-[#F3E8FF] to-purple-100 rounded-2xl p-8 shadow-sm">
+          <div className="bg-linear-to-br from-[#FCFAE0] via-[#F3E8FF] to-purple-100 rounded-2xl p-8 shadow-sm">
             <ul className="space-y-4 text-gray-700">
               <li>✔ Online package exploration</li>
               <li>✔ Smart date & time scheduling</li>

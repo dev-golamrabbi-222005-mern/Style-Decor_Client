@@ -5,16 +5,17 @@ import { Mail, Lock, Eye, EyeOff, User, Image, ArrowRight, Sparkles, Wrench } fr
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import GoogleLogin from "./GoogleLogin";
-import useLoading from "../../../hooks/useLoading";
+import useLoading from '../../../hooks/useLoading'
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [selectedRole, setSelectedRole] = useState("user");
    const navigate = useNavigate();
    const location = useLocation();
-    const { registerUser, updateUserProfile, signInWithGoogle } = useAuth();
-    const { startLoading, stopLoading } = useLoading();
-  const {
+    const { registerUser, updateUserProfile } = useAuth();
+    const {startLoading, stopLoading} = useLoading()
+
+    const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },

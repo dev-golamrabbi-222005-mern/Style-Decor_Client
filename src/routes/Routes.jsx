@@ -11,6 +11,7 @@ import RegistrationPage from "../pages/Auth/Auth-Pages/RegistrationPage";
 import PassRecoverPage from "../pages/Auth/Auth-Pages/PassRecoverPage";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardLayout from "../Layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,16 @@ export const router = createBrowserRouter([
       {path: 'auth/login', element: <LoginPage/>},
       {path: 'auth/register', element: <RegistrationPage/>},
       {path: 'auth/recover-password', element: <PassRecoverPage/>}
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <DashboardLayout/>,
+    children: [
+      {
+        index: true, element: <Dashboard/>,
+
+      }
     ]
   }
 ]);

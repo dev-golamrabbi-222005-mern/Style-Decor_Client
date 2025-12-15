@@ -2,7 +2,7 @@ import React from 'react';
 
 const PacksCard = ({pack}) => {
     const {name, description, price, serviceType, durationHours, imageURL, features} = pack;
-    console.log(imageURL);
+    // console.log(imageURL);
     
     return (
       <div className="bg-[#FCFAE0] p-4 rounded-xl mt-8 shadow-2xl">

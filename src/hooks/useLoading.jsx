@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LoadingContext } from "../pages/Auth/Contexts/Loading-Context&Provider/LoadingContext";
+import LoadingContext from "../pages/Auth/Contexts/Loading-Context&Provider/LoadingContext";
 
 const useLoading = () => {
   const context = useContext(LoadingContext);

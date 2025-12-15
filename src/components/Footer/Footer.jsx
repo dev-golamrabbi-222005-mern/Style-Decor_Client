@@ -49,7 +49,7 @@ const Footer = () => {
           </newsletter>
         )}
 
-        <div className="max-w-10/12 mx-auto footer sm:footer-horizontal mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div className="max-w-10/12 mx-auto mt-10 grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
           <nav>
             <Logo />
             <p className="text-[15px] mb-5">
@@ -65,16 +65,16 @@ const Footer = () => {
 
           <nav>
             <h6 className="footer-title">Services</h6>
-            <a className="link link-hover">Home Decoration</a>
-            <a className="link link-hover">Event / Ceremony Decoration</a>
-            <a className="link link-hover">Wedding Stage Design</a>
-            <a className="link link-hover">Birthday Decoration</a>
-            <a className="link link-hover">Floral & Lighting Setup</a>
-            <a className="link link-hover">On-Site Consultation</a>
-            <a className="link link-hover">In-Studio Consultation</a>
-            <a className="link link-hover">Venue Styling</a>
-            <a className="link link-hover">Custom Decoration Package</a>
-            <a className="link link-hover">Rental Items</a>
+            <li><a className="link link-hover">Home Decoration</a></li>
+            <li><a className="link link-hover">Event / Ceremony Decoration</a></li>
+            <li><a className="link link-hover">Wedding Stage Design</a></li>
+            <li><a className="link link-hover">Birthday Decoration</a></li>
+            <li><a className="link link-hover">Floral & Lighting Setup</a></li>
+            <li><a className="link link-hover">On-Site Consultation</a></li>
+            <li><a className="link link-hover">In-Studio Consultation</a></li>
+            <li><a className="link link-hover">Venue Styling</a></li>
+            <li><a className="link link-hover">Custom Decoration Package</a></li>
+            <li><a className="link link-hover">Rental Items</a></li>
           </nav>
 
           <nav>
@@ -121,11 +121,11 @@ const Footer = () => {
 
           <nav>
             <h6 className="footer-title">Legal</h6>
-            <a className="link link-hover">Terms & Conditions</a>
-            <a className="link link-hover">Privacy Policy</a>
-            <a className="link link-hover">Refund & Cancellation Policy</a>
-            <a className="link link-hover">Service Agreement</a>
-            <a className="link link-hover">Compliance & Safety</a>
+            <li><a className="link link-hover">Terms & Conditions</a></li>
+            <li><a className="link link-hover">Privacy Policy</a></li>
+            <li><a className="link link-hover">Refund & Cancellation Policy</a></li>
+            <li><a className="link link-hover">Service Agreement</a></li>
+            <li><a className="link link-hover">Compliance & Safety</a></li>
           </nav>
 
           <nav>

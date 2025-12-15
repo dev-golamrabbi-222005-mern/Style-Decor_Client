@@ -5,7 +5,7 @@
   name: "light";
   default: true;
   --color-primary: #605DFF;
-  --color-secondary: teal;
+  --color-secondary: #577F84;
 }
 
 body{

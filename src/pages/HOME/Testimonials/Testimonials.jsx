@@ -121,7 +121,7 @@ const Testimonials = () => {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 bg-white hover:bg-blue-50 text-gray-800 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 border border-gray-200"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-5 bg-white hover:bg-blue-50 text-gray-800 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 border border-gray-200"
             aria-label="Previous review"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -129,7 +129,7 @@ const Testimonials = () => {
 
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 bg-white hover:bg-blue-50 text-gray-800 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 border border-gray-200"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-5 bg-white hover:bg-blue-50 text-gray-800 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 border border-gray-200"
             aria-label="Next review"
           >
             <ChevronRight className="w-6 h-6" />

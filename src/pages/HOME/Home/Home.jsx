@@ -11,7 +11,7 @@ import PopularPacks from "../Popular-Packages/PopularPacks";
 
 const Home = () => {
   return (
-    <div className="py-11">
+    <div className="py-3 md:py-7 lg:py-11">
       <title>Style Decor || Home</title>
       <HeroBanner />
       <HowItWorks />

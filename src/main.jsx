@@ -7,8 +7,8 @@ import { Toaster } from "react-hot-toast";
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import { router } from "./routes/Routes";
-import { AuthProvider } from "./pages/Auth/Contexts/Auth-Context&Provider/AuthProvider";
-import { LoadingProvider } from "./pages/Auth/Contexts/Loading-Context&Provider/LoadingProvider";
+import AuthProvider from "./pages/Auth/Contexts/Auth-Context&Provider/AuthProvider";
+import LoadingProvider from "./pages/Auth/Contexts/Loading-Context&Provider/LoadingProvider";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -12,7 +12,7 @@ const LoginPage = () => {
     const {signInUser} = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
-    const { startLoading, stopLoading } = useLoading();
+    const {startLoading, stopLoading} = useLoading();
 
   const {
     register,
