@@ -8,6 +8,7 @@ import HomeCTA from "../Home-CTA/HomeCTA";
 import Testimonials from "../Testimonials/Testimonials";
 import ServedBrands from "../Partners/Partners";
 import PopularPacks from "../Popular-Packages/PopularPacks";
+import Coverage from "../Coverage/Coverage";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
       <ServedBrands />
       <TrustStats />
       <Testimonials />
+      <Coverage/>
       <HomeCTA />
     </div>
   );

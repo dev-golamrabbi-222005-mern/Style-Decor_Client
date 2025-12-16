@@ -22,7 +22,6 @@ const Navbar = () => {
   const handleLogOut = async () =>{
     try{
       const result = await logOutUser();
-      console.log(result);
       toast.success('You have logged out successfully.')
     }catch(error){
       console.log(error);

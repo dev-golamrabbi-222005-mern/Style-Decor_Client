@@ -6,6 +6,8 @@ import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import GoogleLogin from "./GoogleLogin";
 import useLoading from '../../../hooks/useLoading'
+import axios from "axios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,7 +15,8 @@ const RegisterPage = () => {
    const navigate = useNavigate();
    const location = useLocation();
     const { registerUser, updateUserProfile } = useAuth();
-    const {startLoading, stopLoading} = useLoading()
+    const {startLoading, stopLoading} = useLoading();
+    const axiosSecure = useAxiosSecure();
 
     const {
     register,
@@ -27,27 +30,50 @@ const RegisterPage = () => {
   });
 
   const onSubmit = async (data) => {
-    // Simulate API call
-    // await new Promise((resolve) => setTimeout(resolve, 1500));
-    // console.log("Register data:", data);
-    // Handle registration logic here
+    console.log(data);
+    
     startLoading();
     try{
-        const result = await registerUser(data.email, data.password);
-        console.log("user created", result);
-        
-        // Update user profile with name and photo
-        await updateUserProfile({
-            displayName: data.name,
-            photoURL: data.photoURL
-        });
-        console.log('profile updated successfully');
-        toast.success('You have successfully created an account on Style Decor.');
-        navigate(location?.state || '/');
+      const result = await registerUser(data.email, data.password);
+      console.log("user created", result);
+      
+      // Update user profile with name and photo
+      await updateUserProfile({
+        displayName: data.name,
+        photoURL: data.photoUrl,
+      });
+      console.log("profile updated successfully");
+      
+      //Image processing
+      const profileImg = data.photoUrl;
+      const formData = new FormData();
+      formData.append("image", profileImg);
+      const img_API_URL = `https://api.imgbb.com/1/upload?expiration=600&key=${
+        import.meta.env.VITE_IMAGE_HOST_KEY
+      }`;
+      axios.post(img_API_URL, formData).then(res=>{
+        const photoURL = res.data.data.url;
+
+        //create user in db
+        const userInfo = {
+          email: data.email,
+          displayName: data.name,
+          photoURL: photoURL,
+          role: data.role
+        }
+        axiosSecure.post('/users', userInfo)
+        .then(res=>{
+          if(res.data.insertedId){
+            console.log('user already created in db', res.data);
+          }
+        })     
+      })
+      toast.success("You have successfully created an account on Style Decor.");
     }catch(error){
-        console.log("registration error.", error);
+      console.log("registration error.", error);
     }finally{
-        stopLoading();
+      navigate(location?.state || "/");
+      stopLoading();
     }
   }
 

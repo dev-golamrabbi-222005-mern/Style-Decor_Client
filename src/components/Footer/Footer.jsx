@@ -5,6 +5,7 @@ import { Newspaper } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa6";
 
 const Footer = () => {
   const location = useLocation();
@@ -65,16 +66,36 @@ const Footer = () => {
 
           <nav>
             <h6 className="footer-title">Services</h6>
-            <li><a className="link link-hover">Home Decoration</a></li>
-            <li><a className="link link-hover">Event / Ceremony Decoration</a></li>
-            <li><a className="link link-hover">Wedding Stage Design</a></li>
-            <li><a className="link link-hover">Birthday Decoration</a></li>
-            <li><a className="link link-hover">Floral & Lighting Setup</a></li>
-            <li><a className="link link-hover">On-Site Consultation</a></li>
-            <li><a className="link link-hover">In-Studio Consultation</a></li>
-            <li><a className="link link-hover">Venue Styling</a></li>
-            <li><a className="link link-hover">Custom Decoration Package</a></li>
-            <li><a className="link link-hover">Rental Items</a></li>
+            <li>
+              <a className="link link-hover">Home Decoration</a>
+            </li>
+            <li>
+              <a className="link link-hover">Event / Ceremony Decoration</a>
+            </li>
+            <li>
+              <a className="link link-hover">Wedding Stage Design</a>
+            </li>
+            <li>
+              <a className="link link-hover">Birthday Decoration</a>
+            </li>
+            <li>
+              <a className="link link-hover">Floral & Lighting Setup</a>
+            </li>
+            <li>
+              <a className="link link-hover">On-Site Consultation</a>
+            </li>
+            <li>
+              <a className="link link-hover">In-Studio Consultation</a>
+            </li>
+            <li>
+              <a className="link link-hover">Venue Styling</a>
+            </li>
+            <li>
+              <a className="link link-hover">Custom Decoration Package</a>
+            </li>
+            <li>
+              <a className="link link-hover">Rental Items</a>
+            </li>
           </nav>
 
           <nav>
@@ -121,11 +142,21 @@ const Footer = () => {
 
           <nav>
             <h6 className="footer-title">Legal</h6>
-            <li><a className="link link-hover">Terms & Conditions</a></li>
-            <li><a className="link link-hover">Privacy Policy</a></li>
-            <li><a className="link link-hover">Refund & Cancellation Policy</a></li>
-            <li><a className="link link-hover">Service Agreement</a></li>
-            <li><a className="link link-hover">Compliance & Safety</a></li>
+            <li>
+              <a className="link link-hover">Terms & Conditions</a>
+            </li>
+            <li>
+              <a className="link link-hover">Privacy Policy</a>
+            </li>
+            <li>
+              <a className="link link-hover">Refund & Cancellation Policy</a>
+            </li>
+            <li>
+              <a className="link link-hover">Service Agreement</a>
+            </li>
+            <li>
+              <a className="link link-hover">Compliance & Safety</a>
+            </li>
           </nav>
 
           <nav>
@@ -134,6 +165,10 @@ const Footer = () => {
               <a className="cursor-pointer">
                 <FaXTwitter className="hover:text-blue-400 text-2xl" />
               </a>
+              <a className="cursor-pointer">
+                <FaInstagram className="hover:text-blue-400 text-2xl" />
+              </a>
+
               <a className="hover:text-blue-400 cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

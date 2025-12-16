@@ -23,7 +23,7 @@ const Testimonials = () => {
   const currentReview = reviewsData[currentIndex];
 
   return (
-    <section className="py-16 md:py-20 lg:py-28">
+    <section className="py-5 md:py-10 lg:py-15">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">

@@ -27,7 +27,7 @@ const TrustStats = () => {
   }, [countSP, countED, countHC]);
 
   return (
-    <section className="py-10 md:py-15 lg:py-22 bg-white rounded-2xl">
+    <section className="py-10 md:py-15 lg:py-22 bg-white rounded-2xl mb-10">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div>
           <h3 className="text-4xl font-bold text-primary">
