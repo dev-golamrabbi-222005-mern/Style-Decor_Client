@@ -1,28 +1,36 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Mail, Lock, Eye, EyeOff, User, Image, ArrowRight, Sparkles, Wrench } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  User,
+  Image,
+  ArrowRight,
+  Sparkles,
+  Wrench,
+} from "lucide-react";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import GoogleLogin from "./GoogleLogin";
-import useLoading from '../../../hooks/useLoading'
+import useLoading from "../../../hooks/useLoading";
 import axios from "axios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("user");
-   const navigate = useNavigate();
-   const location = useLocation();
-    const { registerUser, updateUserProfile } = useAuth();
-    const {startLoading, stopLoading} = useLoading();
-    const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { registerUser, updateUserProfile } = useAuth();
+  const { startLoading, stopLoading } = useLoading();
+  const axiosSecure = useAxiosSecure();
 
-    const {
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    watch,
   } = useForm({
     defaultValues: {
       role: "user",
@@ -30,20 +38,19 @@ const RegisterPage = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    
+
     startLoading();
-    try{
+    try {
       const result = await registerUser(data.email, data.password);
       console.log("user created", result);
-      
+
       // Update user profile with name and photo
       await updateUserProfile({
         displayName: data.name,
         photoURL: data.photoUrl,
       });
       console.log("profile updated successfully");
-      
+
       //Image processing
       const profileImg = data.photoUrl;
       const formData = new FormData();
@@ -51,35 +58,34 @@ const RegisterPage = () => {
       const img_API_URL = `https://api.imgbb.com/1/upload?expiration=600&key=${
         import.meta.env.VITE_IMAGE_HOST_KEY
       }`;
-      axios.post(img_API_URL, formData).then(res=>{
+      await axios.post(img_API_URL, formData).then((res) => {
         const photoURL = res.data.data.url;
 
         //create user in db
-        const userInfo = {
-          email: data.email,
-          displayName: data.name,
-          photoURL: photoURL,
-          role: data.role
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL,
+            role: 'user',
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user already created in db", res.data);
+              toast.success("You have successfully created an account on Style Decor.");
+            }
+          });
         }
-        axiosSecure.post('/users', userInfo)
-        .then(res=>{
-          if(res.data.insertedId){
-            console.log('user already created in db', res.data);
-          }
-        })     
-      })
-      toast.success("You have successfully created an account on Style Decor.");
-    }catch(error){
+      );
+    } catch (error) {
       console.log("registration error.", error);
-    }finally{
+    } finally {
       navigate(location?.state || "/");
       stopLoading();
     }
-  }
+  };
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen p-4 relative">
+    <div className="flex items-center justify-center min-h-screen p-4 relative">
       {/* Register Card */}
       <div className="w-full max-w-xl p-8 md:p-10 rounded-3xl shadow-2xl bg-white/10 border border-white/20 relative z-10 my-8">
         {/* Subtle Inner Glow */}
@@ -101,97 +107,6 @@ const RegisterPage = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            {/* Role Selection */}
-            <div>
-              <label className="block text-lg font-medium text-white/90 mb-3">
-                I want to register as
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setSelectedRole("user")}
-                  className={`
-                    relative p-4 rounded-xl border-2 transition-all duration-300
-                    ${
-                      selectedRole === "user"
-                        ? "border-sky-400 bg-sky-500/20"
-                        : "border-white/20 bg-white/5 hover:bg-white/10"
-                    }
-                  `}
-                >
-                  <input
-                    type="radio"
-                    value="user"
-                    {...register("role")}
-                    className="sr-only"
-                    checked={selectedRole === "user"}
-                    onChange={() => setSelectedRole("user")}
-                  />
-                  <div className="flex flex-col items-center gap-2">
-                    <User
-                      className={`w-8 h-8 ${
-                        selectedRole === "user"
-                          ? "text-sky-300"
-                          : "text-white/60"
-                      }`}
-                    />
-                    <span
-                      className={`text-sm font-semibold ${
-                        selectedRole === "user" ? "text-white" : "text-white/70"
-                      }`}
-                    >
-                      Normal User
-                    </span>
-                  </div>
-                  {selectedRole === "user" && (
-                    <div className="absolute top-2 right-2 w-3 h-3 bg-sky-400 rounded-full" />
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedRole("decorator")}
-                  className={`
-                    relative p-4 rounded-xl border-2 transition-all duration-300
-                    ${
-                      selectedRole === "decorator"
-                        ? "border-purple-400 bg-purple-500/20"
-                        : "border-white/20 bg-white/5 hover:bg-white/10"
-                    }
-                  `}
-                >
-                  <input
-                    type="radio"
-                    value="decorator"
-                    {...register("role")}
-                    className="sr-only"
-                    checked={selectedRole === "decorator"}
-                    onChange={() => setSelectedRole("decorator")}
-                  />
-                  <div className="flex flex-col items-center gap-2">
-                    <Wrench
-                      className={`w-8 h-8 ${
-                        selectedRole === "decorator"
-                          ? "text-purple-300"
-                          : "text-white/60"
-                      }`}
-                    />
-                    <span
-                      className={`text-sm font-semibold ${
-                        selectedRole === "decorator"
-                          ? "text-white"
-                          : "text-white/70"
-                      }`}
-                    >
-                      Decorator
-                    </span>
-                  </div>
-                  {selectedRole === "decorator" && (
-                    <div className="absolute top-2 right-2 w-3 h-3 bg-purple-400 rounded-full" />
-                  )}
-                </button>
-              </div>
-            </div>
 
             {/* Name Input */}
             <div>
@@ -437,7 +352,7 @@ const RegisterPage = () => {
           </div>
 
           {/* Social Login Button */}
-          <GoogleLogin/>
+          <GoogleLogin />
 
           {/* Login Link */}
           <p className="mt-6 text-center text-sm text-white/80">

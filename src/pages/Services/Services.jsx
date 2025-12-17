@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
-import CTA_bg from '../../assets/banner-1.png'
+import CTA_bg from "../../assets/banner-1.png";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import useLoading from "../../hooks/useLoading";
 
 const Services = () => {
   const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
-     
-    useEffect(()=>{
-      axiosSecure.get('/services')
-      .then(res=>{
-        setServices(res.data);
-      })
-    },[axiosSecure])
+  const { startLoading, stopLoading } = useLoading();
+
+  useEffect(() => {
+    startLoading();
+    axiosSecure.get("/services").then((res) => {
+      setServices(res.data);
+      stopLoading();
+    });
+  }, [axiosSecure]);
 
   return (
     <div className="py-10 md:py-11 lg:py-22">
@@ -49,13 +52,12 @@ const Services = () => {
                 <h3 className="text-xl font-semibold">
                   {service.service_name}
                 </h3>
-                <p className="text-gray-600 text-sm">{service.description.split('.')[0]}...</p>
+                <p className="text-gray-600 text-sm">
+                  {service.description.split(".")[0]}...
+                </p>
 
-                <Link
-                  to="/packages"
-                  className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
-                >
-                  View Packages <BsArrowRight />
+                <Link to={`/packages?service=${service.service_name}`}>
+                  <button className="btn btn-primary">View Packages</button>
                 </Link>
               </div>
             </div>

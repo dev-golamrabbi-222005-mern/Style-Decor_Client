@@ -79,7 +79,7 @@ const Coverage = () => {
         </MapContainer>
       </div>
     </div>
-  );
+  )
 };
 
 export default Coverage;

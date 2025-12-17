@@ -157,6 +157,12 @@ const Footer = () => {
             <li>
               <a className="link link-hover">Compliance & Safety</a>
             </li>
+            <div className="mt-5 bg-white shadow-2xl rounded-2xl p-4 -ml-10">
+              <h1>
+                <strong>Wanna be a Decorator?</strong>
+              </h1>
+              Don't hesitate to mail us at <strong>apply.decorator@styledecor.com</strong>
+            </div>
           </nav>
 
           <nav>

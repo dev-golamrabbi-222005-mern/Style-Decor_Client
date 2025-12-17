@@ -1,27 +1,80 @@
-import React, { use } from 'react';
-import PacksCard from './PacksCard';
-
-const packsPromise = fetch("/popularPacks.json").then((res) => res.json());
+import React, { use, useEffect, useState } from "react";
+import PacksCard from "./PacksCard";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useLoading from "../../../hooks/useLoading";
+import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const PopularPacks = () => {
-        const packsData = use(packsPromise);        
+  const axiosSecure = useAxiosSecure();
+  const [packages, setPackages] = useState([]);
+  const { startLoading, stopLoading } = useLoading();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    return (
-      <div className="bg-white p-4 my-10 md:my-15 lg:my-22 rounded-xl">
-        <h1 className="text-2xl md:text-4xl font-semibold text-center">
-          Our Popular Packages
-          <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-5">
-          {packsData.map((pack) => (
-            <PacksCard pack={pack} key={pack.id} />
-          ))}
-        </div>
-        <div className="flex justify-center items-center my-8">
-          <button className="btn btn-primary">View all Services</button>
-        </div>
+  useEffect(() => {
+    startLoading();
+    axiosSecure.get("/popularPackages").then((res) => {
+      setPackages(res.data);
+      stopLoading();
+    });
+  }, [axiosSecure]);
+
+  const handleBookingClick = (pkg) => {
+    if (user && user.email) {
+      // User is logged in, show the modal
+      setPackages(pkg);
+    } else {
+      toast.error("Sorry, You have to login first to book a package.");
+      navigate("/auth/login", { state: { from: location } });
+    }
+  };
+
+  return (
+    <div className="p-4 my-10 md:my-15 lg:my-22 rounded-xl">
+      <h2 className="text-2xl md:text-4xl font-semibold text-center mb-10">
+        Our Popular Packages
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {packages.map((pkg, index) => (
+          <div
+            key={index}
+            className="border-gray-300 border-2 p-4 rounded-lg shadow-2xl"
+          >
+            <img
+              src={pkg.image}
+              alt={`An unexpected error occurred while loading - ${pkg.package_name}`}
+              className="rounded h-40 w-full object-cover"
+            />
+            <h3 className="font-bold mt-2">{pkg.package_name}</h3>
+            <p className="text-sm text-gray-600 mb-2">{pkg.description}</p>
+            <ul>
+              <strong>Features:</strong>
+              {pkg.features.map((f, i) => (
+                <li key={i} className="list-disc ml-5">
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 font-semibold">
+              Decorating Time: {pkg.delivery_time}
+            </p>
+            <div className="flex items-center my-3 text-lg">
+              <span className="mr-2">Cost: </span>
+              <p className="text-blue-600 font-semibold">৳{pkg.price}</p>
+            </div>
+          </div>
+        ))}
       </div>
-    );
+      <div className="flex justify-center my-10">
+        <Link to="/services">
+          <button className="btn btn-primary">View all Services</button>
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default PopularPacks;

@@ -3,14 +3,19 @@ import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { BaggageClaim } from "lucide-react";
 import { MdHistoryEdu } from "react-icons/md";
 import { MdDocumentScanner } from "react-icons/md";
-import Logo from "../components/logo/Logo";
 import { FaUsersGear } from "react-icons/fa6";
-import { MdDeliveryDining } from "react-icons/md";
 import Footer from "../components/Footer/Footer";
-import Navbar from "../components/Navbar/Navbar";
 import useAuth from "../hooks/useAuth";
 import useLoading from "../hooks/useLoading";
 import toast from "react-hot-toast";
+import { MdAssignmentAdd } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { TbHeartRateMonitor } from "react-icons/tb";
+import { RiTodoFill } from "react-icons/ri";
+import { RiCalendarScheduleFill } from "react-icons/ri";
+import { GrDocumentUpdate } from "react-icons/gr";
+import { PiCurrencyCircleDollarDuotone } from "react-icons/pi";
+
 
 const DashLayout = () => {
   const {user, logOutUser} = useAuth();
@@ -111,14 +116,25 @@ const DashLayout = () => {
               </li>
 
               {/* Our Dashboard Links */}
+              {/* Users Dash  */}
               <li>
                 <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Parcels"
-                  to="/dashboard/my-parcels"
+                  data-tip="My Profile"
+                  to="/dashboard/my-profile"
+                >
+                  <CgProfile className="text-2xl -ml-0.5 my-3" />
+                  <span className="is-drawer-close:hidden"> My Profile</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="My Bookings"
+                  to="/dashboard/my-bookings"
                 >
                   <BaggageClaim className="-ml-1 my-3" />
-                  <span className="is-drawer-close:hidden"> My Parcels</span>
+                  <span className="is-drawer-close:hidden"> My Bookings</span>
                 </NavLink>
               </li>
               <li>
@@ -134,16 +150,72 @@ const DashLayout = () => {
                   </span>
                 </NavLink>
               </li>
+
+              {/* Decorators Dash  */}
               <li>
                 <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Riders Applications"
-                  to="/dashboard/riders-applications"
+                  data-tip="My Assigned Projects"
+                  to="/dashboard/my-assigned-projects"
+                >
+                  <RiTodoFill className="text-2xl -ml-1 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    {" "}
+                    My Assigned Projects
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Today's Schedule"
+                  to="/dashboard/today-schedule"
+                >
+                  <RiCalendarScheduleFill className="text-2xl -ml-1 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    {" "}
+                    Today's Schedule
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Update Project Status"
+                  to="/dashboard/update-project-status"
+                >
+                  <GrDocumentUpdate className="text-2xl -ml-1 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    {" "}
+                    Update Project Status
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Earnings Summary"
+                  to="/dashboard/earnings-summary"
+                >
+                  <PiCurrencyCircleDollarDuotone className="text-2xl -ml-1 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    {" "}
+                    Earnings Summary
+                  </span>
+                </NavLink>
+              </li>
+
+              {/* Admin Dash  */}
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Decorators Applications"
+                  to="/dashboard/decorators-applications"
                 >
                   <MdDocumentScanner className="text-2xl -ml-1 my-3" />
                   <span className="is-drawer-close:hidden">
                     {" "}
-                    Riders Applications
+                    Decorators Applications
                   </span>
                 </NavLink>
               </li>
@@ -160,11 +232,25 @@ const DashLayout = () => {
               <li>
                 <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Assign Riders"
-                  to="/dashboard/assign-riders"
+                  data-tip="Assign Decorators"
+                  to="/dashboard/assign-decorators"
                 >
-                  <MdDeliveryDining className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">Assign Riders</span>
+                  <MdAssignmentAdd className="text-2xl -ml-1 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    Assign Decorators
+                  </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Revenue Monitor"
+                  to="/dashboard/revenue-monitor"
+                >
+                  <TbHeartRateMonitor className="text-2xl -ml-1 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    Revenue Monitor
+                  </span>
                 </NavLink>
               </li>
             </ul>

@@ -2,11 +2,13 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const GoogleLogin = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const {signInWithGoogle} = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     const handleGoogleLogin = async ()=>{
         try{
@@ -15,9 +17,12 @@ const GoogleLogin = () => {
             const userInfo = {
                 email: result.user.email,
                 displayName: result.user.displayName,
-                photoURL: result.user.photoURL
+                photoURL: result.user.photoURL,
+                role: 'user',
         }
-        console.log('userInfo',userInfo);
+        await axiosSecure.post('/users', userInfo)
+        .then(res=> console.log(res.data)
+        );
         toast.success('You have successfully logged in to Style Decor');
         navigate(location?.state || '/');
         }catch(error){
@@ -29,7 +34,7 @@ const GoogleLogin = () => {
         <div>
             <button onClick={handleGoogleLogin}
             type="button"
-            className="w-full py-2.5 px-4 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition duration-300 flex items-center justify-center gap-2"
+            className="w-full cursor-pointer py-2.5 px-4 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition duration-300 flex items-center justify-center gap-2"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path

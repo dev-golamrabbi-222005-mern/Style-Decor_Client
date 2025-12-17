@@ -10,8 +10,9 @@ import LoginPage from "../pages/Auth/Auth-Pages/LoginPage";
 import RegistrationPage from "../pages/Auth/Auth-Pages/RegistrationPage";
 import PassRecoverPage from "../pages/Auth/Auth-Pages/PassRecoverPage";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../pages/Dashboard/Dashboard";
 import DashboardLayout from "../Layouts/DashboardLayout";
+import Packages from "../pages/Packages/Packages";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -21,9 +22,10 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "services", element: <Services /> },
+      { path: "packages", element: <Packages/>},
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
-      {path: "dashboard", element: <PrivateRoute><Dashboard/></PrivateRoute>}
+      { path: "dashboard", element: <PrivateRoute><Dashboard/></PrivateRoute>}
     ],
   },
   {

@@ -220,7 +220,7 @@ const LoginPage = () => {
           <GoogleLogin/>
 
           {/* Registration Link */}
-          <p className="text-center text-sm text-white/80">
+          <p className="text-center mt-5 text-sm text-white/80">
             Don't have an account?{" "}
             <Link
               to="/auth/register"
