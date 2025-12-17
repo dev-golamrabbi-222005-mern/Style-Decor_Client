@@ -1,42 +1,20 @@
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import CTA_bg from '../../assets/banner-1.png'
-
-const services = [
-  {
-    title: "Home Decoration",
-    desc: "Elegant and modern decoration solutions to transform your home for any occasion.",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
-  },
-  {
-    title: "Wedding Decoration",
-    desc: "Luxurious wedding stage, floral, and venue decoration to make your big day unforgettable.",
-    image: "https://i.ibb.co.com/jvDsYLfD/b4f6590f3f0f80749c2fd601a2be5bf0.jpg",
-  },
-  {
-    title: "Birthday & Party Decor",
-    desc: "Creative and colorful decoration themes for birthdays, anniversaries, and private parties.",
-    image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce",
-  },
-  {
-    title: "Corporate & Event Styling",
-    desc: "Professional event styling for corporate programs, launches, and formal events.",
-    image:
-      "https://i.ibb.co.com/hRsrqwLr/living-room-decor-ideas-5442837-hero-8b6e540e13f9457a84fe9f9e26ea2e5c.jpg",
-  },
-  {
-    title: "Floral & Lighting Setup",
-    desc: "Premium floral arrangements and ambient lighting to elevate the overall experience.",
-    image: "https://images.unsplash.com/photo-1508610048659-a06b669e3321",
-  },
-  {
-    title: "Consultation Services",
-    desc: "In-studio and on-site consultation to plan and customize your decoration perfectly.",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
-  },
-];
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useEffect, useState } from "react";
 
 const Services = () => {
+  const axiosSecure = useAxiosSecure();
+  const [services, setServices] = useState([]);
+     
+    useEffect(()=>{
+      axiosSecure.get('/services')
+      .then(res=>{
+        setServices(res.data);
+      })
+    },[axiosSecure])
+
   return (
     <div className="py-10 md:py-11 lg:py-22">
       {/* Hero Section */}
@@ -63,13 +41,15 @@ const Services = () => {
             >
               <img
                 src={service.image}
-                alt={service.title}
+                alt={service.service_name}
                 className="h-48 w-full object-cover"
               />
 
               <div className="p-6 space-y-4">
-                <h3 className="text-xl font-semibold">{service.title}</h3>
-                <p className="text-gray-600 text-sm">{service.desc}</p>
+                <h3 className="text-xl font-semibold">
+                  {service.service_name}
+                </h3>
+                <p className="text-gray-600 text-sm">{service.description.split('.')[0]}...</p>
 
                 <Link
                   to="/packages"
