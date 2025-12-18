@@ -65,7 +65,8 @@ const Packages = () => {
       price: selectedPackage?.price,
       bookingDate,
       location,
-      status: "pending",
+      status: "pendingToPay",
+      paymentStatus: 'unPaid'
     };
 
     try {

@@ -15,6 +15,8 @@ import Packages from "../pages/Packages/Packages";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import MyProfile from "../pages/Dashboard/My-Profile/MyProfile";
 import UpdateProfile from "../pages/Dashboard/My-Profile/UpdateProfile";
+import MyBookings from "../pages/Dashboard/My-Bookings/MyBookings";
+import PaymentHistory from "../pages/Dashboard/Payment-History/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +55,8 @@ export const router = createBrowserRouter([
       { index: true, element: <Dashboard /> },
       { path: "my-profile", element: <MyProfile /> },
       { path: "update-profile", element: <UpdateProfile/> },
+      {path: "my-bookings", element: <MyBookings/>},
+      {path: "payment-history", element: <PaymentHistory/>},
       {}
     ],
   },

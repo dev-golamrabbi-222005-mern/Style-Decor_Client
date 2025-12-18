@@ -57,7 +57,7 @@ const Services = () => {
                 </p>
 
                 <Link to={`/packages?service=${service.service_name}`}>
-                  <button className="btn btn-primary">View Packages</button>
+                  <button className="btn btn-primary">View Details & Packages</button>
                 </Link>
               </div>
             </div>
