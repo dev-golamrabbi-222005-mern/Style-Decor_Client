@@ -37,6 +37,7 @@ const DashLayout = () => {
 
   return (
     <div>
+      <title>Style Decor | Dashboard</title>
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">

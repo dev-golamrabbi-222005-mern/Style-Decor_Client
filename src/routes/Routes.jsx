@@ -13,6 +13,8 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import Packages from "../pages/Packages/Packages";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import MyProfile from "../pages/Dashboard/My-Profile/MyProfile";
+import UpdateProfile from "../pages/Dashboard/My-Profile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -22,29 +24,36 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "services", element: <Services /> },
-      { path: "packages", element: <Packages/>},
+      { path: "packages", element: <Packages /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
-      { path: "dashboard", element: <PrivateRoute><Dashboard/></PrivateRoute>}
+      {
+        path: "dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
-    path: '/',
-    element: <AuthLayout/>,
+    path: "/",
+    element: <AuthLayout />,
     children: [
-      {path: 'auth/login', element: <LoginPage/>},
-      {path: 'auth/register', element: <RegistrationPage/>},
-      {path: 'auth/recover-password', element: <PassRecoverPage/>}
-    ]
+      { path: "auth/login", element: <LoginPage /> },
+      { path: "auth/register", element: <RegistrationPage /> },
+      { path: "auth/recover-password", element: <PassRecoverPage /> },
+    ],
   },
   {
-    path: '/dashboard',
-    element: <DashboardLayout/>,
+    path: "/dashboard",
+    element: <DashboardLayout />,
     children: [
-      {
-        index: true, element: <Dashboard/>,
-
-      }
-    ]
-  }
+      { index: true, element: <Dashboard /> },
+      { path: "my-profile", element: <MyProfile /> },
+      { path: "update-profile", element: <UpdateProfile/> },
+      {}
+    ],
+  },
 ]);
