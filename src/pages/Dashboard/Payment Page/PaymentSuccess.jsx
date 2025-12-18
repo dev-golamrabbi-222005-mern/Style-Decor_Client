@@ -56,10 +56,10 @@ const PaymentSuccess = () => {
           <h2 className="text-xl font-bold text-gray-800 mb-4">Invalid Payment Session</h2>
           <p className="text-gray-600 mb-6">Unable to verify payment information.</p>
           <button
-            onClick={() => navigate('/dashboard/my-parcels')}
+            onClick={() => navigate('/dashboard/my-bookings')}
             className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary/90"
           >
-            Go to My Parcels
+            Go to My Bookings
           </button>
         </div>
       </div>
@@ -67,7 +67,7 @@ const PaymentSuccess = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-5">
       <div className="max-w-2xl w-full">
         {/* Success Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center">
@@ -89,7 +89,7 @@ const PaymentSuccess = () => {
             Payment Successful!
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            Your payment has been processed successfully. Your parcel booking is
+            Your payment has been processed successfully. Your booking is
             confirmed!
           </p>
 
@@ -116,13 +116,13 @@ const PaymentSuccess = () => {
               <div className="flex justify-between items-center py-2 border-b border-gray-200">
                 <span className="text-gray-600">Transaction ID</span>
                 <span className="font-medium text-gray-800 text-sm break-all">
-                  {paymentInfo.transactionId || 'N/A'}
+                  {paymentInfo.transactionId || "N/A"}
                 </span>
               </div>
               <div className="flex justify-between items-center py-2 border-b border-gray-200">
                 <span className="text-gray-600">Tracking ID</span>
                 <span className="font-medium text-gray-800 font-mono">
-                  {paymentInfo.trackingId || 'N/A'}
+                  {paymentInfo.trackingId || "N/A"}
                 </span>
               </div>
               <div className="flex justify-between items-center py-2">
@@ -150,11 +150,11 @@ const PaymentSuccess = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 mt-1">✓</span>
-                <span>Your parcel will be picked up between 4pm–7pm</span>
+                <span>One of our decorator will contact with you shortly.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 mt-1">✓</span>
-                <span>Track your parcel status in your dashboard</span>
+                <span>Track your booking status in your dashboard</span>
               </li>
             </ul>
           </div>
@@ -162,11 +162,11 @@ const PaymentSuccess = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => navigate("/dashboard/my-parcels")}
+              onClick={() => navigate("/dashboard/my-bookings")}
               className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
             >
               <Package className="w-5 h-5" />
-              View My Parcels
+              View My Bookings
             </button>
             <button
               onClick={() => navigate("/")}
@@ -181,11 +181,11 @@ const PaymentSuccess = () => {
           <div className="mt-8 pt-6 border-t border-gray-200">
             <p className="text-sm text-gray-500">
               Need help? Contact our support team at{" "}
-              
-                href="mailto:support@zapshift.com"
+              <a
+                href="mailto:support@styledecor.com"
                 className="text-primary hover:underline"
-              <a>
-                support@zapshift.com
+              >
+                support@styledecor.com
               </a>
             </p>
           </div>
@@ -194,7 +194,7 @@ const PaymentSuccess = () => {
         {/* Additional Info */}
         <div className="text-center mt-6">
           <p className="text-sm text-gray-600">
-            Thank you for choosing Zap Shift! 🚀
+            Thank you for choosing Style Decor! 🚀
           </p>
         </div>
       </div>

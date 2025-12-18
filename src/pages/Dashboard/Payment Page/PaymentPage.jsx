@@ -21,18 +21,17 @@ const PaymentPage = () => {
   const { bookingId } = useParams();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const { startLoading, stopLoading } = useLoading();
+  const {startLoading, stopLoading} = useLoading();
 
   const {
-    isLoading,
     data: booking,
     error,
   } = useQuery({
     queryKey: ["bookings", bookingId],
     queryFn: async () => {
+      startLoading()
       const res = await axiosSecure.get(`/bookings/${bookingId}`);
-      console.log(res.data);
-
+      stopLoading();
       return res.data;
     },
   });
@@ -64,11 +63,13 @@ const PaymentPage = () => {
 
   const handlePayment = async () => {
     const paymentInfo = {
-      cost: booking.cost,
+      price: booking.price,
       bookingId: booking._id,
-      senderEmail: booking.senderEmail,
-      bookingName: booking.bookingName,
+      userEmail: booking.userEmail,
+      packageName: booking.packageName,
     };
+    console.log(paymentInfo);
+    
     try {
       const res = await axiosSecure.post(
         "/StyleDecor-checkout-session",
@@ -78,19 +79,10 @@ const PaymentPage = () => {
         window.location.href = res.data.url;
       }
     } catch (error) {
-      console.error("Payment error:", error);
-      toast.error("Failed to initiate payment. Please try again.");
+      console.error("Payment error full:", error);
+      console.error("Response:", error.response?.data);
+      toast.error(error.response?.data?.message || "Payment failed");
     }
-  };
-
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
   };
 
   return (
@@ -226,7 +218,7 @@ const PaymentPage = () => {
 
             <button
               onClick={handlePayment}
-              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+              className="w-full bg-green-500 hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
             >
               <CreditCard className="w-5 h-5" />
               Proceed to Payment
@@ -245,10 +237,7 @@ const PaymentPage = () => {
       </div>
 
       <div className="flex justify-center mt-8">
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-primary w-55"
-        >
+        <button onClick={() => navigate(-1)} className="btn btn-primary w-55">
           Go Back
         </button>
       </div>

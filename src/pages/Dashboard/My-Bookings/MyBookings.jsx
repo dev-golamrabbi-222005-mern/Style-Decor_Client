@@ -51,6 +51,9 @@ const handleBookingUpdate = async (id) => {
   });
 };
 
+const formatStatus = (status) => {
+  return status.replace(/([A-Z])/g, " $1").trim();
+};
 
   const handleBookingDelete = (id) => {
     Swal.fire({
@@ -98,9 +101,11 @@ const handleBookingUpdate = async (id) => {
                 </h3>
                 <p className="text-sm text-gray-500">{bk.serviceName}</p>
               </div>
-              <span className="badge badge-secondary badge-md text-[15px] capitalize">
-                {bk.status === 'pendingToPay' && 'Pending To Pay' || bk.status}
-              </span>
+              {bk.paymentStatus === "unPaid" || (
+                <span className="badge badge-secondary badge-md text-[15px] capitalize">
+                  {formatStatus(bk.status)}
+                </span>
+              )}
             </div>
 
             <div className="space-y-1 text-sm mb-4">
@@ -117,36 +122,37 @@ const handleBookingUpdate = async (id) => {
             </div>
 
             <div className="card-actions justify-end border-t pt-3">
-              <label
-                htmlFor="detailsModal"
-                className={`btn btn-sm btn-outline btn-primary ${
-                  bk.status === "cancelled" ? "btn-disabled" : ""
-                }`}
-                onClick={() => {
-                  if (bk.status !== "cancelled") setSelectedBooking(bk);
-                }}
-              >
-                Update
-              </label>
-
-              {bk.paymentStatus === "paid" ? (
-                <button
-                  disabled
-                  className="btn btn-square bg-primary text-white"
+              {/* Update Button */}
+              {bk.status !== "cancelled" && bk.paymentStatus !== "Paid" && (
+                <label
+                  htmlFor="detailsModal"
+                  className="btn btn-sm btn-outline btn-primary"
+                  onClick={() => setSelectedBooking(bk)}
                 >
-                  Paid
-                </button>
-              ) : (
-                <Link to={`/dashboard/payment-checkout/${bk._id}`}>
-                  <button className="btn btn-sm btn-primary">Pay</button>
-                </Link>
+                  Update
+                </label>
               )}
+
+              {/* Pay / Paid Button */}
+              {bk.status !== "cancelled" &&
+                (bk.paymentStatus === "Paid" ? (
+                  <button
+                    className="btn btn-sm bg-primary/50 text-white"
+                    disabled
+                  >
+                    Paid
+                  </button>
+                ) : (
+                  <Link to={`/dashboard/payment-checkout/${bk._id}`}>
+                    <button className="btn btn-sm btn-primary">Pay</button>
+                  </Link>
+                ))}
 
               <button
                 onClick={() => handleBookingDelete(bk._id)}
                 disabled={bk.status === "cancelled"}
                 className={`btn btn-sm btn-error text-white ${
-                  bk.status === "cancelled" ? "btn-disabled bg-red-800" : ""
+                  bk.status === "cancelled" || bk.paymentStatus === "Paid" ? "btn-disabled bg-red-800/50" : ""
                 }`}
               >
                 {bk.status === "cancelled" ? "Cancelled" : "Cancel"}

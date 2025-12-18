@@ -15,12 +15,28 @@ import { RiTodoFill } from "react-icons/ri";
 import { RiCalendarScheduleFill } from "react-icons/ri";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { PiCurrencyCircleDollarDuotone } from "react-icons/pi";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import useDefineRole from "../hooks/useDefineRole";
 
 
 const DashLayout = () => {
   const {user, logOutUser} = useAuth();
   const {startLoading, stopLoading} = useLoading();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
+  const {role} = useDefineRole();
+
+const { data: users = [] } = useQuery({
+  queryKey: ['user', user?.email],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/users?email=${user.email}`);
+    console.log(res.data);
+    
+    return res.data;
+  },
+});
+
 
   const handleLogout = async()=>{
     startLoading();
@@ -77,7 +93,7 @@ const DashLayout = () => {
             )}
           </nav>
           {/* Page content here */}
-          <div className="p-4">
+          <div>
             <Outlet />
           </div>
         </div>
@@ -117,143 +133,162 @@ const DashLayout = () => {
               </li>
 
               {/* Our Dashboard Links */}
+
               {/* Users Dash  */}
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Profile"
-                  to="/dashboard/my-profile"
-                >
-                  <CgProfile className="text-2xl -ml-0.5 my-3" />
-                  <span className="is-drawer-close:hidden"> My Profile</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Bookings"
-                  to="/dashboard/my-bookings"
-                >
-                  <BaggageClaim className="-ml-1 my-3" />
-                  <span className="is-drawer-close:hidden"> My Bookings</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Payment History"
-                  to="/dashboard/payment-history"
-                >
-                  <MdHistoryEdu className="text-3xl -ml-2 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    Payment History
-                  </span>
-                </NavLink>
-              </li>
+              {role === "user" && (
+                <>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My Profile"
+                      to="/dashboard/my-profile"
+                    >
+                      <CgProfile className="text-2xl -ml-0.5 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        My Profile
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My Bookings"
+                      to="/dashboard/my-bookings"
+                    >
+                      <BaggageClaim className="-ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        My Bookings
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Payment History"
+                      to="/dashboard/payment-history"
+                    >
+                      <MdHistoryEdu className="text-3xl -ml-2 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        Payment History
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
 
               {/* Decorators Dash  */}
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Assigned Projects"
-                  to="/dashboard/my-assigned-projects"
-                >
-                  <RiTodoFill className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    My Assigned Projects
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Today's Schedule"
-                  to="/dashboard/today-schedule"
-                >
-                  <RiCalendarScheduleFill className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    Today's Schedule
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Update Project Status"
-                  to="/dashboard/update-project-status"
-                >
-                  <GrDocumentUpdate className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    Update Project Status
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Earnings Summary"
-                  to="/dashboard/earnings-summary"
-                >
-                  <PiCurrencyCircleDollarDuotone className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    Earnings Summary
-                  </span>
-                </NavLink>
-              </li>
+              {role === "decorator" && (
+                <>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My Assigned Projects"
+                      to="/dashboard/my-assigned-projects"
+                    >
+                      <RiTodoFill className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        My Assigned Projects
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Today's Schedule"
+                      to="/dashboard/today-schedule"
+                    >
+                      <RiCalendarScheduleFill className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        Today's Schedule
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Update Project Status"
+                      to="/dashboard/update-project-status"
+                    >
+                      <GrDocumentUpdate className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        Update Project Status
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Earnings Summary"
+                      to="/dashboard/earnings-summary"
+                    >
+                      <PiCurrencyCircleDollarDuotone className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        Earnings Summary
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
 
               {/* Admin Dash  */}
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Decorators Applications"
-                  to="/dashboard/decorators-applications"
-                >
-                  <MdDocumentScanner className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    Decorators Applications
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="All Users"
-                  to="/dashboard/users-management-system"
-                >
-                  <FaUsersGear className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden"> All Users</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Assign Decorators"
-                  to="/dashboard/assign-decorators"
-                >
-                  <MdAssignmentAdd className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    Assign Decorators
-                  </span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Revenue Monitor"
-                  to="/dashboard/revenue-monitor"
-                >
-                  <TbHeartRateMonitor className="text-2xl -ml-1 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    Revenue Monitor
-                  </span>
-                </NavLink>
-              </li>
+              {role === "admin" && (
+                <>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Decorators Applications"
+                      to="/dashboard/decorators-applications"
+                    >
+                      <MdDocumentScanner className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        {" "}
+                        Decorators Applications
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="All Users"
+                      to="/dashboard/users-management-system"
+                    >
+                      <FaUsersGear className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden"> All Users</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assign Decorators"
+                      to="/dashboard/assign-decorators"
+                    >
+                      <MdAssignmentAdd className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        Assign Decorators
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Revenue Monitor"
+                      to="/dashboard/revenue-monitor"
+                    >
+                      <TbHeartRateMonitor className="text-2xl -ml-1 my-3" />
+                      <span className="is-drawer-close:hidden">
+                        Revenue Monitor
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

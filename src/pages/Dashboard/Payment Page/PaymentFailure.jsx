@@ -6,12 +6,11 @@ const PaymentFailure = () => {
   const navigate = useNavigate();
 
   const handleRetry = () => {
-    // Navigate back to payment or parcel list
     navigate(-2); // Go back 2 steps to the payment page
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center p-5">
       <div className="max-w-2xl w-full">
         {/* Failure Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center">
@@ -33,7 +32,7 @@ const PaymentFailure = () => {
             Payment Failed
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            We couldn't process your payment. Your parcel booking was not
+            We couldn't process your payment. Your booking was not
             completed.
           </p>
 
@@ -101,11 +100,11 @@ const PaymentFailure = () => {
               Try Again
             </button>
             <button
-              onClick={() => navigate("/dashboard/my-parcels")}
+              onClick={() => navigate("/dashboard/my-bookings")}
               className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
             >
               <Home className="w-5 h-5" />
-              My Parcels
+              My Bookings
             </button>
           </div>
 
@@ -121,7 +120,7 @@ const PaymentFailure = () => {
                 href="mailto:support@zapshift.com"
                 className="text-primary hover:underline"
               >
-                support@zapshift.com
+                support@styledecor.com
               </a>{" "}
               or call{" "}
               <a

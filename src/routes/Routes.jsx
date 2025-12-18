@@ -18,6 +18,10 @@ import UpdateProfile from "../pages/Dashboard/My-Profile/UpdateProfile";
 import MyBookings from "../pages/Dashboard/My-Bookings/MyBookings";
 import PaymentHistory from "../pages/Dashboard/Payment-History/PaymentHistory";
 import PaymentPage from "../pages/Dashboard/Payment Page/PaymentPage";
+import PaymentSuccess from "../pages/Dashboard/Payment Page/PaymentSuccess";
+import PaymentFailure from "../pages/Dashboard/Payment Page/PaymentFailure";
+import AdminRoute from "./AdminRoute";
+import UsersManagement from "../pages/Dashboard/Users-Management/UsersManagement";
 
 export const router = createBrowserRouter([
   {
@@ -55,11 +59,20 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "my-profile", element: <MyProfile /> },
-      { path: "update-profile", element: <UpdateProfile/> },
-      {path: "my-bookings", element: <MyBookings/>},
-      {path: "payment-history", element: <PaymentHistory/>},
-      {path: "payment-checkout/:bookingId", element: <PaymentPage/>},
-      {}
+      { path: "update-profile", element: <UpdateProfile /> },
+      { path: "my-bookings", element: <MyBookings /> },
+      { path: "payment-history", element: <PaymentHistory /> },
+      { path: "payment-checkout/:bookingId", element: <PaymentPage /> },
+      { path: "payment-success", element: <PaymentSuccess /> },
+      { path: "payment-cancelled", element: <PaymentFailure /> },
+      {
+        path: "users-management-system",
+        element: (
+            <AdminRoute>
+              <UsersManagement />
+            </AdminRoute>
+        ),
+      },
     ],
   },
 ]);
