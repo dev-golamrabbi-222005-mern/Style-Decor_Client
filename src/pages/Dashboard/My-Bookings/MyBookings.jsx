@@ -137,7 +137,7 @@ const handleBookingUpdate = async (id) => {
                   Paid
                 </button>
               ) : (
-                <Link to={`/dashboard/payment/${bk._id}`}>
+                <Link to={`/dashboard/payment-checkout/${bk._id}`}>
                   <button className="btn btn-sm btn-primary">Pay</button>
                 </Link>
               )}
