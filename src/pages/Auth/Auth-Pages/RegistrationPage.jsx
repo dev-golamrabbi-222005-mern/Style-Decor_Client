@@ -31,14 +31,15 @@ const RegisterPage = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    watch,
   } = useForm({
     defaultValues: {
       role: "user",
     },
   });
+  const selectedRole = watch("role");
 
   const onSubmit = async (data) => {
-
     startLoading();
     try {
       const result = await registerUser(data.email, data.password);
@@ -58,28 +59,40 @@ const RegisterPage = () => {
       const img_API_URL = `https://api.imgbb.com/1/upload?expiration=600&key=${
         import.meta.env.VITE_IMAGE_HOST_KEY
       }`;
-      await axios.post(img_API_URL, formData).then((res) => {
+      await axios.post(img_API_URL, formData).then(async (res) => {
         const photoURL = res.data.data.url;
 
         //create user in db
+        if(data.role === "user"){
           const userInfo = {
             email: data.email,
             displayName: data.name,
             photoURL: photoURL,
-            role: 'user',
+            role: data.role,
           };
-          axiosSecure.post("/users", userInfo).then((res) => {
-            if (res.data.insertedId) {
-              console.log("user already created in db", res.data);
-              toast.success("You have successfully created an account on Style Decor.");
-            }
-          });
+          await axiosSecure.post("/users", userInfo);
+          toast.success("Account created Successfully.!")
         }
-      );
+
+        if (data.role === "decorator") {
+          const decoratorApplication = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: data.photoUrl,
+            role: data.role,
+            experience: data.experience,
+            applicationStatus: "pending",
+            appliedAt: new Date(),
+          };
+          await axiosSecure.post("/decorators", decoratorApplication);
+          toast.success("Account created! Application is pending review.");
+        }
+
+        navigate(location?.state || "/");
+      });
     } catch (error) {
       console.log("registration error.", error);
     } finally {
-      navigate(location?.state || "/");
       stopLoading();
     }
   };
@@ -107,6 +120,96 @@ const RegisterPage = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Role Selection Section */}
+            <div className="space-y-3">
+              <label className="block text-sm font-medium text-white/90">
+                I want to register as a:
+              </label>
+              <div className="grid grid-cols-2 gap-4">
+                {/* Home Owner Option */}
+                <label
+                  className={`
+      relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 cursor-pointer transition-all duration-300
+      ${
+        selectedRole === "user"
+          ? "border-sky-400 bg-sky-400/20 ring-2 ring-sky-400/50 shadow-[0_0_15px_rgba(56,189,248,0.4)]"
+          : "border-white/10 bg-white/5 hover:bg-white/10"
+      }
+    `}
+                >
+                  <input
+                    type="radio"
+                    value="user"
+                    {...register("role")}
+                    className="hidden"
+                  />
+                  <User
+                    className={`w-6 h-6 mb-1 ${
+                      selectedRole === "user" ? "text-sky-300" : "text-white/50"
+                    }`}
+                  />
+                  <span
+                    className={`text-sm font-bold ${
+                      selectedRole === "user" ? "text-white" : "text-white/60"
+                    }`}
+                  >
+                    Home Owner
+                  </span>
+                  {selectedRole === "user" && (
+                    <div className="absolute -top-2 -right-2 bg-sky-500 rounded-full p-1">
+                      <ArrowRight className="w-3 h-3 text-white" />
+                    </div>
+                  )}
+                </label>
+
+                {/* Decorator Option */}
+                <label
+                  className={`
+      relative flex flex-col items-center justify-center p-4 rounded-2xl border-2 cursor-pointer transition-all duration-300
+      ${
+        selectedRole === "decorator"
+          ? "border-sky-400 bg-sky-400/20 ring-2 ring-sky-400/50 shadow-[0_0_15px_rgba(56,189,248,0.4)]"
+          : "border-white/10 bg-white/5 hover:bg-white/10"
+      }
+    `}
+                >
+                  <input
+                    type="radio"
+                    value="decorator"
+                    {...register("role")}
+                    className="hidden"
+                  />
+                  <Wrench
+                    className={`w-6 h-6 mb-1 ${
+                      selectedRole === "decorator"
+                        ? "text-sky-300"
+                        : "text-white/50"
+                    }`}
+                  />
+                  <span
+                    className={`text-sm font-bold ${
+                      selectedRole === "decorator"
+                        ? "text-white"
+                        : "text-white/60"
+                    }`}
+                  >
+                    Decorator
+                  </span>
+                  {selectedRole === "decorator" && (
+                    <div className="absolute -top-2 -right-2 bg-sky-500 rounded-full p-1">
+                      <ArrowRight className="w-3 h-3 text-white" />
+                    </div>
+                  )}
+                </label>
+              </div>
+
+              {/* Dynamic Helper Text - Makes it clear what's happening */}
+              <p className="text-xs text-center text-sky-200/70 italic mt-2">
+                {selectedRole === "user"
+                  ? "You'll be able to browse and book professional decorators."
+                  : "You'll be applying to join our professional decorator team."}
+              </p>
+            </div>
 
             {/* Name Input */}
             <div>
@@ -225,6 +328,25 @@ const RegisterPage = () => {
               )}
             </div>
 
+            {selectedRole === "decorator" && (
+              <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                <label className="block text-sm font-medium text-white/90 mb-2">
+                  Years of Experience
+                </label>
+                <div className="relative">
+                  <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
+                  <input
+                    type="number"
+                    {...register("experience", {
+                      required: selectedRole === "decorator",
+                    })}
+                    placeholder="How many years have you been decorating?"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/10 border border-white/20 text-white focus:ring-2 focus:ring-sky-300"
+                  />
+                </div>
+              </div>
+            )}
+
             {/* Password Input */}
             <div>
               <label
@@ -339,20 +461,22 @@ const RegisterPage = () => {
             </button>
           </form>
 
-          {/* Divider */}
-          <div className="relative my-3">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/20" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white/5 text-white/60 rounded-full">
-                or continue with
-              </span>
-            </div>
-          </div>
-
-          {/* Social Login Button */}
-          <GoogleLogin />
+          {/* Divider & Social Login Button */}
+          {selectedRole === "user" && (
+            <>
+              <div className="relative my-3">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-white/20" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-white/5 text-white/60 rounded-full">
+                    or continue with
+                  </span>
+                </div>
+              </div>
+              <GoogleLogin />
+            </>
+          )}
 
           {/* Login Link */}
           <p className="mt-6 text-center text-sm text-white/80">

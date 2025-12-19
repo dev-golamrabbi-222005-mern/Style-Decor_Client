@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom';
 import useDefineRole from '../hooks/useDefineRole'
 
 const DecoratorRoute = ({ children }) => {

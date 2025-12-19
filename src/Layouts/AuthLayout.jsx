@@ -17,7 +17,7 @@ const AuthLayout = () => {
         }}
       >
         {/* Background Blur Overlay */}
-        <div className="absolute inset-0 backdrop-blur-sm bg-black/10 z-0" />
+        <div className="absolute inset-0 backdrop-blur-sm bg-black/50 z-0" />
 
         {/* Content Container */}
         <div className="relative z-10">
