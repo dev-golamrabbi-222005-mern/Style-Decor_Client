@@ -5,6 +5,8 @@ import { FaUserShield } from "react-icons/fa";
 import { BsPersonFillDash } from "react-icons/bs";
 import { BsPersonFillSlash } from "react-icons/bs";
 import { BsPersonFillUp } from "react-icons/bs";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const UsersManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,6 +18,46 @@ const UsersManagement = () => {
       return res.data;
     },
   });
+
+  // Generic Function for PATCH updates
+  const handleUpdateRole = (id, role, actionName) => {
+    axiosSecure.patch(`/users/${actionName}/${id}`).then((res) => {
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        toast.success(`User is now an ${role}!`);
+      }
+    });
+  };
+
+  // Function for Deleting/Banning with confirmation
+  const handleAction = (id, type) => {
+    const isDelete = type === "delete";
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: isDelete
+        ? "This user will be permanently removed!"
+        : "This user will not be able to login!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, proceed!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const request = isDelete
+          ? axiosSecure.delete(`/users/${id}`)
+          : axiosSecure.patch(`/users/ban/${id}`);
+
+        request.then((res) => {
+          if (res.data.deletedCount > 0 || res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire("Success!", `Action completed.`, "success");
+          }
+        });
+      }
+    });
+  };
 
   const filteredUsers = usersData.filter(
     (user) =>
@@ -87,30 +129,54 @@ const UsersManagement = () => {
                   </td>
                   <td>{user.email}</td>
                   <td>{user.createdAt.split("T")[0]}</td>
-                  <td className="">
+                  <td className="flex items-center justify-center gap-2">
+                    {/* Make Admin */}
                     <button
-                      className="btn btn-square tooltip"
+                      onClick={() =>
+                        handleUpdateRole(user._id, "admin", "admin")
+                      }
+                      disabled={user.role === "admin"}
+                      className={`btn btn-square tooltip ${
+                        user.role === "admin"
+                          ? "btn-disabled"
+                          : "btn-info text-white"
+                      }`}
                       data-tip="Make Admin"
                     >
-                      <FaUserShield />
+                      <FaUserShield size={18} />
                     </button>
+
+                    {/* Ban User */}
                     <button
-                      className="btn btn-square mx-5 tooltip"
-                      data-tip="BAN"
+                      onClick={() => handleAction(user._id, "ban")}
+                      disabled={user.status === "banned"}
+                      className="btn btn-square tooltip btn-warning text-white"
+                      data-tip={
+                        user.status === "banned" ? "Already Banned" : "BAN"
+                      }
                     >
-                      <BsPersonFillSlash />
+                      <BsPersonFillSlash size={18} />
                     </button>
+
+                    {/* Make Decorator */}
                     <button
-                      className="btn btn-square tooltip text-xl mr-5"
+                      onClick={() =>
+                        handleUpdateRole(user._id, "decorator", "decorator")
+                      }
+                      disabled={user.role === "decorator"}
+                      className="btn btn-square tooltip btn-success text-white"
                       data-tip="Make Decorator"
                     >
-                      <BsPersonFillUp />
+                      <BsPersonFillUp size={18} />
                     </button>
+
+                    {/* Remove User */}
                     <button
-                      className="btn btn-square tooltip text-xl"
+                      onClick={() => handleAction(user._id, "delete")}
+                      className="btn btn-square tooltip btn-error text-white"
                       data-tip="Remove User"
                     >
-                      <BsPersonFillDash />
+                      <BsPersonFillDash size={18} />
                     </button>
                   </td>
                 </tr>

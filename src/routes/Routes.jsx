@@ -23,6 +23,7 @@ import PaymentFailure from "../pages/Dashboard/Payment Page/PaymentFailure";
 import AdminRoute from "./AdminRoute";
 import UsersManagement from "../pages/Dashboard/Users-Management/UsersManagement";
 import DecoratorManagement from "../pages/Dashboard/Decorator-Management/DecoratorManagement";
+import AssignDecorator from "../pages/Dashboard/Assign-Decorator/AssignDecorator";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,14 @@ export const router = createBrowserRouter([
         element: (
             <AdminRoute>
               <DecoratorManagement />
+            </AdminRoute>
+        ),
+      },
+      {
+        path: "assign-decorators",
+        element: (
+            <AdminRoute>
+              <AssignDecorator />
             </AdminRoute>
         ),
       },

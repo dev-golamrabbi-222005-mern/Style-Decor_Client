@@ -6,6 +6,8 @@ import { BsPersonFillDash } from "react-icons/bs";
 import { BsPersonFillX } from "react-icons/bs";
 import { BsPersonFillSlash } from "react-icons/bs";
 import { BsPersonFillCheck } from "react-icons/bs";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const DecoratorManagement = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,10 +15,62 @@ const DecoratorManagement = () => {
   const { data: decoratorsData = [], refetch } = useQuery({
     queryKey: ["decorator"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/decorators");      
+      const res = await axiosSecure.get("/decorators");
       return res.data;
     },
   });
+
+  // Function for Approval / Rejection
+const handleStatusUpdate = (id, email, newStatus) => {
+  axiosSecure
+    .patch(`/decorators/status/${id}`, {
+      applicationStatus: newStatus,
+      email: email,
+    })
+    .then((res) => {
+      // Check if the document was found and processed
+      if (res.data.matchedCount > 0) {
+        refetch();
+        toast.success(`Application ${newStatus} successfully!`);
+      } else {
+        toast.error("No changes made or decorator not found.");
+      }
+    })
+    .catch((err) => {
+      console.error("Patch Error:", err);
+      toast.error("Server error: Could not update status");
+    });
+};
+
+  // Function for Deleting/Banning with confirmation
+  const handleUpdateRole = (id, type) => {
+    const isDelete = type === "delete";
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: isDelete
+        ? "This decorator will be permanently removed!"
+        : "This decorator will not be able to login!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, proceed!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const request = isDelete
+          ? axiosSecure.delete(`/decorators/${id}`)
+          : axiosSecure.patch(`/decorators/ban/${id}`);
+
+        request.then((res) => {
+          if (res.data.deletedCount > 0 || res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire("Success!", `Action completed.`, "success");
+          }
+        });
+      }
+    });
+  };
 
   const filteredDecorators = decoratorsData.filter(
     (decorator) =>
@@ -51,7 +105,7 @@ const DecoratorManagement = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             type="search"
             required
-            placeholder="Search user via Name or Email"
+            placeholder="Search decorator via Name or Email"
           />
         </label>
       </div>
@@ -64,6 +118,7 @@ const DecoratorManagement = () => {
               <th>Email</th>
               <th>Apply Date</th>
               <th>Experience (yr)</th>
+              <th>Application Status</th>
               <th>Take Action</th>
             </tr>
           </thead>
@@ -90,36 +145,95 @@ const DecoratorManagement = () => {
                   <td>{decorator.email}</td>
                   <td>{decorator.appliedAt.split("T")[0]}</td>
                   <td className="font-semibold">{decorator.experience}</td>
-                  <td className="">
+                  <td>
+                    <span
+                      className={`badge ${
+                        decorator.applicationStatus === "approved"
+                          ? "badge-success"
+                          : decorator.applicationStatus === "rejected"
+                          ? "badge-error"
+                          : "badge-ghost"
+                      }`}
+                    >
+                      {decorator.applicationStatus}
+                    </span>
+                  </td>
+                  <td className="flex items-center justify-center gap-2">
+                    {/* Make Admin - Keep your existing one for role swapping */}
                     <button
-                      className="btn btn-square tooltip"
+                      onClick={() =>
+                        handleUpdateRole(decorator._id, "admin", "admin")
+                      }
+                      disabled={decorator.role === "admin"}
+                      className={`btn btn-square tooltip ${
+                        decorator.role === "admin"
+                          ? "btn-disabled"
+                          : "btn-info text-white"
+                      }`}
                       data-tip="Make Admin"
                     >
-                      <FaUserShield />
+                      <FaUserShield size={18} />
                     </button>
+
+                    {/* Ban decorator */}
                     <button
-                      className="btn btn-square mx-5 tooltip"
-                      data-tip="BAN"
+                      onClick={() => handleAction(decorator._id, "ban")}
+                      disabled={decorator.status === "banned"}
+                      className="btn btn-square tooltip btn-warning text-white"
+                      data-tip={
+                        decorator.status === "banned" ? "Already Banned" : "BAN"
+                      }
                     >
-                      <BsPersonFillSlash />
+                      <BsPersonFillSlash size={18} />
                     </button>
+
+                    {/* Approve Button */}
                     <button
-                      className="btn btn-square tooltip text-xl mr-5"
+                      onClick={() =>
+                        handleStatusUpdate(
+                          decorator._id,
+                          decorator.email,
+                          "approved"
+                        )
+                      }
+                      disabled={decorator.applicationStatus === "approved"}
+                      className={`btn btn-square tooltip btn-success text-white ${
+                        decorator.applicationStatus === "approved"
+                          ? "btn-disabled opacity-50"
+                          : ""
+                      }`}
                       data-tip="Approve Decorator"
                     >
-                      <BsPersonFillCheck />
+                      <BsPersonFillCheck size={18} />
                     </button>
+
+                    {/* Reject Button */}
                     <button
-                      className="btn btn-square tooltip text-xl mr-5"
+                      onClick={() =>
+                        handleStatusUpdate(
+                          decorator._id,
+                          decorator.email,
+                          "rejected"
+                        )
+                      }
+                      disabled={decorator.applicationStatus === "rejected"}
+                      className={`btn btn-square tooltip btn-secondary text-white ${
+                        decorator.applicationStatus === "rejected"
+                          ? "btn-disabled opacity-50"
+                          : ""
+                      }`}
                       data-tip="Reject Decorator"
                     >
-                      <BsPersonFillX />
+                      <BsPersonFillX size={18} />
                     </button>
+
+                    {/* Remove decorator */}
                     <button
-                      className="btn btn-square tooltip text-xl"
-                      data-tip="Remove Decorator"
+                      onClick={() => handleAction(decorator._id, "delete")}
+                      className="btn btn-square tooltip btn-error text-white"
+                      data-tip="Remove decorator"
                     >
-                      <BsPersonFillDash />
+                      <BsPersonFillDash size={18} />
                     </button>
                   </td>
                 </tr>
