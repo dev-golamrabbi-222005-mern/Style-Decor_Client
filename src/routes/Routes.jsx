@@ -22,6 +22,7 @@ import PaymentSuccess from "../pages/Dashboard/Payment Page/PaymentSuccess";
 import PaymentFailure from "../pages/Dashboard/Payment Page/PaymentFailure";
 import AdminRoute from "./AdminRoute";
 import UsersManagement from "../pages/Dashboard/Users-Management/UsersManagement";
+import DecoratorManagement from "../pages/Dashboard/Decorator-Management/DecoratorManagement";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,14 @@ export const router = createBrowserRouter([
         element: (
             <AdminRoute>
               <UsersManagement />
+            </AdminRoute>
+        ),
+      },
+      {
+        path: "decorators-management-system",
+        element: (
+            <AdminRoute>
+              <DecoratorManagement />
             </AdminRoute>
         ),
       },

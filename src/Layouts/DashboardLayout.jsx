@@ -133,23 +133,22 @@ const { data: users = [] } = useQuery({
               </li>
 
               {/* Our Dashboard Links */}
-
+              <li>
+                <NavLink
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="My Profile"
+                  to="/dashboard/my-profile"
+                >
+                  <CgProfile className="text-2xl -ml-0.5 my-3" />
+                  <span className="is-drawer-close:hidden">
+                    {" "}
+                    My Profile
+                  </span>
+                </NavLink>
+              </li>
               {/* Users Dash  */}
               {role === "user" && (
                 <>
-                  <li>
-                    <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="My Profile"
-                      to="/dashboard/my-profile"
-                    >
-                      <CgProfile className="text-2xl -ml-0.5 my-3" />
-                      <span className="is-drawer-close:hidden">
-                        {" "}
-                        My Profile
-                      </span>
-                    </NavLink>
-                  </li>
                   <li>
                     <NavLink
                       className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -244,7 +243,7 @@ const { data: users = [] } = useQuery({
                     <NavLink
                       className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                       data-tip="Decorators Applications"
-                      to="/dashboard/decorators-applications"
+                      to="/dashboard/decorators-management-system"
                     >
                       <MdDocumentScanner className="text-2xl -ml-1 my-3" />
                       <span className="is-drawer-close:hidden">

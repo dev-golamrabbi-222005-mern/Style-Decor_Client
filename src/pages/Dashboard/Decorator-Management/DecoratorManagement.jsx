@@ -3,31 +3,32 @@ import React, { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaUserShield } from "react-icons/fa";
 import { BsPersonFillDash } from "react-icons/bs";
+import { BsPersonFillX } from "react-icons/bs";
 import { BsPersonFillSlash } from "react-icons/bs";
-import { BsPersonFillUp } from "react-icons/bs";
+import { BsPersonFillCheck } from "react-icons/bs";
 
-const UsersManagement = () => {
+const DecoratorManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
-  const { data: usersData = [], refetch } = useQuery({
-    queryKey: ["user"],
+  const { data: decoratorsData = [], refetch } = useQuery({
+    queryKey: ["decorator"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get("/decorators");      
       return res.data;
     },
   });
 
-  const filteredUsers = usersData.filter(
-    (user) =>
-      user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredDecorators = decoratorsData.filter(
+    (decorator) =>
+      decorator.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      decorator.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="max-w-7xl mx-auto my-11">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl md:text-4xl font-semibold">
-          All users List: {usersData.length}
+          All Decorators List: {decoratorsData.length}
         </h1>
         <label className="input bg-amber-100">
           <svg
@@ -61,12 +62,13 @@ const UsersManagement = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>Join Date</th>
+              <th>Apply Date</th>
+              <th>Experience (yr)</th>
               <th>Take Action</th>
             </tr>
           </thead>
           {/* row 1 */}
-          {filteredUsers.map((user, index) => {
+          {filteredDecorators.map((decorator, index) => {
             return (
               <tbody key={index} className="text-[16px]">
                 <tr>
@@ -75,18 +77,19 @@ const UsersManagement = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                           <img
-                            src={user.photoURL}
+                            src={decorator.photoURL}
                             alt="Avatar Tailwind CSS Component"
                           />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{user.displayName}</div>
+                        <div className="font-bold">{decorator.displayName}</div>
                       </div>
                     </div>
                   </td>
-                  <td>{user.email}</td>
-                  <td>{user.createdAt.split("T")[0]}</td>
+                  <td>{decorator.email}</td>
+                  <td>{decorator.appliedAt.split("T")[0]}</td>
+                  <td className="font-semibold">{decorator.experience}</td>
                   <td className="">
                     <button
                       className="btn btn-square tooltip"
@@ -102,13 +105,19 @@ const UsersManagement = () => {
                     </button>
                     <button
                       className="btn btn-square tooltip text-xl mr-5"
-                      data-tip="Make Decorator"
+                      data-tip="Approve Decorator"
                     >
-                      <BsPersonFillUp />
+                      <BsPersonFillCheck />
+                    </button>
+                    <button
+                      className="btn btn-square tooltip text-xl mr-5"
+                      data-tip="Reject Decorator"
+                    >
+                      <BsPersonFillX />
                     </button>
                     <button
                       className="btn btn-square tooltip text-xl"
-                      data-tip="Remove User"
+                      data-tip="Remove Decorator"
                     >
                       <BsPersonFillDash />
                     </button>
@@ -123,4 +132,4 @@ const UsersManagement = () => {
   );
 };
 
-export default UsersManagement;
+export default DecoratorManagement;
