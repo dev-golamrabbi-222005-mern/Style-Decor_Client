@@ -70,25 +70,25 @@ export const router = createBrowserRouter([
       {
         path: "users-management-system",
         element: (
-            <AdminRoute>
-              <UsersManagement />
-            </AdminRoute>
+          <AdminRoute>
+            <UsersManagement />
+          </AdminRoute>
         ),
       },
       {
         path: "decorators-management-system",
         element: (
-            <AdminRoute>
-              <DecoratorManagement />
-            </AdminRoute>
+          <AdminRoute>
+            <DecoratorManagement />
+          </AdminRoute>
         ),
       },
       {
         path: "assign-decorators",
         element: (
-            <AdminRoute>
-              <AssignDecorator />
-            </AdminRoute>
+          <AdminRoute>
+            <AssignDecorator />
+          </AdminRoute>
         ),
       },
     ],

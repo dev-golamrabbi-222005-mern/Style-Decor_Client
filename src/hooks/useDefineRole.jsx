@@ -3,7 +3,7 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 
 const useDefineRole = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data: role, isLoading } = useQuery({
@@ -15,7 +15,7 @@ const useDefineRole = () => {
     },
   });
 
-  return { role, isLoading };
+  return { role, isLoading, loading };
 };
 
 export default useDefineRole;

@@ -15,13 +15,11 @@ import {
   CreditCard,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import useLoading from "../../../hooks/useLoading";
 
 const PaymentPage = () => {
   const { bookingId } = useParams();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
-  const {startLoading, stopLoading} = useLoading();
 
   const {
     data: booking,
@@ -29,9 +27,7 @@ const PaymentPage = () => {
   } = useQuery({
     queryKey: ["bookings", bookingId],
     queryFn: async () => {
-      startLoading()
       const res = await axiosSecure.get(`/bookings/${bookingId}`);
-      stopLoading();
       return res.data;
     },
   });

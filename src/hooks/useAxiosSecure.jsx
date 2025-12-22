@@ -28,11 +28,11 @@ const useAxiosSecure = () => {
       },
       (error) => {
         const statusCode = error.status;
-        if (statusCode === 401 || statusCode === 403) {
-          logOutUser().then((res) => {
-            navigate("/auth/login");
-          });
-        }
+        // if (statusCode === 401 || statusCode === 403) {
+        //   logOutUser().then((res) => {
+        //     navigate("/auth/login");
+        //   });
+        // }
         return Promise.reject(error);
       }
     );

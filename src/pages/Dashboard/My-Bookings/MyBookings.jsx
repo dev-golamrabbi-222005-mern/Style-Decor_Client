@@ -2,28 +2,24 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaEdit } from "react-icons/fa";
-import { PiListMagnifyingGlassDuotone } from "react-icons/pi";
-import { TbTrashXFilled } from "react-icons/tb";
+
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import useLoading from "../../../hooks/useLoading";
 
 const MyBookings = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [selectedBooking, setSelectedBooking] = useState(null);
-  const {startLoading, stopLoading} = useLoading();
 
-  const { data: bookings = [], refetch } = useQuery({
+  const { data: bookings = [], refetch,isLoading } = useQuery({
       queryKey: ["myBookings", user?.email],
       queryFn: async () => {
-      startLoading()
       const res = await axiosSecure.get(`/bookings?email=${user.email}`);
-      stopLoading();
       return res.data;
     },
   });
+
+  if(isLoading || loading) return <div>Loading...</div>
 
 const handleBookingUpdate = async (id) => {
   Swal.fire({
@@ -102,9 +98,9 @@ const formatStatus = (status) => {
                 <p className="text-sm text-gray-500">{bk.serviceName}</p>
               </div>
               {bk.paymentStatus === "unPaid" || (
-                <span className="badge badge-secondary badge-md text-[15px] capitalize">
+                <p className="bg-pink-500 text-white rounded-4xl text-center px-3 py-1 capitalize">
                   {formatStatus(bk.status)}
-                </span>
+                </p>
               )}
             </div>
 
