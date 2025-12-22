@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import toast from "react-hot-toast";
 
 const AssignDecorator = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,47 +21,44 @@ const AssignDecorator = () => {
   });
 
   // 2. Fetch Approved Decorators for the modal
-  const { data: decorators = [] } = useQuery({
+  const { data: decorators = [], refetch:decoratorRefetch } = useQuery({
     queryKey: ["decorators", "available"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/decorators/approved");
+      const res = await axiosSecure.get("/decorators?status=available");
       return res.data;
     },
   });
 
   // 3. Handle the Assignment
-  const handleAssign = (decorator) => {
-    const assignmentData = {
-      decoratorEmail: decorator.email,
-      decoratorName: decorator.displayName,
-      decoratorPhoto: decorator.photoURL,
-      status: "decorator-assigned",
-      assignedAt: new Date(),
-    };
-
-    // 1. Update the Booking
-    axiosSecure
-      .patch(`/bookings/assign/${activeBooking._id}`, assignmentData)
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          // 2. Update the Decorator's status in the decorators collection
-          axiosSecure
-            .patch(`/decorators/status/${decorator.email}`, {
-              status: "assigned",
-            })
-            .then(() => {
-              refetch(); // Refresh the list of bookings
-              document.getElementById("assign_modal").checked = false;
-              Swal.fire(
-                "Assigned!",
-                `${decorator.displayName} is now busy with this project.`,
-                "success"
-              );
-            });
-        }
-      })
-      .catch(() => toast.error("Failed to complete assignment"));
+const handleAssign = (decorator) => {
+  const assignmentData = {
+    decoratorEmail: decorator.email, 
+    status: "pending-approval",
+    assignRequestAt: new Date(),
   };
+
+  axiosSecure
+    .patch(`/bookings/assign/${activeBooking._id}`, assignmentData)
+    .then((res) => {
+      if (res.data.modifiedCount > 0) {
+        // We set decorator to 'assigned' (busy) so other admins don't pick them
+        axiosSecure
+          .patch(`/decorators/status-update-by-email/${decorator.email}`, {
+            status: "assigned",
+          })
+          .then(() => {
+            refetch();
+            decoratorRefetch();
+            document.getElementById("assign_modal").checked = false;
+            Swal.fire(
+              "Request Sent!",
+              `Waiting for ${decorator.displayName} to accept.`,
+              "success"
+            );
+          });
+      }
+    });
+};
 
   if (isLoading)
     return (
@@ -89,6 +85,9 @@ const AssignDecorator = () => {
               </p>
               <p>
                 <strong>Location:</strong> {bk.location}
+              </p>
+              <p>
+                <strong>Cost:</strong> <span className="text-primary font-semibold text-lg">{bk.price} BDT</span>
               </p>
             </div>
             <div className="flex justify-end">

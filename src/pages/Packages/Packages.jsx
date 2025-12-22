@@ -72,8 +72,9 @@ const Packages = () => {
     try {
       const res = await axiosSecure.post("/bookings", bookingData);
       if (res.data.insertedId) {
-        Swal.fire("Success!", "Your booking has been placed.", "success");
+        Swal.fire("Success!", "Your booking has been placed. Please Pay now.", "success");
         setSelectedPackage(null); // Close modal
+        navigate('/dashboard/my-bookings');
       }
     } catch (error) {
       Swal.fire("Error", "Something went wrong. Try again.", "error");

@@ -6,7 +6,7 @@ const DecoratorRoute = ({ children }) => {
 
   if (isLoading || loading) return <p>Loading...</p>;
 
-  if (role !== "decorator") return <Navigate to="/unauthorized" />;
+  if (role !== "decorator") return <Navigate to="/" />;
 
   return children;
 };

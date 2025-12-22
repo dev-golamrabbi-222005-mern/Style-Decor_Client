@@ -4,17 +4,17 @@ import { CheckCircle, Package, Home, Receipt, Loader } from "lucide-react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const PaymentSuccess = () => {
+  const hasCalled = React.useRef(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [paymentInfo, setPaymentInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const sessionId = searchParams.get('session_id');
   const axiosSecure = useAxiosSecure();
-  console.log(sessionId);
-  
 
   useEffect(() => {
-    if(sessionId){
+    if(sessionId && !hasCalled.current ){
+      hasCalled.current = true;
       // Match the backend endpoint URL
       axiosSecure.patch(`/verify-payment-success?session_id=${sessionId}`)
         .then(res=> {

@@ -28,6 +28,8 @@ const PaymentPage = () => {
     queryKey: ["bookings", bookingId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/bookings/${bookingId}`);
+      console.log(res.data);
+      
       return res.data;
     },
   });

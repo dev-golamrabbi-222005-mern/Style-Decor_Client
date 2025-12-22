@@ -27,6 +27,7 @@ import AssignDecorator from "../pages/Dashboard/Assign-Decorator/AssignDecorator
 import DecoratorRoute from "./DecoratorRoute";
 import AssignedProject from "../pages/Dashboard/Assigned-Project/AssignedProject";
 import UpdateStatus from "../pages/Dashboard/Update-Project-Status/UpdateStatus";
+import UserRoute from "./userRoute";
 
 export const router = createBrowserRouter([
   {
@@ -64,12 +65,54 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: "my-profile", element: <MyProfile /> },
-      { path: "update-profile", element: <UpdateProfile /> },
-      { path: "my-bookings", element: <MyBookings /> },
-      { path: "payment-history", element: <PaymentHistory /> },
-      { path: "payment-checkout/:bookingId", element: <PaymentPage /> },
-      { path: "payment-success", element: <PaymentSuccess /> },
-      { path: "payment-cancelled", element: <PaymentFailure /> },
+      {
+        path: "update-profile",
+        element: (
+          <UserRoute>
+            <UpdateProfile />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "my-bookings",
+        element: (
+          <UserRoute>
+            <MyBookings />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <UserRoute>
+            <PaymentHistory />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment-checkout/:bookingId",
+        element: (
+          <UserRoute>
+            <PaymentPage />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment-success",
+        element: (
+          <UserRoute>
+            <PaymentSuccess />
+          </UserRoute>
+        ),
+      },
+      {
+        path: "payment-cancelled",
+        element: (
+          <UserRoute>
+            <PaymentFailure />
+          </UserRoute>
+        ),
+      },
       {
         path: "users-management-system",
         element: (
@@ -94,20 +137,22 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      {path: "my-assigned-projects", 
+      {
+        path: "my-assigned-projects",
         element: (
           <DecoratorRoute>
-            <AssignedProject/>
+            <AssignedProject />
           </DecoratorRoute>
-        )
+        ),
       },
-      {path: "update-project-status", 
+      {
+        path: "update-project-status",
         element: (
           <DecoratorRoute>
-            <UpdateStatus/>
+            <UpdateStatus />
           </DecoratorRoute>
-        )
-      }
+        ),
+      },
     ],
   },
 ]);

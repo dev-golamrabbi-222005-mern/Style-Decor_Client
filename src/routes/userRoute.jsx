@@ -6,7 +6,7 @@ const UserRoute = ({ children }) => {
 
   if (isLoading) return <p>Loading...</p>;
 
-  if (role !== "user") return <Navigate to="/unauthorized" />;
+  if (role !== "user") return <Navigate to="/" />;
 
   return children;
 };

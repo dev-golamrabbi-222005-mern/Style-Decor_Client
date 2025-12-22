@@ -58,101 +58,106 @@ const AssignedProject = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-2xl md:text-4xl font-semibold mb-6">
-        My Pending Projects: {bookings.length}
+        My Pending Projects:{" "}
+        {bookings.filter((project) => project.status !== "completed").length}
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {bookings.map((project) => (
-          <div
-            key={project._id}
-            className="card bg-amber-50 shadow-md border border-amber-200"
-          >
-            <div className="card-body">
-              <div className="flex justify-between items-start">
-                <h2 className="card-title text-primary">
-                  {project.packageName}
-                </h2>
-                <div className="badge badge-outline text-xs capitalize">
-                  {project.status.replace(/-/g, " ")}
+        {bookings
+          .filter((project) => project.status !== "completed")
+          .map((project) => (
+            <div
+              key={project._id}
+              className="card bg-amber-50 shadow-md border border-amber-200"
+            >
+              <div className="card-body">
+                <div className="flex justify-between items-start">
+                  <h2 className="card-title text-primary">
+                    {project.packageName}
+                  </h2>
+                  <div className="badge badge-outline text-xs capitalize">
+                    {project.status.replace(/-/g, " ")}
+                  </div>
+                </div>
+
+                <div className="text-sm space-y-1 mt-2">
+                  <p>
+                    <strong>Client:</strong> {project.userName}
+                  </p>
+                  <p className="truncate">
+                    <strong>Location:</strong> {project.location}
+                  </p>
+                </div>
+
+                <div className="card-actions justify-end items-center gap-5 mt-4 pt-4 border-t border-amber-200">
+                  <label
+                    htmlFor="details_modal"
+                    className="btn btn-xs btn-outline"
+                    onClick={() => setSelectedProject(project)}
+                  >
+                    View Details
+                  </label>
+
+                  {project.status === "decorator-assigned" && (
+                    <button
+                      onClick={() =>
+                        handleStatusUpdate(project._id, "planning-phase")
+                      }
+                      className="btn btn-success text-white"
+                    >
+                      {" "}
+                      Start Planning{" "}
+                    </button>
+                  )}
+
+                  {project.status === "planning-phase" && (
+                    <button
+                      onClick={() =>
+                        handleStatusUpdate(project._id, "materials-prepared")
+                      }
+                      className="btn btn-success text-white"
+                    >
+                      {" "}
+                      Materials Prepared{" "}
+                    </button>
+                  )}
+                  {project.status === "materials-prepared" && (
+                    <button
+                      onClick={() =>
+                        handleStatusUpdate(project._id, "on-the-way")
+                      }
+                      className="btn btn-success text-white"
+                    >
+                      {" "}
+                      On the way to venue{" "}
+                    </button>
+                  )}
+                  {project.status === "on-the-way" && (
+                    <button
+                      onClick={() =>
+                        handleStatusUpdate(project._id, "setup-in-progress")
+                      }
+                      className="btn btn-success text-white"
+                    >
+                      {" "}
+                      Setup in Progress{" "}
+                    </button>
+                  )}
+                  {project.status === "setup-in-progress" && (
+                    <button
+                      onClick={() =>
+                        handleStatusUpdate(project._id, "completed")
+                      }
+                      className="btn btn-success text-white"
+                    >
+                      {" "}
+                      Complete Project{" "}
+                    </button>
+                  )}
                 </div>
               </div>
-
-              <div className="text-sm space-y-1 mt-2">
-                <p>
-                  <strong>Client:</strong> {project.userName}
-                </p>
-                <p className="truncate">
-                  <strong>Location:</strong> {project.location}
-                </p>
-              </div>
-
-              <div className="card-actions justify-end items-center gap-5 mt-4 pt-4 border-t border-amber-200">
-                <label
-                  htmlFor="details_modal"
-                  className="btn btn-xs btn-outline"
-                  onClick={() => setSelectedProject(project)}
-                >
-                  View Details
-                </label>
-
-                {project.status === "decorator-assigned" && (
-                  <button
-                    onClick={() =>
-                      handleStatusUpdate(project._id, "planning-phase")
-                    }
-                    className="btn btn-success text-white"
-                  >
-                    {" "}
-                    Start Planning{" "}
-                  </button>
-                )}
-
-                {project.status === "planning-phase" && (
-                  <button
-                    onClick={() =>
-                      handleStatusUpdate(project._id, "materials-prepared")
-                    }
-                    className="btn btn-success text-white"
-                  >
-                    {" "}
-                    Materials Prepared{" "}
-                  </button>
-                )}
-                {project.status === "materials-prepared" && (
-                  <button
-                    onClick={() =>
-                      handleStatusUpdate(project._id, "on-the-way")
-                    }
-                    className="btn btn-success text-white"
-                  >
-                    {" "}
-                    On the way to venue{" "}
-                  </button>
-                )}
-                {project.status === "on-the-way" && (
-                  <button
-                    onClick={() =>
-                      handleStatusUpdate(project._id, "setup-in-progress")
-                    }
-                    className="btn btn-success text-white"
-                  >
-                    {" "}
-                    Setup in Progress{" "}
-                  </button>
-                )}
-                {project.status === "setup-in-progress" && (
-                  <button
-                    onClick={() => handleStatusUpdate(project._id, "completed")}
-                    className="btn btn-success text-white"
-                  >
-                    {" "}
-                    Complete Project{" "}
-                  </button>
-                )}
-              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {/* ================= DETAILS MODAL ================= */}

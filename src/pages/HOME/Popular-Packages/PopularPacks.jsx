@@ -5,32 +5,20 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useLoading from "../../../hooks/useLoading";
 import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const PopularPacks = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const [packages, setPackages] = useState([]);
   const { startLoading, stopLoading } = useLoading();
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     startLoading();
-    axiosSecure.get("/popularPackages").then((res) => {
+    axiosPublic.get("/popularPackages").then((res) => {
       setPackages(res.data);
       stopLoading();
     });
-  }, [axiosSecure]);
-
-  const handleBookingClick = (pkg) => {
-    if (user && user.email) {
-      // User is logged in, show the modal
-      setPackages(pkg);
-    } else {
-      toast.error("Sorry, You have to login first to book a package.");
-      navigate("/auth/login", { state: { from: location } });
-    }
-  };
+  }, [startLoading, stopLoading]);
 
   return (
     <div className="p-4 my-10 md:my-15 lg:my-22 rounded-xl">
