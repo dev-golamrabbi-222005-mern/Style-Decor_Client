@@ -23,7 +23,7 @@ const AssignDecorator = () => {
 
   // 2. Fetch Approved Decorators for the modal
   const { data: decorators = [] } = useQuery({
-    queryKey: ["decorators", "approved"],
+    queryKey: ["decorators", "available"],
     queryFn: async () => {
       const res = await axiosSecure.get("/decorators/approved");
       return res.data;
@@ -36,23 +36,32 @@ const AssignDecorator = () => {
       decoratorEmail: decorator.email,
       decoratorName: decorator.displayName,
       decoratorPhoto: decorator.photoURL,
+      status: "decorator-assigned",
+      assignedAt: new Date(),
     };
 
+    // 1. Update the Booking
     axiosSecure
       .patch(`/bookings/assign/${activeBooking._id}`, assignmentData)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          refetch(); // Refresh the list
-          setActiveBooking(null); // Close modal
-          document.getElementById("assign_modal").checked = false;
-          Swal.fire(
-            "Assigned!",
-            `${decorator.displayName} has been assigned.`,
-            "success"
-          );
+          // 2. Update the Decorator's status in the decorators collection
+          axiosSecure
+            .patch(`/decorators/status/${decorator.email}`, {
+              status: "assigned",
+            })
+            .then(() => {
+              refetch(); // Refresh the list of bookings
+              document.getElementById("assign_modal").checked = false;
+              Swal.fire(
+                "Assigned!",
+                `${decorator.displayName} is now busy with this project.`,
+                "success"
+              );
+            });
         }
       })
-      .catch(() => toast.error("Failed to assign decorator"));
+      .catch(() => toast.error("Failed to complete assignment"));
   };
 
   if (isLoading)

@@ -15,7 +15,7 @@ const UpdateProfile = () => {
     updateUserProfile({ displayName: name, photoURL: photoUrl })
       .then(() => {
         setUser({ ...user, displayName: name, photoURL: photoUrl });
-        navigate("/myProfile");
+        navigate("/dashboard/my-profile");
       })
       .catch((err) => {
         console.log(err);

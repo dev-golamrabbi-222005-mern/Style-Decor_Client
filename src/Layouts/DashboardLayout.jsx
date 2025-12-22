@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { BaggageClaim } from "lucide-react";
 import { MdHistoryEdu } from "react-icons/md";
@@ -12,31 +11,15 @@ import { MdAssignmentAdd } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { TbHeartRateMonitor } from "react-icons/tb";
 import { RiTodoFill } from "react-icons/ri";
-import { RiCalendarScheduleFill } from "react-icons/ri";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { PiCurrencyCircleDollarDuotone } from "react-icons/pi";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import useDefineRole from "../hooks/useDefineRole";
-
 
 const DashLayout = () => {
   const {user, logOutUser} = useAuth();
   const {startLoading, stopLoading} = useLoading();
   const navigate = useNavigate();
-  const axiosSecure = useAxiosSecure();
   const {role} = useDefineRole();
-
-const { data: users = [] } = useQuery({
-  queryKey: ['user', user?.email],
-  queryFn: async () => {
-    const res = await axiosSecure.get(`/users?email=${user.email}`);
-    console.log(res.data);
-    
-    return res.data;
-  },
-});
-
 
   const handleLogout = async()=>{
     startLoading();
@@ -48,6 +31,7 @@ const { data: users = [] } = useQuery({
       navigate('/');
     }catch(error){
       console.log(error);
+      stopLoading();
     }
   }
 
@@ -191,19 +175,6 @@ const { data: users = [] } = useQuery({
                       <span className="is-drawer-close:hidden">
                         {" "}
                         My Assigned Projects
-                      </span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Today's Schedule"
-                      to="/dashboard/today-schedule"
-                    >
-                      <RiCalendarScheduleFill className="text-2xl -ml-1 my-3" />
-                      <span className="is-drawer-close:hidden">
-                        {" "}
-                        Today's Schedule
                       </span>
                     </NavLink>
                   </li>

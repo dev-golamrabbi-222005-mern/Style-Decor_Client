@@ -24,6 +24,9 @@ import AdminRoute from "./AdminRoute";
 import UsersManagement from "../pages/Dashboard/Users-Management/UsersManagement";
 import DecoratorManagement from "../pages/Dashboard/Decorator-Management/DecoratorManagement";
 import AssignDecorator from "../pages/Dashboard/Assign-Decorator/AssignDecorator";
+import DecoratorRoute from "./DecoratorRoute";
+import AssignedProject from "../pages/Dashboard/Assigned-Project/AssignedProject";
+import UpdateStatus from "../pages/Dashboard/Update-Project-Status/UpdateStatus";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +94,20 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      {path: "my-assigned-projects", 
+        element: (
+          <DecoratorRoute>
+            <AssignedProject/>
+          </DecoratorRoute>
+        )
+      },
+      {path: "update-project-status", 
+        element: (
+          <DecoratorRoute>
+            <UpdateStatus/>
+          </DecoratorRoute>
+        )
+      }
     ],
   },
 ]);
