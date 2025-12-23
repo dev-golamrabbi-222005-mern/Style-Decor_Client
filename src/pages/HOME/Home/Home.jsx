@@ -9,6 +9,7 @@ import Testimonials from "../Testimonials/Testimonials";
 import ServedBrands from "../Partners/Partners";
 import PopularPacks from "../Popular-Packages/PopularPacks";
 import Coverage from "../Coverage/Coverage";
+import TopDecorators from "../Top-Decorators/TopDecorators";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <HowItWorks />
       <PopularPacks />
       <Features />
+      <TopDecorators/>
       <ServedBrands />
       <TrustStats />
       <Testimonials />

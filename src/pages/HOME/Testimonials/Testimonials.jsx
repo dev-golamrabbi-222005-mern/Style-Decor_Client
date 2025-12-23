@@ -1,12 +1,37 @@
-import { use, useState } from "react";
+import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
-
-const reviewsPromise = fetch("/reviews.json").then((res) => res.json());
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Testimonials = () => {
-  const reviewsData = use(reviewsPromise);
+  const axiosPublic = useAxiosPublic();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+
+  // Fetch reviews via React Query
+  const {
+    data: reviewsData = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/usersReviews");
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <div className="text-center py-20">Loading reviews...</div>;
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center py-20">
+        Failed to load reviews. Please try again later.
+      </div>
+    );
+  }
 
   const handleNext = () => {
     setDirection(1);
@@ -91,7 +116,7 @@ const Testimonials = () => {
               {/* User Info */}
               <div
                 className="flex flex-col items-center gap-4 relative tooltip"
-                data-tip={currentReview.user_email}
+                data-tip={currentReview.user_email} // show email as tooltip
               >
                 <div className="relative">
                   <img
@@ -165,25 +190,12 @@ const Testimonials = () => {
 
       <style>{`
         @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(100px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(100px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
         @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-100px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          from { opacity: 0; transform: translateX(-100px); }
+          to { opacity: 1; transform: translateX(0); }
         }
       `}</style>
     </section>

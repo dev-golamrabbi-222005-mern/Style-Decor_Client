@@ -1,10 +1,6 @@
-import React, { use, useEffect, useState } from "react";
-import PacksCard from "./PacksCard";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useLoading from "../../../hooks/useLoading";
-import useAuth from "../../../hooks/useAuth";
-import toast from "react-hot-toast";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const PopularPacks = () => {
@@ -14,16 +10,17 @@ const PopularPacks = () => {
 
   useEffect(() => {
     startLoading();
-    axiosPublic.get("/popularPackages").then((res) => {
+    axiosPublic.get("/popular-packages").then((res) => {
       setPackages(res.data);
       stopLoading();
     });
-  }, [startLoading, stopLoading]);
+  }, [axiosPublic]);
 
   return (
     <div className="p-4 my-10 md:my-15 lg:my-22 rounded-xl">
       <h2 className="text-2xl md:text-4xl font-semibold text-center mb-10">
         Our Popular Packages
+      <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {packages.map((pkg, index) => (

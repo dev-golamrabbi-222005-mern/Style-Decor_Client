@@ -64,7 +64,11 @@ const DashLayout = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="navbar-start px-4">Dashboard</div>
+            <div className="navbar-start px-4">
+              <Link to='/dashboard'>
+                <button className="btn btn-ghost">Dashboard</button>
+              </Link>
+            </div>
             {user && (
               <div className="navbar-end">
                 <button
@@ -124,10 +128,7 @@ const DashLayout = () => {
                   to="/dashboard/my-profile"
                 >
                   <CgProfile className="text-2xl -ml-0.5 my-3" />
-                  <span className="is-drawer-close:hidden">
-                    {" "}
-                    My Profile
-                  </span>
+                  <span className="is-drawer-close:hidden"> My Profile</span>
                 </NavLink>
               </li>
               {/* Users Dash  */}

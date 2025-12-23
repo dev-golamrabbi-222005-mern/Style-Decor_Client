@@ -9,7 +9,7 @@ const AssignedProject = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedProject, setSelectedProject] = useState(null);
   
-const { data: bookings = [], isLoading } = useQuery({
+const { data: bookings = [], isLoading, refetch } = useQuery({
   queryKey: ["assignedBookings", user?.email],
   enabled: !loading && !!user?.email, 
   queryFn: async () => {

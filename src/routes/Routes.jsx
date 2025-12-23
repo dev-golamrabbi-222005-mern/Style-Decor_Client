@@ -28,6 +28,7 @@ import DecoratorRoute from "./DecoratorRoute";
 import AssignedProject from "../pages/Dashboard/Assigned-Project/AssignedProject";
 import UpdateStatus from "../pages/Dashboard/Update-Project-Status/UpdateStatus";
 import UserRoute from "./userRoute";
+import RevenueMonitor from "../pages/Dashboard/Revenue-Monitor/RevenueMonitor";
 
 export const router = createBrowserRouter([
   {
@@ -136,6 +137,14 @@ export const router = createBrowserRouter([
             <AssignDecorator />
           </AdminRoute>
         ),
+      },
+      {
+        path: "revenue-monitor",
+        element: (
+          <AdminRoute>
+            <RevenueMonitor/>
+          </AdminRoute>
+        )
       },
       {
         path: "my-assigned-projects",

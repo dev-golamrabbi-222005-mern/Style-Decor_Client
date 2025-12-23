@@ -1,12 +1,26 @@
-import React, { use, useRef } from "react";
+import React, { useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-const coverageAreaPromise = fetch('/coverageAreas.json').then(res=>res.json());
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Coverage = () => {
-  const position = [23.685, 90.3563]; // Example: Dhaka, Bangladesh coordinates
+  const axiosPublic = useAxiosPublic();
   const mapRef = useRef(null);
-  const coverageAreas = use(coverageAreaPromise);  
+  const position = [23.685, 90.3563]; // Dhaka, Bangladesh
+
+  // Fetch coverage areas with React Query
+  const {
+    data: coverageAreas = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["coverage-areas"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/coverageAreas");
+      return res.data;
+    },
+  });
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -14,11 +28,23 @@ const Coverage = () => {
     const district = coverageAreas.find((cent) =>
       cent.district.toLowerCase().includes(location.toLowerCase())
     );
-    if (district) {
-      const coOrdinates = [district.latitude, district.longitude];
-      mapRef.current.flyTo(coOrdinates, 11);
+    if (district && mapRef.current) {
+      mapRef.current.flyTo([district.latitude, district.longitude], 11);
     }
   };
+
+  if (isLoading) {
+    return <div className="text-center py-20">Loading coverage areas...</div>;
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center py-20">
+        Failed to load coverage areas. Please try again later.
+      </div>
+    );
+  }
+
   return (
     <div className="my-5 md:my-10 lg:my-15">
       <h1 className="text-2xl md:text-4xl font-semibold text-center">
@@ -79,7 +105,7 @@ const Coverage = () => {
         </MapContainer>
       </div>
     </div>
-  )
+  );
 };
 
 export default Coverage;
