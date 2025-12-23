@@ -13,6 +13,7 @@ const LoginPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const {startLoading, stopLoading} = useLoading();
+    const [error, setError] = useState();
 
   const {
     register,
@@ -21,10 +22,7 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // Simulate API call
-    // await new Promise((resolve) => setTimeout(resolve, 1500));
-    // console.log("Login data:", data);
-    // Handle login logic here
+
     startLoading();
     try {
       const result = await signInUser(data.email, data.password);
@@ -32,6 +30,7 @@ const LoginPage = () => {
       toast.success("You have successfully logged in to Style Decor.");
       navigate(location?.state || "/");
     } catch (error) {
+      setError(error?.message);
       console.log("login error.", error);
     }finally{
         stopLoading();
@@ -202,6 +201,7 @@ const LoginPage = () => {
                 </>
               )}
             </button>
+            <p className="text-red-500 font-semibold ">{error}</p>
           </form>
 
           {/* Divider */}

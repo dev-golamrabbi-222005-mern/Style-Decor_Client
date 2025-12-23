@@ -25,13 +25,16 @@ const AssignedProject = () => {
   });
 
   const handleStatusUpdate = async (id, status) => {
-    const statusInfo = { status: status };
+    const statusInfo = {
+      status: status,
+      completedAt: new Date(),
+    };
 
     axiosSecure.patch(`/bookings/${id}/status`, statusInfo).then((res) => {
       if (res.data.modifiedCount) {
         if (status === "completed") {
           axiosSecure
-            .patch(`/decorators/status/${user?.email}`, { status: "available" })
+            .patch(`/decorators/status-update-by-email/${user?.email}`, { status: "available" })
             .then(() => {
               console.log("Decorator is now available for new projects");
             });

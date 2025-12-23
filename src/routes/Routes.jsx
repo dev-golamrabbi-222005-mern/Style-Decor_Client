@@ -29,6 +29,7 @@ import AssignedProject from "../pages/Dashboard/Assigned-Project/AssignedProject
 import UpdateStatus from "../pages/Dashboard/Update-Project-Status/UpdateStatus";
 import UserRoute from "./userRoute";
 import RevenueMonitor from "../pages/Dashboard/Revenue-Monitor/RevenueMonitor";
+import EarningsSummary from "../pages/Dashboard/Earnings-Summary/EarningsSummary";
 
 export const router = createBrowserRouter([
   {
@@ -159,6 +160,14 @@ export const router = createBrowserRouter([
         element: (
           <DecoratorRoute>
             <UpdateStatus />
+          </DecoratorRoute>
+        ),
+      },
+      {
+        path: "earnings-summary",
+        element: (
+          <DecoratorRoute>
+            <EarningsSummary />
           </DecoratorRoute>
         ),
       },

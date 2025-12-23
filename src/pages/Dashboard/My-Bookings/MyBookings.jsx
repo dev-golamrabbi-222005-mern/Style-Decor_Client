@@ -37,12 +37,12 @@ const handleBookingUpdate = async (id) => {
 
       const res = await axiosSecure.patch(`/bookings/${id}`, updateData);
 
-      if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire("Updated!", "Booking updated successfully.", "success");
-        setSelectedBooking(null);
-        document.getElementById("detailsModal").checked = false;
-      }
+if (res.data.modifiedCount > 0) {
+  refetch();
+  Swal.fire("Updated!", "Booking updated successfully.", "success");
+  setSelectedBooking(null);
+  document.getElementById("detailsModal").checked = false; // This closes the daisyUI modal
+}
     }
   });
 };

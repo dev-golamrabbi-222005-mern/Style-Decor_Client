@@ -26,6 +26,7 @@ const RegisterPage = () => {
   const { registerUser, updateUserProfile } = useAuth();
   const { startLoading, stopLoading } = useLoading();
   const axiosSecure = useAxiosSecure();
+  const [error, setError] = useState();
 
   const {
     register,
@@ -43,14 +44,11 @@ const RegisterPage = () => {
     startLoading();
     try {
       const result = await registerUser(data.email, data.password);
-      console.log("user created", result);
-
       // Update user profile with name and photo
       await updateUserProfile({
         displayName: data.name,
         photoURL: data.photoUrl,
       });
-      console.log("profile updated successfully");
 
       //Image processing
       const profileImg = data.photoUrl;
@@ -63,7 +61,7 @@ const RegisterPage = () => {
         const photoURL = res.data.data.url;
 
         //create user in db
-        if(data.role === "user"){
+        if (data.role === "user") {
           const userInfo = {
             email: data.email,
             displayName: data.name,
@@ -71,7 +69,7 @@ const RegisterPage = () => {
             role: data.role,
           };
           await axiosSecure.post("/users", userInfo);
-          toast.success("Account created Successfully.!")
+          toast.success("Account created Successfully.!");
         }
 
         if (data.role === "decorator") {
@@ -91,6 +89,7 @@ const RegisterPage = () => {
         navigate(location?.state || "/");
       });
     } catch (error) {
+      setError(error?.message);
       console.log("registration error.", error);
     } finally {
       stopLoading();
@@ -459,6 +458,7 @@ const RegisterPage = () => {
                 </>
               )}
             </button>
+            <p className="text-red-500 font-semibold ">{error}</p>            <p className="text-red-500 font-semibold ">{error}</p>
           </form>
 
           {/* Divider & Social Login Button */}

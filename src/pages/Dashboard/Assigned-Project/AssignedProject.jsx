@@ -95,14 +95,21 @@ const handleReject = async (id) => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-2xl md:text-4xl font-semibold mb-6">
-        New Project Proposals:{bookings
-          .filter((project) => project.status === "pending-approval").length}
+      <h1 className="text-2xl md:text-4xl font-semibold mb-8">
+        New Project Proposals & completed Projects
+        {
+          bookings.filter((project) => project.status === "pending-approval")
+            .length
+        }
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {bookings
-          .filter((project) => project.status === "pending-approval" && project.status === "completed")
+          .filter(
+            (project) =>
+              project.status === "pending-approval" ||
+              project.status === "completed"
+          )
           .map((project) => (
             <div
               key={project._id}
@@ -125,7 +132,9 @@ const handleReject = async (id) => {
                   >
                     View Details
                   </label>
-                  {project.status === "pending-approval" ? (
+
+                  {/* Only show Accept/Reject buttons for pending-approval */}
+                  {project.status === "pending-approval" && (
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleReject(project._id)}
@@ -140,9 +149,12 @@ const handleReject = async (id) => {
                         Accept
                       </button>
                     </div>
-                  ) : (
+                  )}
+
+                  {/* Completed projects */}
+                  {project.status === "completed" && (
                     <div className="badge badge-success text-white uppercase p-3">
-                      Active Workflow
+                      Completed
                     </div>
                   )}
                 </div>
@@ -150,6 +162,7 @@ const handleReject = async (id) => {
             </div>
           ))}
       </div>
+
       {/* ================= DETAILS MODAL ================= */}
       <input type="checkbox" id="details_modal" className="modal-toggle" />
       <div className="modal">
@@ -203,6 +216,10 @@ const handleReject = async (id) => {
               <p>
                 <strong>Assigned On:</strong>{" "}
                 {new Date(selectedProject?.assignedAt).toLocaleString()}
+              </p>
+              <p>
+                <strong>Completed On:</strong>{" "}
+                {new Date(selectedProject?.updatedAt).toLocaleString()}
               </p>
               <p>
                 <strong>Payment:</strong>{" "}
