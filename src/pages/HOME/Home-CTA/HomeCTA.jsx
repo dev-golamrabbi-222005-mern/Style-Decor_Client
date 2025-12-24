@@ -22,11 +22,11 @@ const HomeCTA = () => {
         </p>
 
         <div className="flex justify-center gap-4 flex-wrap">
-          <Link to="/packages" className="btn bg-white text-primary">
-            Explore Packages
+          <Link to="/services" className="btn bg-white text-primary">
+            Explore Services & packages
           </Link>
           <Link
-            to="/consultation"
+            to="/packages?service=On-Site%20Design%20Consultation"
             className="btn btn-outline text-white border-white"
           >
             Book Consultation
