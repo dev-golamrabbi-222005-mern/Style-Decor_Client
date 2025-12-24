@@ -23,7 +23,7 @@ const PassRecoverPage = () => {
   const onSubmitEmail = async (data) => {
     // Simulate sending reset code
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Sending reset code to:", data.email);
+    // console.log("Sending reset code to:", data.email);
 
     setEmail(data.email);
     // Here you'll integrate with Firebase: sendPasswordResetEmail()
@@ -35,7 +35,7 @@ const PassRecoverPage = () => {
   const onSubmitCode = async (data) => {
     // Simulate verifying code
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Verifying code:", data.code);
+    // console.log("Verifying code:", data.code);
 
     // Here you'll integrate with Firebase to verify the code
     // Firebase sends a reset link to email, so this step might be different
@@ -44,7 +44,7 @@ const PassRecoverPage = () => {
   };
 
   const handleResendCode = async () => {
-    console.log("Resending code to:", email);
+    // console.log("Resending code to:", email);
     // Resend the password reset email
   };
 

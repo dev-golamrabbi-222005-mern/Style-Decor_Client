@@ -18,19 +18,19 @@ const PaymentSuccess = () => {
       // Match the backend endpoint URL
       axiosSecure.patch(`/verify-payment-success?session_id=${sessionId}`)
         .then(res=> {
-          console.log('Payment verification response:', res.data);
+          // console.log('Payment verification response:', res.data);
           if(res.data.success){
             setPaymentInfo({
               transactionId: res.data.transactionId,
               trackingId: res.data.trackingId,
             })
           } else {
-            console.error('Payment verification failed:', res.data.message);
+            // console.error('Payment verification failed:', res.data.message);
           }
           setLoading(false);
         })
         .catch(error => {
-          console.error('Payment verification error:', error);
+          // console.error('Payment verification error:', error);
           setLoading(false);
         })
     } else {

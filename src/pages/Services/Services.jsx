@@ -77,7 +77,7 @@ const Services = () => {
         });
       }
     } catch (error) {
-      console.error("Service creation failed:", error);
+      // console.error("Service creation failed:", error);
     }
   };
 

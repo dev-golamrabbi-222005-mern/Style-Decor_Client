@@ -18,7 +18,7 @@ const UpdateProfile = () => {
         navigate("/dashboard/my-profile");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setUser(user);
       });
     toast.success("Profile Updated Successfully!");

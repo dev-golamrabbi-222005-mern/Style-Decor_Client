@@ -26,12 +26,12 @@ const LoginPage = () => {
     startLoading();
     try {
       const result = await signInUser(data.email, data.password);
-      console.log("sign in done", result);
+      // console.log("sign in done", result);
       toast.success("You have successfully logged in to Style Decor.");
       navigate(location?.state || "/");
     } catch (error) {
       setError(error?.message);
-      console.log("login error.", error);
+      // console.log("login error.", error);
     }finally{
         stopLoading();
     }

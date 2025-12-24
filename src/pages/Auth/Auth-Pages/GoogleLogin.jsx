@@ -13,7 +13,7 @@ const GoogleLogin = () => {
     const handleGoogleLogin = async ()=>{
         try{
             const result = await signInWithGoogle();
-            console.log('user created',result);
+            // console.log('user created',result);
             const userInfo = {
                 email: result.user.email,
                 displayName: result.user.displayName,
@@ -26,7 +26,7 @@ const GoogleLogin = () => {
         toast.success('You have successfully logged in to Style Decor');
         navigate(location?.state || '/');
         }catch(error){
-            console.log(error); 
+            // console.log(error); 
         }
     }
     

@@ -28,8 +28,7 @@ const PaymentPage = () => {
     queryKey: ["bookings", bookingId],
     queryFn: async () => {
       const res = await axiosSecure.get(`/bookings/${bookingId}`);
-      console.log(res.data);
-      
+      // console.log(res.data);
       return res.data;
     },
   });
@@ -66,7 +65,7 @@ const PaymentPage = () => {
       userEmail: booking.userEmail,
       packageName: booking.packageName,
     };
-    console.log(paymentInfo);
+    // console.log(paymentInfo);
     
     try {
       const res = await axiosSecure.post(
@@ -77,8 +76,8 @@ const PaymentPage = () => {
         window.location.href = res.data.url;
       }
     } catch (error) {
-      console.error("Payment error full:", error);
-      console.error("Response:", error.response?.data);
+      // console.error("Payment error full:", error);
+      // console.error("Response:", error.response?.data);
       toast.error(error.response?.data?.message || "Payment failed");
     }
   };

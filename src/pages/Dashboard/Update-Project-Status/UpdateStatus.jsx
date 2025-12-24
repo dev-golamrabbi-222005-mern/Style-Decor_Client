@@ -36,7 +36,7 @@ const AssignedProject = () => {
           axiosSecure
             .patch(`/decorators/status-update-by-email/${user?.email}`, { status: "available" })
             .then(() => {
-              console.log("Decorator is now available for new projects");
+              // console.log("Decorator is now available for new projects");
             });
         }
 

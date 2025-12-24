@@ -90,7 +90,7 @@ const RegisterPage = () => {
       });
     } catch (error) {
       setError(error?.message);
-      console.log("registration error.", error);
+      // console.log("registration error.", error);
     } finally {
       stopLoading();
     }

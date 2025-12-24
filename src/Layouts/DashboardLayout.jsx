@@ -25,12 +25,12 @@ const DashLayout = () => {
     startLoading();
     try{
       const result = await logOutUser();
-      console.log(result);
+      // console.log(result);
       stopLoading();
       toast.success('Log Out Successful.');
       navigate('/');
     }catch(error){
-      console.log(error);
+      // console.log(error);
       stopLoading();
     }
   }
