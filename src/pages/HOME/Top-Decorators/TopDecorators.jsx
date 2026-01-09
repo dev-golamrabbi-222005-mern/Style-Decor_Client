@@ -4,7 +4,6 @@ import useAxiosPublic from "../../../hooks/useAxiosPublic";
 const TopDecorators = () => {
   const axiosPublic = useAxiosPublic();
 
-  // React Query for fetching top decorators
 const {
   data: decorators = [],
   isLoading,
@@ -35,7 +34,7 @@ const {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16">
+    <section className="max-w-7xl mx-auto">
       {/* Section Header */}
       <div className="text-center mb-12">
         <h2 className="text-2xl md:text-4xl font-semibold">

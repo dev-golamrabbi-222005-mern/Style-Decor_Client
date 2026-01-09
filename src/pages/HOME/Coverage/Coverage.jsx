@@ -9,7 +9,6 @@ const Coverage = () => {
   const mapRef = useRef(null);
   const position = [23.685, 90.3563]; // Dhaka, Bangladesh
 
-  // Fetch coverage areas with React Query
   const {
     data: coverageAreas = [],
     isLoading,
@@ -46,7 +45,7 @@ const Coverage = () => {
   }
 
   return (
-    <div className="my-5 md:my-10 lg:my-15">
+    <div>
       <h1 className="text-2xl md:text-4xl font-semibold text-center">
         We are available in 64 districts
       </h1>
@@ -82,7 +81,7 @@ const Coverage = () => {
           </label>
         </form>
       </div>
-      <div className="h-[777px] w-full pt-11 border-b-2 border-[#577F84] pb-11">
+      <div className="h-[777px] w-full py-5 border-b-2 border-[#577F84]">
         <MapContainer
           center={position}
           zoom={8}

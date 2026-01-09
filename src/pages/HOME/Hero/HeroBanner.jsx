@@ -28,21 +28,21 @@ const slideData = [
 ];
 
 const HeroBanner = () => {
-  // 2. Define the responsive buttons once
+
   const ResponsiveButtons = (
     <div
       className="
-        absolute z-50 flex items-center gap-1 md:gap-5
-        left-[7%] bottom-8
-        md:bottom-22 md:left-[5%]
-        lg:bottom-33 lg:left-[11%]
+        absolute z-50 flex md:items-center flex-col md:flex-row items-start gap-3 md:gap-5
+        left-[8%] bottom-10
+        md:bottom-15 md:left-[4%]
+        lg:bottom-33 lg:left-[9.3%]
       "
     >
-      <Link to="/services" className="btn btn-primary">
+      <Link to="/services" className="btn btn-primary btn-sm md:btn-md">
         Explore Services
       </Link>
       <Link to="/packages?service=On-Site%20Design%20Consultation">
-        <button className="btn bg-white text-gray-700">
+        <button className="btn bg-white text-gray-700 btn-sm md:btn-md">
           Book a Consultation
         </button>
       </Link>
@@ -57,7 +57,6 @@ const HeroBanner = () => {
         infiniteLoop={true}
         showStatus={false}
       >
-        {/* 3. Map over the data array to render all slides */}
         {slideData.map((slide, index) => (
           <div key={index} className="relative">
             <img
@@ -65,14 +64,15 @@ const HeroBanner = () => {
               className="w-full h-56 md:h-96 lg:h-[32rem] object-cover rounded-xl"
               alt={slide.title}
             />
-
-            <div className="absolute top-8 md:top-22 lg:top-11 left-8 z-50 md:max-w-xl lg:max-w-3xl text-left text-white pr-8 lg:p-27 space-y-3">
-              <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg">
-                {slide.title}
-              </h1>
-              <p className="text-sm md:text-lg drop-shadow-md">
-                {slide.description}
-              </p>
+            <div className="max-w-7xl">
+              <div className="absolute top-8 md:top-22 lg:top-11 left-8 z-50 text-left text-white pr-8 lg:p-27 space-y-3">
+                <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg md:max-w-2xl lg:max-w-5xl">
+                  {slide.title}
+                </h1>
+                <p className="text-sm md:max-w-lg lg:max-w-xl hidden md:block md:text-lg drop-shadow-md">
+                  {slide.description}
+                </p>
+              </div>
             </div>
 
             {ResponsiveButtons}

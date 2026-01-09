@@ -60,8 +60,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div>
-      <div className="navbar bg-[#FCFAE0] shadow-sm mx-auto">
+    <div className="sticky bg-[#FCFAE0] top-0 z-11111">
+      <div className="navbar max-w-7xl shadow-sm mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -85,7 +85,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link className="pl-3 md:pl-7 lg:pl-13" to="/">
+          <Link to="/">
             <Logo />
           </Link>
         </div>
@@ -94,9 +94,11 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <div className="navbar-end lg:pr-15">
+        <div className="navbar-end">
           {user ? (
-              <button onClick={handleLogOut} className="btn bg-primary rounded">Sign Out</button>
+            <button onClick={handleLogOut} className="btn bg-primary rounded">
+              Sign Out
+            </button>
           ) : (
             <Link to="/auth/login">
               <button className="btn bg-primary rounded">Sign In</button>

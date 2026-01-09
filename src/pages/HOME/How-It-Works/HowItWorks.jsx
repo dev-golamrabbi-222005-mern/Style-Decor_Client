@@ -21,7 +21,7 @@ export const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-10 md:py-15 lg:py-22">
+    <section>
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-2xl md:text-4xl font-semibold text-center mb-12">
           How StyleDecor Works

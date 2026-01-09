@@ -8,7 +8,6 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  // Fetch reviews via React Query
   const {
     data: reviewsData = [],
     isLoading,
@@ -48,10 +47,10 @@ const Testimonials = () => {
   const currentReview = reviewsData[currentIndex];
 
   return (
-    <section className="py-5 md:py-10 lg:py-15">
+    <section>
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="inline-block mb-4">
             <span className="bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-2 rounded-full">
               Testimonials

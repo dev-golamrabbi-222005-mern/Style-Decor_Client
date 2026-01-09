@@ -82,8 +82,7 @@ const Services = () => {
   };
 
   return (
-    <div className="py-10 md:py-11 lg:py-22">
-      {/* Hero Section */}
+    <div className="py-5 md:py-8 lg:py-10">
       <title>Style Decor | Services</title>
 
       <section className="max-w-7xl mx-auto px-6 pb-11 text-center">
@@ -98,7 +97,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="max-w-7xl mx-auto px-6 pb-20">
+      <section className="max-w-7xl mx-auto px-6 pb-16">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, idx) => (
             <div
@@ -148,7 +147,7 @@ const Services = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        className="py-16 rounded-2xl text-white"
+        className="py-16 max-w-7xl mx-auto rounded-2xl text-white"
       >
         <div className="max-w-5xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-4">

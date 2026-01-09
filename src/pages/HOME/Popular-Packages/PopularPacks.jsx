@@ -17,7 +17,7 @@ const PopularPacks = () => {
   }, [axiosPublic]);
 
   return (
-    <div className="p-4 my-10 md:my-15 lg:my-22 rounded-xl">
+    <div className="p-4 rounded-xl">
       <h2 className="text-2xl md:text-4xl font-semibold text-center mb-10">
         Our Popular Packages
       <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
@@ -53,7 +53,7 @@ const PopularPacks = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center my-10">
+      <div className="flex justify-center mt-10">
         <Link to="/services">
           <button className="btn btn-primary">View all Services</button>
         </Link>

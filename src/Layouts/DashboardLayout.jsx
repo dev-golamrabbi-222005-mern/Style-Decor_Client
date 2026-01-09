@@ -14,6 +14,7 @@ import { RiTodoFill } from "react-icons/ri";
 import { GrDocumentUpdate } from "react-icons/gr";
 import { PiCurrencyCircleDollarDuotone } from "react-icons/pi";
 import useDefineRole from "../hooks/useDefineRole";
+import Logo from "../components/Logo/Logo";
 
 const DashLayout = () => {
   const {user, logOutUser} = useAuth();
@@ -64,10 +65,15 @@ const DashLayout = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
+
             <div className="navbar-start px-4">
-              <Link to='/dashboard'>
+              <Link to="/dashboard">
                 <button className="btn btn-ghost">Dashboard</button>
               </Link>
+            </div>
+
+            <div className="w-22 navbar-center">
+              <Logo />
             </div>
             {user && (
               <div className="navbar-end">

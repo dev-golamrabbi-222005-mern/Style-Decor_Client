@@ -10,21 +10,33 @@ import ServedBrands from "../Partners/Partners";
 import PopularPacks from "../Popular-Packages/PopularPacks";
 import Coverage from "../Coverage/Coverage";
 import TopDecorators from "../Top-Decorators/TopDecorators";
+import SectionDivider from "../../../components/Divider/SectionDivider";
 
 const Home = () => {
   return (
-    <div className="py-3 md:py-7 lg:py-11">
+    <div className="pb-3 md:pb-7 lg:pb-11">
       <title>Style Decor || Home</title>
       <HeroBanner />
-      <HowItWorks />
-      <PopularPacks />
-      <Features />
-      <TopDecorators/>
-      <ServedBrands />
-      <TrustStats />
-      <Testimonials />
-      <Coverage/>
-      <HomeCTA />
+      <SectionDivider />
+      <div className="max-w-7xl mx-auto">
+        <HowItWorks />
+        <SectionDivider />
+        <PopularPacks />
+        <SectionDivider />
+        <Features />
+        <SectionDivider />
+        <TopDecorators />
+        <SectionDivider />
+        <ServedBrands />
+        <SectionDivider />
+        <TrustStats />
+        <SectionDivider />
+        <Testimonials />
+        <SectionDivider />
+        <Coverage />
+        <SectionDivider />
+        <HomeCTA />
+      </div>
     </div>
   );
 };
