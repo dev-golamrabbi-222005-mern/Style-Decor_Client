@@ -171,7 +171,7 @@ const Services = () => {
 
       {/* Modal  */}
       {openModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-22222">
           <div className="bg-white rounded-2xl w-full max-w-lg p-6 relative">
             <h3 className="text-xl font-semibold mb-4">Create New Service</h3>
 

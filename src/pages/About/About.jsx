@@ -1,4 +1,18 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 const About = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+      if (location.hash) {
+        const element = document.querySelector(location.hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }, [location]);
+
   return (
     <section className="py-5 md:py-8 lg:py-10">
       <title>Style Decor | About Us</title>
@@ -82,7 +96,7 @@ const About = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="text-center pb-10">
           <h3 className="text-3xl font-bold mb-4">
             Simplifying Decoration Services, Digitally
           </h3>
@@ -92,6 +106,114 @@ const About = () => {
             enhance service quality.
           </p>
         </div>
+
+        <div className="border-t-2 border-gray-300/55">
+          <section id="terms" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-4 text-primary">Terms & Conditions</h2>
+
+            <p className="mb-4">
+              By accessing and using StyleDecor’s services, you agree to comply
+              with and be bound by these Terms & Conditions. Our services
+              include in-studio consultations, on-site decoration, and event
+              styling.
+            </p>
+
+            <p className="mb-4">
+              Clients must provide accurate event details, including location,
+              timing, and requirements. Any changes should be communicated at
+              least 48 hours before the scheduled service.
+            </p>
+
+            <p>
+              StyleDecor reserves the right to refuse service in cases of unsafe
+              environments, unethical requests, or non-compliance with company
+              policies.
+            </p>
+          </section>
+
+          <section id="privacy" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-4 text-primary">Privacy Policy</h2>
+
+            <p className="mb-4">
+              StyleDecor respects your privacy and is committed to protecting
+              your personal information. We collect basic details such as name,
+              phone number, email, and event information for service purposes
+              only.
+            </p>
+
+            <p className="mb-4">
+              Your data is never sold to third parties. Information is used
+              strictly for communication, booking, and service improvement.
+            </p>
+
+            <p>
+              By using our website and services, you consent to our data
+              collection and usage policies.
+            </p>
+          </section>
+
+          <section id="refund" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
+            <h2 className="text-3xl text-primary font-bold mb-4">
+              Refund & Cancellation Policy
+            </h2>
+
+            <p className="mb-4">
+              Clients may cancel bookings up to 72 hours before the event for a
+              partial refund. Cancellations made within 72 hours are
+              non-refundable due to preparation costs.
+            </p>
+
+            <p className="mb-4">
+              Refunds will be processed within 7–10 business days via the
+              original payment method.
+            </p>
+
+            <p>
+              In rare cases of service failure, StyleDecor may offer
+              compensation or service rescheduling.
+            </p>
+          </section>
+
+          <section id="service" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
+            <h2 className="text-3xl text-primary font-bold mb-4">Service Agreement</h2>
+
+            <p className="mb-4">
+              StyleDecor agrees to provide professional decoration services
+              according to the client’s selected package and preferences.
+            </p>
+
+            <p className="mb-4">
+              Clients agree to provide safe access to the venue, necessary
+              permissions, and timely cooperation.
+            </p>
+
+            <p>
+              Any additional requests outside the original agreement may result
+              in extra charges.
+            </p>
+          </section>
+
+          <section id="compliance" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
+            <h2 className="text-3xl text-primary font-bold mb-4">Compliance & Safety</h2>
+
+            <p className="mb-4">
+              StyleDecor follows local safety regulations and event compliance
+              standards. All materials used are inspected for safety and
+              quality.
+            </p>
+
+            <p className="mb-4">
+              Our team ensures proper electrical, structural, and fire safety
+              measures during setup and teardown.
+            </p>
+
+            <p>
+              Client cooperation is required to maintain a safe and secure event
+              environment.
+            </p>
+          </section>
+        </div>
+
       </div>
     </section>
   );

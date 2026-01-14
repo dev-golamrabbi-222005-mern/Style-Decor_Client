@@ -9,11 +9,11 @@ import useLoading from "../../../hooks/useLoading";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-    const {signInUser} = useAuth();
-    const location = useLocation();
-    const navigate = useNavigate();
-    const {startLoading, stopLoading} = useLoading();
-    const [error, setError] = useState();
+  const { signInUser } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { startLoading, stopLoading } = useLoading();
+  const [error, setError] = useState();
 
   const {
     register,
@@ -22,7 +22,6 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-
     startLoading();
     try {
       const result = await signInUser(data.email, data.password);
@@ -30,18 +29,56 @@ const LoginPage = () => {
       toast.success("You have successfully logged in to Style Decor.");
       navigate(location?.state || "/");
     } catch (error) {
-      setError(error?.message);
-      // console.log("login error.", error);
-    }finally{
-        stopLoading();
+      let message = "Login failed. Please try again.";
+
+      if (error.code === "auth/user-not-found") {
+        message = "No account found with this email.";
+      } else if (error.code === "auth/wrong-password") {
+        message = "Incorrect password. Try again.";
+      } else if (error.code === "auth/too-many-requests") {
+        message = "Too many attempts. Try later.";
+      }
+
+      setError(message);
+    } finally {
+      stopLoading();
+    }
+  };
+
+  const handleDemoUserLogin = async () => {
+    startLoading();
+    setError(null);
+
+    try {
+      await signInUser("demoUser.styledecor@gmail.com", "DemoUser@2026");
+      toast.success("Logged in with demo User account!");
+      navigate(location?.state || "/");
+    } catch (err) {
+      setError("Demo login failed. Please try again.");
+    } finally {
+      stopLoading();
+    }
+  };
+
+  const handleDemoDecoratorLogin = async () => {
+    startLoading();
+    setError(null);
+
+    try {
+      await signInUser("demoDecorator.styledecor@gmail.com", "DemoDecorator@2026");
+      toast.success("Logged in with demo Decorator account!");
+      navigate(location?.state || "/");
+    } catch (err) {
+      setError("Demo login failed. Please try again.");
+    } finally {
+      stopLoading();
     }
   };
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen p-4 relative">
+    <div className="flex items-center justify-center min-h-screen p-4 relative">
       <title>Style Decor | Login</title>
-      
+
       {/* Login Card */}
       <div className="w-full max-w-xl my-10 p-8 md:p-10 rounded-3xl shadow-2xl bg-white/10 border border-white/20 relative z-10">
         {/* Subtle Inner Glow */}
@@ -118,21 +155,30 @@ const LoginPage = () => {
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
+                      value: 8,
+                      message: "Password must be at least 8 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])/,
+                      message:
+                        "Password must include uppercase, lowercase, number & special character",
                     },
                   })}
                   placeholder="••••••••"
                   className={`
                     w-full pl-12 pr-12 py-3.5 rounded-xl 
-                    bg-white/10 border ${
-                      errors.password ? "border-red-400" : "border-white/20"
-                    }
+                     border ${
+                       errors.password ? "border-red-400" : "border-white/20"
+                     }
                     text-white placeholder-white/50 
                     focus:ring-2 focus:ring-sky-300 focus:border-sky-300 
                     transition duration-300 shadow-inner
                   `}
                 />
+                <p className="text-xs text-white/60 mt-1">
+                  Must be 8+ chars with uppercase, lowercase, number & symbol
+                </p>
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -201,7 +247,48 @@ const LoginPage = () => {
                 </>
               )}
             </button>
-            <p className="text-red-500 font-semibold ">{error}</p>
+            {error && (
+              <div className="bg-red-500/10 border border-red-400 text-red-300 px-4 py-2 rounded-lg text-sm">
+                {error}
+              </div>
+            )}
+
+            <p className="text-center text-xs text-white/60 mt-2">
+              Use demo account to explore features without registration
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleDemoUserLogin}
+                className="
+    py-3 flex-1 px-5 rounded-xl
+    bg-gradient-to-r from-gray-700 to-gray-900
+    text-white font-semibold
+    shadow-lg shadow-black/30
+    hover:shadow-xl hover:shadow-black/40
+    hover:from-gray-800 hover:to-black
+    transition-all duration-300
+  "
+              >
+                Login with Demo User Account
+              </button>
+
+              <button
+                type="button"
+                onClick={handleDemoDecoratorLogin}
+                className="
+    py-3 px-5 flex-1 rounded-xl
+    bg-gradient-to-r from-gray-700 to-gray-900
+    text-white font-semibold
+    shadow-lg shadow-black/30
+    hover:shadow-xl hover:shadow-black/40
+    hover:from-gray-800 hover:to-black
+    transition-all duration-300
+  "
+              >
+                Login with Demo Decorator Account
+              </button>
+            </div>
           </form>
 
           {/* Divider */}
@@ -217,7 +304,7 @@ const LoginPage = () => {
           </div>
 
           {/* Social Login Buttons */}
-          <GoogleLogin/>
+          <GoogleLogin />
 
           {/* Registration Link */}
           <p className="text-center mt-5 text-sm text-white/80">

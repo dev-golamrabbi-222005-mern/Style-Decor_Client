@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
+import { FaFacebook, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
   const location = useLocation();
@@ -51,6 +52,7 @@ const Footer = () => {
         )}
 
         <div className="max-w-10/12 mx-auto mt-10 grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+          {/* About */}
           <nav>
             <Logo />
             <p className="text-[15px] mb-5">
@@ -64,43 +66,66 @@ const Footer = () => {
             </strong>
           </nav>
 
+          {/* Services */}
           <nav>
             <h6 className="footer-title">Services</h6>
             <li>
-              <a className="link link-hover">Home Decoration</a>
+              <a href="/services/home-decoration" className="link link-hover">
+                Home Decoration
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Event / Ceremony Decoration</a>
+              <a href="/services/event-decoration" className="link link-hover">
+                Event / Ceremony Decoration
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Wedding Stage Design</a>
+              <a href="/services/wedding-stage" className="link link-hover">
+                Wedding Stage Design
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Birthday Decoration</a>
+              <a href="/services/birthday" className="link link-hover">
+                Birthday Decoration
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Floral & Lighting Setup</a>
+              <a href="/services/floral-lighting" className="link link-hover">
+                Floral & Lighting Setup
+              </a>
             </li>
             <li>
-              <a className="link link-hover">On-Site Consultation</a>
+              <a href="/services/on-site" className="link link-hover">
+                On-Site Consultation
+              </a>
             </li>
             <li>
-              <a className="link link-hover">In-Studio Consultation</a>
+              <a href="/services/in-studio" className="link link-hover">
+                In-Studio Consultation
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Venue Styling</a>
+              <a href="/services/venue-styling" className="link link-hover">
+                Venue Styling
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Custom Decoration Package</a>
+              <a href="/services/custom-package" className="link link-hover">
+                Custom Decoration Package
+              </a>
             </li>
             <li>
-              <a className="link link-hover">Rental Items</a>
+              <a href="/services/rental" className="link link-hover">
+                Rental Items
+              </a>
             </li>
           </nav>
 
+          {/* Contact */}
           <nav>
             <h6 className="footer-title">Contact Us</h6>
-            <p className="">
+
+            <p>
               <span className="font-medium">Address:</span>
               <br />
               StyleDecor Studio
@@ -140,66 +165,51 @@ const Footer = () => {
             </p>
           </nav>
 
+          {/* Legal */}
           <nav>
             <h6 className="footer-title">Legal</h6>
-            <li>
-              <a className="link link-hover">Terms & Conditions</a>
-            </li>
-            <li>
-              <a className="link link-hover">Privacy Policy</a>
-            </li>
-            <li>
-              <a className="link link-hover">Refund & Cancellation Policy</a>
-            </li>
-            <li>
-              <a className="link link-hover">Service Agreement</a>
-            </li>
-            <li>
-              <a className="link link-hover">Compliance & Safety</a>
-            </li>
-            <div className="mt-5 bg-white shadow-2xl rounded-2xl p-4 -ml-10">
-              <h1>
-                <strong>Wanna be a Decorator?</strong>
-              </h1>
-              Don't hesitate to mail us at <strong>apply.decorator@styledecor.com</strong>
-            </div>
+            <a className="link-hover block" href="/about#terms">
+              Terms & Conditions
+            </a>
+            <a className="link-hover block" href="/about#privacy">
+              Privacy Policy
+            </a>
+            <a className="link-hover block" href="/about#refund">
+              Refund & Cancellation Policy
+            </a>
+            <a className="link-hover block" href="/about#service">
+              Service Agreement
+            </a>
+            <a className="link-hover block" href="/about#compliance">
+              Compliance & Safety
+            </a>
           </nav>
 
+          {/* Social */}
           <nav>
             <h6 className="footer-title">Social</h6>
             <div className="grid grid-flow-col gap-4">
-              <a className="cursor-pointer">
+              <a href="https://twitter.com/" target="_blank" rel="noreferrer">
                 <FaXTwitter className="hover:text-blue-400 text-2xl" />
               </a>
-              <a className="cursor-pointer">
+
+              <a href="https://instagram.com/" target="_blank" rel="noreferrer">
                 <FaInstagram className="hover:text-blue-400 text-2xl" />
               </a>
 
-              <a className="hover:text-blue-400 cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  className="fill-current"
-                >
-                  <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                </svg>
+              {/* YouTube */}
+              <a href="https://youtube.com/" target="_blank" rel="noreferrer">
+                <FaYoutube className="text-2xl"/>
               </a>
-              <a className="hover:text-blue-400 cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  className="fill-current"
-                >
-                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-                </svg>
+
+              {/* Facebook */}
+              <a href="https://facebook.com/" target="_blank" rel="noreferrer">
+                <FaFacebook className="text-2xl"/>
               </a>
             </div>
           </nav>
         </div>
+
         <div className="max-w-10/12 mx-auto flex justify-center items-center border-t-2 mt-5 py-5 gap-5">
           <svg
             width="36"

@@ -8,10 +8,13 @@ import { BsPersonFillSlash } from "react-icons/bs";
 import { BsPersonFillCheck } from "react-icons/bs";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAuth from "../../../hooks/useAuth";
 
 const DecoratorManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
+  const {user} = useAuth();
+  const isDemoUser = user?.role === "demoUser";
   const { data: decoratorsData = [], refetch } = useQuery({
     queryKey: ["decorator"],
     queryFn: async () => {
@@ -154,6 +157,7 @@ const DecoratorManagement = () => {
                   <td className="flex items-center justify-center gap-2">
                     {/* Make Admin */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() => handleAction(decorator._id, "admin")}
                       className="btn btn-square btn-info text-white tooltip"
                       data-tip="Make Admin"
@@ -163,6 +167,7 @@ const DecoratorManagement = () => {
 
                     {/* Ban */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() => handleAction(decorator._id, "ban")}
                       className="btn btn-square btn-warning text-white tooltip"
                       data-tip="Ban User"
@@ -172,6 +177,7 @@ const DecoratorManagement = () => {
 
                     {/* Approve */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() =>
                         handleStatusUpdate(
                           decorator._id,
@@ -187,6 +193,7 @@ const DecoratorManagement = () => {
 
                     {/* Reject */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() =>
                         handleStatusUpdate(
                           decorator._id,
@@ -202,6 +209,7 @@ const DecoratorManagement = () => {
 
                     {/* Delete */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() => handleAction(decorator._id, "delete")}
                       className="btn btn-square btn-error text-white tooltip"
                       data-tip="Remove"
@@ -214,6 +222,11 @@ const DecoratorManagement = () => {
             );
           })}
         </table>
+        {isDemoUser && (
+          <p className="text-sm text-warning text-center mt-2">
+            Demo users can explore but cannot perform these actions.
+          </p>
+        )}
       </div>
     </div>
   );

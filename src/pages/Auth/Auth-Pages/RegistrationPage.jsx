@@ -209,7 +209,6 @@ const RegisterPage = () => {
                   : "You'll be applying to join our professional decorator team."}
               </p>
             </div>
-
             {/* Name Input */}
             <div>
               <label
@@ -248,7 +247,6 @@ const RegisterPage = () => {
                 </p>
               )}
             </div>
-
             {/* Email Input */}
             <div>
               <label
@@ -287,7 +285,6 @@ const RegisterPage = () => {
                 </p>
               )}
             </div>
-
             {/* Photo URL Input */}
             <div>
               <label
@@ -326,7 +323,6 @@ const RegisterPage = () => {
                 </p>
               )}
             </div>
-
             {selectedRole === "decorator" && (
               <div className="animate-in fade-in slide-in-from-top-2 duration-300">
                 <label className="block text-sm font-medium text-white/90 mb-2">
@@ -345,7 +341,6 @@ const RegisterPage = () => {
                 </div>
               </div>
             )}
-
             {/* Password Input */}
             <div>
               <label
@@ -362,8 +357,13 @@ const RegisterPage = () => {
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
-                      value: 6,
-                      message: "Password must be at least 6 characters",
+                      value: 8,
+                      message: "Password must be at least 8 characters",
+                    },
+                    pattern: {
+                      value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])/,
+                      message:
+                        "Password must include uppercase, lowercase, number & special character",
                     },
                   })}
                   placeholder="••••••••"
@@ -395,7 +395,6 @@ const RegisterPage = () => {
                 </p>
               )}
             </div>
-
             {/* Terms and Conditions */}
             <div className="flex items-start gap-2">
               <input
@@ -428,7 +427,6 @@ const RegisterPage = () => {
                 {errors.terms.message}
               </p>
             )}
-
             {/* Submit Button */}
             <button
               type="submit"
@@ -458,7 +456,8 @@ const RegisterPage = () => {
                 </>
               )}
             </button>
-            <p className="text-red-500 font-semibold ">{error}</p>            <p className="text-red-500 font-semibold ">{error}</p>
+            <p className="text-red-500 font-semibold ">{error}</p>{" "}
+            <p className="text-red-500 font-semibold ">{error}</p>
           </form>
 
           {/* Divider & Social Login Button */}

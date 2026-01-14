@@ -96,12 +96,12 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <button onClick={handleLogOut} className="btn bg-primary rounded">
+            <button onClick={handleLogOut} className="btn bg-primary text-white rounded">
               Sign Out
             </button>
           ) : (
             <Link to="/auth/login">
-              <button className="btn bg-primary rounded">Sign In</button>
+              <button className="btn bg-primary text-white rounded">Sign In</button>
             </Link>
           )}
         </div>

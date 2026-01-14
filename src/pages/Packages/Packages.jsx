@@ -19,6 +19,12 @@ const Packages = () => {
   const { startLoading, stopLoading } = useLoading();
   const navigate = useNavigate();
   const location = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterPrice, setFilterPrice] = useState("all");
+  const [sortOption, setSortOption] = useState("default");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   
   useEffect(() => {
     startLoading();
@@ -81,6 +87,31 @@ const Packages = () => {
     }
   };
 
+  const filteredPackages = packages
+    .filter((pkg) =>
+      pkg.package_name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((pkg) => {
+      if (filterPrice === "low") return pkg.price < 50000;
+      if (filterPrice === "mid") return pkg.price >= 50000 && pkg.price <= 100000;
+      if (filterPrice === "high") return pkg.price > 100000;
+      return true;
+    })
+    .sort((a, b) => {
+      if (sortOption === "priceLow") return a.price - b.price;
+      if (sortOption === "priceHigh") return b.price - a.price;
+      return 0;
+    });
+
+    const totalPages = Math.ceil(filteredPackages.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedPackages = filteredPackages.slice(
+      startIndex,
+      startIndex + itemsPerPage
+    );
+
+
+
   return (
     <div className="p-10 container mx-auto">
       {/* Service Info Section (Unchanged) */}
@@ -112,12 +143,43 @@ const Packages = () => {
         </div>
       )}
 
+      <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {/* Price Filter */}
+        <select
+          className="select select-bordered"
+          onChange={(e) => setFilterPrice(e.target.value)}
+        >
+          <option value="all">Filter - All Prices</option>
+          <option value="low">Below 50,000</option>
+          <option value="mid">50,000 – 1,00,000</option>
+          <option value="high">Above 1,00,000</option>
+        </select>
+
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search package..."
+          className="input input-bordered max-w-3xl"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+
+        {/* Sorting */}
+        <select
+          className="select select-bordered"
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="default">Sort - Default</option>
+          <option value="priceLow">Price: Low to High</option>
+          <option value="priceHigh">Price: High to Low</option>
+        </select>
+      </div>
+
       {/* Packages Grid */}
       <h2 className="text-2xl md:text-4xl font-semibold text-center mb-6">
         Available Packages
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {packages.map((pkg, index) => (
+        {paginatedPackages.map((pkg, index) => (
           <div
             key={index}
             className="border-gray-300 border-2 p-4 rounded-lg shadow-2xl"
@@ -152,6 +214,20 @@ const Packages = () => {
               Book Now
             </button>
           </div>
+        ))}
+      </div>
+
+      <div className="flex justify-center mt-10 gap-2">
+        {[...Array(totalPages).keys()].map((num) => (
+          <button
+            key={num}
+            onClick={() => setCurrentPage(num + 1)}
+            className={`btn ${
+              currentPage === num + 1 ? "btn-primary" : "btn-outline"
+            }`}
+          >
+            {num + 1}
+          </button>
         ))}
       </div>
 

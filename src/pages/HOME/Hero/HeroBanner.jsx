@@ -38,11 +38,11 @@ const HeroBanner = () => {
         lg:bottom-33 lg:left-[9.3%]
       "
     >
-      <Link to="/services" className="btn btn-primary btn-sm md:btn-md">
+      <Link to="/services" className="btn btn-primary btn-sm md:btn-lg">
         Explore Services
       </Link>
       <Link to="/packages?service=On-Site%20Design%20Consultation">
-        <button className="btn bg-white text-gray-700 btn-sm md:btn-md">
+        <button className="btn bg-white text-gray-700 btn-sm md:btn-lg">
           Book a Consultation
         </button>
       </Link>

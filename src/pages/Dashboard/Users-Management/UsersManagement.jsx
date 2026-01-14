@@ -7,10 +7,13 @@ import { BsPersonFillSlash } from "react-icons/bs";
 import { BsPersonFillUp } from "react-icons/bs";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAuth from "../../../hooks/useAuth";
 
 const UsersManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
+  const {user} = useAuth();
+  const isDemoUser = user?.role === "demoUser";
   const { data: usersData = [], refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
@@ -132,6 +135,7 @@ const UsersManagement = () => {
                   <td className="flex items-center justify-center gap-2">
                     {/* Make Admin */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() =>
                         handleUpdateRole(user._id, "admin", "admin")
                       }
@@ -148,6 +152,7 @@ const UsersManagement = () => {
 
                     {/* Ban User */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() => handleAction(user._id, "ban")}
                       disabled={user.status === "banned"}
                       className="btn btn-square tooltip btn-warning text-white"
@@ -160,6 +165,7 @@ const UsersManagement = () => {
 
                     {/* Make Decorator */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() =>
                         handleUpdateRole(user._id, "decorator", "decorator")
                       }
@@ -172,6 +178,7 @@ const UsersManagement = () => {
 
                     {/* Remove User */}
                     <button
+                      disabled={isDemoUser}
                       onClick={() => handleAction(user._id, "delete")}
                       className="btn btn-square tooltip btn-error text-white"
                       data-tip="Remove User"
@@ -184,6 +191,11 @@ const UsersManagement = () => {
             );
           })}
         </table>
+        {isDemoUser && (
+          <p className="text-sm text-warning text-center mt-2">
+            Demo users can explore but cannot perform these actions.
+          </p>
+        )}
       </div>
     </div>
   );

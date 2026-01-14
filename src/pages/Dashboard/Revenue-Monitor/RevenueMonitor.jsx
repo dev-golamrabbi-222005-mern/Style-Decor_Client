@@ -11,18 +11,60 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import useAuth from "../../../hooks/useAuth";
+import useDefineRole from "../../../hooks/useDefineRole";
 
 const RevenueMonitor = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: stats = {}, isLoading } = useQuery({
-    queryKey: ["admin-stats"],
+  const {user} = useAuth();
+  const { role, isLoading, loading } = useDefineRole();
+  
+  const {
+    data: stats = {},
+    isLoading: isDataLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["revenue-stats"],
+    enabled: !loading && !isLoading && !!role && !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get("/revenue-stats");
       return res.data;
     },
+    retry: 1
   });
 
-  if (isLoading) return <div className="p-10 text-center">Loading...</div>;
+ if (isLoading || loading) {
+   return (
+     <div className="flex flex-col items-center justify-center min-h-screen">
+       <span className="loading loading-spinner loading-lg text-primary"></span>
+       <p className="mt-4 text-gray-500">Verifying session and loading Revenue...</p>
+     </div>
+   );
+ }
+
+ if (isError) {
+   return (
+     <div className="p-10 text-center">
+       <p className="text-red-500">
+         Session expired. Please refresh or log in again.
+       </p>
+       <button
+         onClick={() => window.location.reload()}
+         className="btn btn-sm mt-4"
+       >
+         Retry
+       </button>
+     </div>
+   );
+ }
+
+ if (isDataLoading) {
+   return (
+     <div className="p-10 text-center animate-pulse">
+       Loading Revenue Monitor
+     </div>
+   );
+ }
 
   return (
     <div className="p-6 space-y-8 bg-gray-50">
