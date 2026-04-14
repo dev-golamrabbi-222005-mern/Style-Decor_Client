@@ -1,236 +1,194 @@
 import React from "react";
 import footerLine from "../../assets/footer-Line-1.png";
-import newsletter from "../../assets/newsletter.png";
-import { Newspaper } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import newsletterImg from "../../assets/newsletter.png";
+import { Newspaper, Mail, Phone, MapPin, Clock } from "lucide-react";
+import { useLocation, Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa6";
-import { FaFacebook, FaYoutube } from "react-icons/fa";
+import {
+  FaXTwitter,
+  FaInstagram,
+  FaFacebook,
+  FaYoutube,
+} from "react-icons/fa6";
 
 const Footer = () => {
   const location = useLocation();
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div>
-      <footer
-        style={{
-          backgroundImage: `url(${footerLine})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-        className="bg-[#FCFAE0] text-black pt-10"
-      >
-        {location.pathname === "/" && (
-          // Newsletter Section
-          <newsletter>
-            <div className="text-center">
-              <img className="mx-auto" src={newsletter} alt="" />
-              <p className="text-3xl text-gray-500">News & Updates</p>
-              <h1 className="font-bold text-xl my-2">
-                SUBSCRIBE NOW FOR COUPONS
-              </h1>
-              <p className="max-w-[555px] mx-auto text-gray-400 mt-3 mb-5">
-                You can connect with us via subscribing our newsletter.
-                Subscribe to get updates on new decoration packages, seasonal
-                offers, and exclusive discounts. Thanks for staying with us.{" "}
+    <footer
+      style={{
+        backgroundImage: `url(${footerLine})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "bottom center",
+        backgroundSize: "contain",
+      }}
+      className="bg-[#FCFAE0] text-slate-800 pt-16"
+    >
+      {/* Newsletter Section - Only on Home */}
+      {location.pathname === "/" && (
+        <div className="max-w-5xl mx-auto px-6 mb-16">
+          <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-xl border border-slate-100 relative overflow-hidden">
+            {/* Decorative Accent */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#577F84]/5 rounded-bl-full"></div>
+
+            <div className="relative z-10 flex flex-col items-center text-center">
+              <img className="w-20 mb-6" src={newsletterImg} alt="Newsletter" />
+              <span className="text-[#577F84] font-bold text-xs uppercase tracking-[0.3em] mb-2">
+                Exclusive Updates
+              </span>
+              <h2 className="text-3xl md:text-4xl font-serif italic mb-4">
+                Subscribe for Coupons
+              </h2>
+              <p className="max-w-xl text-slate-500 mb-8 leading-relaxed">
+                Join our community to get updates on new decoration packages,
+                seasonal offers, and exclusive discounts delivered to your
+                inbox.
               </p>
+
+              <form className="flex flex-col sm:flex-row w-full max-w-lg gap-3">
+                <div className="relative flex-grow">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <input
+                    className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 border border-slate-100 outline-none focus:ring-2 focus:ring-[#577F84] transition-all"
+                    type="email"
+                    placeholder="yourname@email.com"
+                    name="email"
+                    required
+                  />
+                </div>
+                <button className="px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-[#577F84] transition-all duration-300 shadow-lg shadow-slate-200">
+                  Subscribe
+                </button>
+              </form>
             </div>
-            <div className="flex justify-center items-center my-5 pb-10">
-              <Newspaper />
-              <input
-                className="w-55 md:w-77 lg:w-111 ml-2 outline-0 bg-white p-4 rounded-3xl"
-                type="email"
-                placeholder="Input your email here"
-                name="email"
-              />
-              <button className="ml-3 text-lg md:text-2xl lg:text-3xl text-gray-500 font-semibold hover:bg-[#68e6ff] px-2 md:px-4 lg:px-6 py-2 pb-2.5 rounded-3xl cursor-pointer border-2 border-gray-300">
-                Subscribe
-              </button>
+          </div>
+          <div className="w-full h-px bg-slate-200 mt-16"></div>
+        </div>
+      )}
+
+      {/* Main Footer Links */}
+      <div className="max-w-7xl mx-auto px-6 grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-16">
+        {/* Brand Column */}
+        <div className="space-y-6">
+          <Logo />
+          <p className="text-slate-500 text-sm leading-relaxed">
+            A premier appointment management system for StyleDecor, transforming
+            spaces through expert in-studio and on-site decoration services
+            across Bangladesh.
+          </p>
+          <div className="flex items-center gap-3 p-3 bg-white/50 rounded-xl border border-slate-100 w-fit">
+            <Clock className="w-5 h-5 text-[#577F84]" />
+            <div className="text-[11px] uppercase tracking-wider font-bold text-slate-600">
+              9AM - 9PM <span className="text-slate-300 mx-1">|</span> Sat - Thu
             </div>
-            <div className="border-b-5 border-[#577F84] max-w-full mt-5"></div>
-          </newsletter>
-        )}
+          </div>
+        </div>
 
-        <div className="max-w-10/12 mx-auto mt-10 grid gap-5 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
-          {/* About */}
-          <nav>
-            <Logo />
-            <p className="text-[15px] mb-5">
-              is a modern appointment management system for a local decoration
-              company that offers both in-studio consultations and on-site
-              decoration services for homes and ceremonies.
-            </p>
-            <strong>
-              Our business hour is 9am to 9pm everyday; except Friday - it's our
-              holiday.
-            </strong>
-          </nav>
+        {/* Services Column */}
+        <div>
+          <h6 className="text-slate-900 font-bold uppercase tracking-widest text-xs mb-6 border-l-4 border-[#577F84] pl-3">
+            Services
+          </h6>
+          <ul className="space-y-3 text-sm text-slate-500">
+            {[
+              "Home Decoration",
+              "Event Styling",
+              "Wedding Stage",
+              "Floral Setup",
+              "On-Site Design",
+            ].map((item) => (
+              <li key={item}>
+                <Link
+                  to="/services"
+                  className="hover:text-[#577F84] hover:pl-2 transition-all duration-300"
+                >
+                  {item}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Services */}
-          <nav>
-            <h6 className="footer-title">Services</h6>
-            <li>
-              <a href="/services/home-decoration" className="link link-hover">
-                Home Decoration
-              </a>
+        {/* Contact Column */}
+        <div>
+          <h6 className="text-slate-900 font-bold uppercase tracking-widest text-xs mb-6 border-l-4 border-[#577F84] pl-3">
+            Contact
+          </h6>
+          <ul className="space-y-4 text-sm text-slate-500">
+            <li className="flex gap-3">
+              <MapPin className="w-5 h-5 text-[#577F84] shrink-0" />
+              <span>Uttara, Sector 4, Dhaka 1230</span>
             </li>
-            <li>
-              <a href="/services/event-decoration" className="link link-hover">
-                Event / Ceremony Decoration
-              </a>
-            </li>
-            <li>
-              <a href="/services/wedding-stage" className="link link-hover">
-                Wedding Stage Design
-              </a>
-            </li>
-            <li>
-              <a href="/services/birthday" className="link link-hover">
-                Birthday Decoration
-              </a>
-            </li>
-            <li>
-              <a href="/services/floral-lighting" className="link link-hover">
-                Floral & Lighting Setup
-              </a>
-            </li>
-            <li>
-              <a href="/services/on-site" className="link link-hover">
-                On-Site Consultation
-              </a>
-            </li>
-            <li>
-              <a href="/services/in-studio" className="link link-hover">
-                In-Studio Consultation
-              </a>
-            </li>
-            <li>
-              <a href="/services/venue-styling" className="link link-hover">
-                Venue Styling
-              </a>
-            </li>
-            <li>
-              <a href="/services/custom-package" className="link link-hover">
-                Custom Decoration Package
-              </a>
-            </li>
-            <li>
-              <a href="/services/rental" className="link link-hover">
-                Rental Items
-              </a>
-            </li>
-          </nav>
-
-          {/* Contact */}
-          <nav>
-            <h6 className="footer-title">Contact Us</h6>
-
-            <p>
-              <span className="font-medium">Address:</span>
-              <br />
-              StyleDecor Studio
-              <br />
-              House 18, Road 12, Sector 4<br />
-              Uttara, Dhaka 1230, Bangladesh
-            </p>
-
-            <p>
-              <span className="font-medium">Phone:</span>
-              <br />
-              <a href="tel:+8801700000000" className="link link-hover">
+            <li className="flex gap-3">
+              <Phone className="w-5 h-5 text-[#577F84] shrink-0" />
+              <a href="tel:+8801700000000" className="hover:text-[#577F84]">
                 +880 1700-000000
               </a>
-              <br />
-              <a href="tel:+8801900000000" className="link link-hover">
-                +880 1900-000000
-              </a>
-            </p>
-
-            <p>
-              <span className="font-medium">Email:</span>
-              <br />
+            </li>
+            <li className="flex gap-3">
+              <Mail className="w-5 h-5 text-[#577F84] shrink-0" />
               <a
                 href="mailto:support@styledecor.com"
-                className="link link-hover"
+                className="hover:text-[#577F84]"
               >
                 support@styledecor.com
               </a>
-              <br />
-              <a
-                href="mailto:booking@styledecor.com"
-                className="link link-hover"
-              >
-                booking@styledecor.com
-              </a>
-            </p>
-          </nav>
-
-          {/* Legal */}
-          <nav>
-            <h6 className="footer-title">Legal</h6>
-            <a className="link-hover block" href="/about#terms">
-              Terms & Conditions
-            </a>
-            <a className="link-hover block" href="/about#privacy">
-              Privacy Policy
-            </a>
-            <a className="link-hover block" href="/about#refund">
-              Refund & Cancellation Policy
-            </a>
-            <a className="link-hover block" href="/about#service">
-              Service Agreement
-            </a>
-            <a className="link-hover block" href="/about#compliance">
-              Compliance & Safety
-            </a>
-          </nav>
-
-          {/* Social */}
-          <nav>
-            <h6 className="footer-title">Social</h6>
-            <div className="grid grid-flow-col gap-4">
-              <a href="https://twitter.com/" target="_blank" rel="noreferrer">
-                <FaXTwitter className="hover:text-blue-400 text-2xl" />
-              </a>
-
-              <a href="https://instagram.com/" target="_blank" rel="noreferrer">
-                <FaInstagram className="hover:text-blue-400 text-2xl" />
-              </a>
-
-              {/* YouTube */}
-              <a href="https://youtube.com/" target="_blank" rel="noreferrer">
-                <FaYoutube className="text-2xl"/>
-              </a>
-
-              {/* Facebook */}
-              <a href="https://facebook.com/" target="_blank" rel="noreferrer">
-                <FaFacebook className="text-2xl"/>
-              </a>
-            </div>
-          </nav>
+            </li>
+          </ul>
         </div>
 
-        <div className="max-w-10/12 mx-auto flex justify-center items-center border-t-2 mt-5 py-5 gap-5">
-          <svg
-            width="36"
-            height="36"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            className="fill-current"
-          >
-            <path d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path>
-          </svg>
-          <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by{" "}
-            <span className="hover:text-[#FF5520] font-semibold">
-              MD. GOLAM RABBI
-            </span>
+        {/* Social & Legal Column */}
+        <div>
+          <h6 className="text-slate-900 font-bold uppercase tracking-widest text-xs mb-6 border-l-4 border-[#577F84] pl-3">
+            Connect
+          </h6>
+          <div className="flex gap-4 mb-8">
+            <a
+              href="#"
+              className="p-3 bg-white rounded-full shadow-sm hover:bg-[#577F84] hover:text-white transition-all"
+            >
+              <FaFacebook size={18} />
+            </a>
+            <a
+              href="#"
+              className="p-3 bg-white rounded-full shadow-sm hover:bg-[#577F84] hover:text-white transition-all"
+            >
+              <FaInstagram size={18} />
+            </a>
+            <a
+              href="#"
+              className="p-3 bg-white rounded-full shadow-sm hover:bg-[#577F84] hover:text-white transition-all"
+            >
+              <FaXTwitter size={18} />
+            </a>
+          </div>
+          <div className="space-y-2 text-xs font-medium text-slate-400">
+            <Link to="/privacy" className="block hover:text-slate-600">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="block hover:text-slate-600">
+              Terms of Service
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Copyright Bar */}
+      <div className="border-t border-slate-200/60 py-8 bg-white/30 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+            <span>System Status: Fully Operational</span>
+          </div>
+          <p className="tracking-wide uppercase font-bold text-[10px]">
+            © {currentYear}{" "}
+            <span className="text-slate-900 ml-1">Md. Golam Rabbi</span>
           </p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
+
 export default Footer;

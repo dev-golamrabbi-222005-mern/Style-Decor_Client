@@ -147,7 +147,7 @@ const LoginPage = () => {
               >
                 Password
               </label>
-              <div className="relative">
+              <div className="relative flex items-center justify-center w-full">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/50" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -175,9 +175,6 @@ const LoginPage = () => {
                     transition duration-300 shadow-inner
                   `}
                 />
-                <p className="text-xs text-white/60 mt-1">
-                  Must be 8+ chars with uppercase, lowercase, number & symbol
-                </p>
 
                 <button
                   type="button"
@@ -197,6 +194,9 @@ const LoginPage = () => {
                 </p>
               )}
             </div>
+            <p className="text-xs text-white/60 mt-1">
+              Must be 8+ chars with uppercase, lowercase, number & symbol
+            </p>
 
             {/* Remember Me & Forgot Password */}
             <div className="flex items-center justify-between text-sm">
