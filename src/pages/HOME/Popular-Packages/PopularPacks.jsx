@@ -17,7 +17,7 @@ const PopularPacks = () => {
   }, [axiosPublic]);
 
   return (
-    <div className="max-w-7xl mx-auto px-6">
+    <div className="max-w-7xl mx-auto px-4 md:px-6">
       {/* Header Section */}
       <div className="text-center mb-16">
         <span className="text-sm uppercase tracking-[0.3em] text-[#577F84] font-bold">
@@ -83,7 +83,7 @@ const PopularPacks = () => {
 
                 <Link
                   to={`/package/${pkg._id}`}
-                  className="text-sm font-bold text-[#577F84] hover:underline underline-offset-4"
+                  className="text-sm font-bold text-[#577F84] hover:underline underline-offset-4 hover:text-primary"
                 >
                   View Details →
                 </Link>
@@ -96,7 +96,7 @@ const PopularPacks = () => {
       {/* CTA Button */}
       <div className="flex justify-center mt-16">
         <Link to="/services">
-          <button className="px-10 py-4 bg-[#577F84] text-white font-bold rounded-full hover:bg-[#46666a] transform hover:-translate-y-1 transition-all shadow-lg shadow-[#577F84]/20 uppercase tracking-widest text-xs">
+          <button className="px-10 py-4 bg-primary text-white font-bold rounded-full hover:bg-[#46666a] transform hover:-translate-y-1 transition-all shadow-lg shadow-[#577F84]/20 uppercase tracking-widest text-xs">
             Explore All Services
           </button>
         </Link>

@@ -1,202 +1,251 @@
+import React, { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaUserShield } from "react-icons/fa";
-import { BsPersonFillDash } from "react-icons/bs";
-import { BsPersonFillSlash } from "react-icons/bs";
-import { BsPersonFillUp } from "react-icons/bs";
+import useAuth from "../../../hooks/useAuth";
+import {
+  FaUserShield,
+  FaSearch,
+  FaUserTag,
+  FaTrashAlt,
+  FaBan,
+  FaCalendarAlt,
+  FaUserPlus,
+} from "react-icons/fa";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
-import useAuth from "../../../hooks/useAuth";
 
 const UsersManagement = () => {
   const axiosSecure = useAxiosSecure();
   const [searchTerm, setSearchTerm] = useState("");
-  const {user} = useAuth();
-  const isDemoUser = user?.role === "demoUser";
-  const { data: usersData = [], refetch } = useQuery({
-    queryKey: ["user"],
+  const { user: currentUser } = useAuth();
+  const isDemoUser = currentUser?.role === "demoUser";
+
+  const {
+    data: usersData = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["users"],
+    enabled: !!currentUser?.email && !isDemoUser,
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
 
-  // Generic Function for PATCH updates
+  // Role Update Logic
   const handleUpdateRole = (id, role, actionName) => {
-    axiosSecure.patch(`/users/${actionName}/${id}`).then((res) => {
-      if (res.data.modifiedCount > 0) {
-        refetch();
-        toast.success(`User is now an ${role}!`);
-      }
-    });
+    axiosSecure
+      .patch(`/users/${actionName}/${id}`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          toast.success(`Role updated to ${role}!`);
+        }
+      })
+      .catch(() => toast.error("Update failed"));
   };
 
-  // Function for Deleting/Banning with confirmation
+  // Delete/Ban Logic
   const handleAction = (id, type) => {
     const isDelete = type === "delete";
-
     Swal.fire({
       title: "Are you sure?",
       text: isDelete
         ? "This user will be permanently removed!"
-        : "This user will not be able to login!",
+        : "This user will be restricted from access!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: isDelete ? "#ef4444" : "#f59e0b",
       confirmButtonText: "Yes, proceed!",
     }).then((result) => {
       if (result.isConfirmed) {
         const request = isDelete
           ? axiosSecure.delete(`/users/${id}`)
           : axiosSecure.patch(`/users/ban/${id}`);
-
         request.then((res) => {
           if (res.data.deletedCount > 0 || res.data.modifiedCount > 0) {
             refetch();
-            Swal.fire("Success!", `Action completed.`, "success");
+            Swal.fire("Action Successful", "", "success");
           }
         });
       }
     });
   };
 
-  const filteredUsers = usersData.filter(
-    (user) =>
-      user.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Search Filter
+  const filteredUsers = useMemo(() => {
+    return usersData.filter(
+      (user) =>
+        user?.displayName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user?.email?.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  }, [usersData, searchTerm]);
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center my-20">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
 
   return (
-    <div className="max-w-7xl mx-auto my-11">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl md:text-4xl font-semibold">
-          All users List: {usersData.length}
-        </h1>
-        <label className="input bg-amber-100">
-          <svg
-            className="h-[1em] opacity-50"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <g
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth="2.5"
-              fill="none"
-              stroke="currentColor"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </g>
-          </svg>
+    <div className="pb-10">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <div className="text-center md:text-left">
+          <h1 className="text-2xl md:text-3xl font-serif font-black text-slate-800">
+            Manage Users
+          </h1>
+          <p className="text-slate-500 text-sm mt-2">
+            Overview of {usersData.length} registered users
+          </p>
+        </div>
+        <div className="relative w-full md:w-96">
+          <FaSearch className="absolute z-10 top-4 left-4" />
           <input
+            type="text"
+            placeholder="Search by name or email..."
+            className="input input-bordered pl-12 w-full bg-white rounded-2xl border-slate-200 focus:outline-primary h-12"
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            type="search"
-            required
-            placeholder="Search user via Name or Email"
           />
-        </label>
+        </div>
       </div>
-      <div className="overflow-x-auto bg-primary p-5 rounded-2xl my-7">
-        <table className="table bg-white text-center">
-          {/* head */}
-          <thead className="text-lg text-black bg-gray-200">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Join Date</th>
-              <th>Take Action</th>
-            </tr>
-          </thead>
-          {/* row 1 */}
-          {filteredUsers.map((user, index) => {
-            return (
-              <tbody key={index} className="text-[16px]">
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-5">
+
+      {/* Modern Table Container */}
+      <div className="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="table w-full border-separate border-spacing-0">
+            <thead className="bg-slate-50/80 text-slate-500 uppercase text-[10px] font-black tracking-widest">
+              <tr>
+                <th className="py-5 pl-8">User Information</th>
+                <th>Join Date</th>
+                <th>Current Role</th>
+                <th className="pr-8 text-right">Administrative Actions</th>
+              </tr>
+            </thead>
+            <tbody className="text-slate-600">
+              {filteredUsers.map((user) => (
+                <tr
+                  key={user._id}
+                  className="hover:bg-slate-50/50 transition-colors border-b border-slate-50"
+                >
+                  <td className="py-4 pl-8">
+                    <div className="flex items-center gap-4">
                       <div className="avatar">
-                        <div className="mask mask-squircle h-12 w-12">
+                        <div className="mask mask-squircle w-11 h-11 ring ring-primary/10 ring-offset-2 ring-offset-white">
                           <img
-                            src={user.photoURL}
-                            alt="Avatar Tailwind CSS Component"
+                            src={
+                              user.photoURL ||
+                              "https://i.ibb.co/mR9pY7L/user.png"
+                            }
+                            alt={user.displayName}
                           />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{user.displayName}</div>
+                        <p className="font-bold text-slate-900 leading-tight">
+                          {user.displayName}
+                        </p>
+                        <p className="text-[11px] text-slate-400 mt-0.5">
+                          {user.email}
+                        </p>
                       </div>
                     </div>
                   </td>
-                  <td>{user.email}</td>
-                  <td>{user.createdAt.split("T")[0]}</td>
-                  <td className="flex items-center justify-center gap-2">
-                    {/* Make Admin */}
-                    <button
-                      disabled={isDemoUser}
-                      onClick={() =>
-                        handleUpdateRole(user._id, "admin", "admin")
-                      }
-                      disabled={user.role === "admin"}
-                      className={`btn btn-square tooltip ${
+                  <td>
+                    <div className="flex items-center gap-2 text-xs font-medium">
+                      <FaCalendarAlt className="text-slate-300" />
+                      {user.createdAt ? user.createdAt.split("T")[0] : "N/A"}
+                    </div>
+                  </td>
+                  <td>
+                    <span
+                      className={`badge badge-sm font-black px-3 py-3 uppercase tracking-tighter ${
                         user.role === "admin"
-                          ? "btn-disabled"
-                          : "btn-info text-white"
+                          ? "badge-primary text-white"
+                          : user.role === "decorator"
+                            ? "badge-secondary text-white"
+                            : "badge-ghost text-slate-300"
                       }`}
-                      data-tip="Make Admin"
                     >
-                      <FaUserShield size={18} />
-                    </button>
+                      {user.role || "user"}
+                    </span>
+                  </td>
+                  <td className="pr-8">
+                    <div className="flex justify-end items-center gap-2">
+                      {/* Action: Admin */}
+                      <button
+                        disabled={isDemoUser || user.role === "admin"}
+                        onClick={() =>
+                          handleUpdateRole(user._id, "admin", "admin")
+                        }
+                        className="btn btn-square btn-ghost btn-xs text-info hover:bg-info/10 tooltip"
+                        data-tip="Promote to Admin"
+                      >
+                        <FaUserShield size={16} />
+                      </button>
 
-                    {/* Ban User */}
-                    <button
-                      disabled={isDemoUser}
-                      onClick={() => handleAction(user._id, "ban")}
-                      disabled={user.status === "banned"}
-                      className="btn btn-square tooltip btn-warning text-white"
-                      data-tip={
-                        user.status === "banned" ? "Already Banned" : "BAN"
-                      }
-                    >
-                      <BsPersonFillSlash size={18} />
-                    </button>
+                      {/* Action: Decorator */}
+                      <button
+                        disabled={isDemoUser || user.role === "decorator"}
+                        onClick={() =>
+                          handleUpdateRole(user._id, "decorator", "decorator")
+                        }
+                        className="btn btn-square btn-ghost btn-xs text-success hover:bg-success/10 tooltip"
+                        data-tip="Make Decorator"
+                      >
+                        <FaUserPlus size={16} />
+                      </button>
 
-                    {/* Make Decorator */}
-                    <button
-                      disabled={isDemoUser}
-                      onClick={() =>
-                        handleUpdateRole(user._id, "decorator", "decorator")
-                      }
-                      disabled={user.role === "decorator"}
-                      className="btn btn-square tooltip btn-success text-white"
-                      data-tip="Make Decorator"
-                    >
-                      <BsPersonFillUp size={18} />
-                    </button>
+                      {/* Action: Ban */}
+                      <button
+                        disabled={isDemoUser || user.status === "banned"}
+                        onClick={() => handleAction(user._id, "ban")}
+                        className={`btn btn-square btn-ghost btn-xs tooltip ${user.status === "banned" ? "text-slate-300" : "text-warning hover:bg-warning/10"}`}
+                        data-tip={
+                          user.status === "banned"
+                            ? "Already Banned"
+                            : "Ban User"
+                        }
+                      >
+                        <FaBan size={14} />
+                      </button>
 
-                    {/* Remove User */}
-                    <button
-                      disabled={isDemoUser}
-                      onClick={() => handleAction(user._id, "delete")}
-                      className="btn btn-square tooltip btn-error text-white"
-                      data-tip="Remove User"
-                    >
-                      <BsPersonFillDash size={18} />
-                    </button>
+                      {/* Action: Delete */}
+                      <button
+                        disabled={isDemoUser}
+                        onClick={() => handleAction(user._id, "delete")}
+                        className="btn btn-square btn-ghost btn-xs text-error hover:bg-error/10 tooltip"
+                        data-tip="Remove User"
+                      >
+                        <FaTrashAlt size={14} />
+                      </button>
+                    </div>
                   </td>
                 </tr>
-              </tbody>
-            );
-          })}
-        </table>
-        {isDemoUser && (
-          <p className="text-sm text-warning text-center mt-2">
-            Demo users can explore but cannot perform these actions.
-          </p>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Bug Fix for Empty UI */}
+        {filteredUsers.length === 0 && !isLoading && (
+          <div className="flex flex-col items-center justify-center p-20 text-slate-400">
+            <FaUserTag size={48} className="mb-4 opacity-20" />
+            <p className="text-lg font-medium">
+              No users found in the records.
+            </p>
+          </div>
         )}
       </div>
+
+      {isDemoUser && (
+        <div className="mt-6 p-4 bg-amber-50 border border-amber-100 rounded-2xl text-amber-700 text-center text-sm font-medium">
+          🔒 You are in <b>Demo Mode</b>. Administrative actions are restricted.
+        </div>
+      )}
     </div>
   );
 };

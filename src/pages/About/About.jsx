@@ -19,7 +19,7 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-14">
-          <h2 className="text-2xl md:text-4xl font-semibold mb-4">
+          <h2 className="text-2xl md:text-4xl font-serif italic mb-4">
             About StyleDecor
             <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
           </h2>
@@ -59,7 +59,7 @@ const About = () => {
 
         {/* Why Develop */}
         <div className="mb-20">
-          <h3 className="text-2xl md:text-4xl font-semibold mb-8 text-center">
+          <h3 className="text-2xl md:text-4xl font-serif italic mb-8 text-center">
             Why Develop This System?
             <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
           </h3>
@@ -96,11 +96,11 @@ const About = () => {
         </div>
 
         {/* CTA */}
-        <div className="text-center pb-10">
-          <h3 className="text-3xl font-bold mb-4">
+        <div className="text-center py-12 md:py-16 lg:py-20 rounded-2xl bg-primary/20">
+          <h3 className="text-3xl font-serif italic mb-4">
             Simplifying Decoration Services, Digitally
           </h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             StyleDecor bridges the gap between customers and decorators with
             technology-driven solutions that save time, reduce confusion, and
             enhance service quality.
@@ -108,8 +108,8 @@ const About = () => {
         </div>
 
         <div className="border-t-2 border-gray-300/55">
-          <section id="terms" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-4 text-primary">Terms & Conditions</h2>
+          <section id="terms" className="py-12 md:py-16 lg:py-20 scroll-mt-20 max-w-5xl mx-auto px-4">
+            <h2 className="text-3xl font-serif italic mb-4 text-primary">Terms & Conditions</h2>
 
             <p className="mb-4">
               By accessing and using StyleDecor’s services, you agree to comply
@@ -132,7 +132,7 @@ const About = () => {
           </section>
 
           <section id="privacy" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-4 text-primary">Privacy Policy</h2>
+            <h2 className="text-3xl font-serif italic mb-4 text-primary">Privacy Policy</h2>
 
             <p className="mb-4">
               StyleDecor respects your privacy and is committed to protecting
@@ -153,7 +153,7 @@ const About = () => {
           </section>
 
           <section id="refund" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
-            <h2 className="text-3xl text-primary font-bold mb-4">
+            <h2 className="text-3xl text-primary font-serif italic mb-4">
               Refund & Cancellation Policy
             </h2>
 
@@ -175,7 +175,7 @@ const About = () => {
           </section>
 
           <section id="service" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
-            <h2 className="text-3xl text-primary font-bold mb-4">Service Agreement</h2>
+            <h2 className="text-3xl text-primary font-serif italic mb-4">Service Agreement</h2>
 
             <p className="mb-4">
               StyleDecor agrees to provide professional decoration services
@@ -194,7 +194,7 @@ const About = () => {
           </section>
 
           <section id="compliance" className="py-10 scroll-mt-20 max-w-5xl mx-auto px-4">
-            <h2 className="text-3xl text-primary font-bold mb-4">Compliance & Safety</h2>
+            <h2 className="text-3xl text-primary font-serif italic mb-4">Compliance & Safety</h2>
 
             <p className="mb-4">
               StyleDecor follows local safety regulations and event compliance

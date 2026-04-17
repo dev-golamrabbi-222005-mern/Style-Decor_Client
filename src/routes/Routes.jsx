@@ -30,6 +30,7 @@ import UpdateStatus from "../pages/Dashboard/Update-Project-Status/UpdateStatus"
 import UserRoute from "./userRoute";
 import RevenueMonitor from "../pages/Dashboard/Revenue-Monitor/RevenueMonitor";
 import EarningsSummary from "../pages/Dashboard/Earnings-Summary/EarningsSummary";
+import Coverage from "../pages/Coverage/Coverage";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,9 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "services", element: <Services /> },
       { path: "packages", element: <Packages /> },
+      { path: "coverage", element: <Coverage />, loader: async () => {
+      const response = await fetch("/warehouses.json");
+      return response.json();},},
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       {

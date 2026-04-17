@@ -5,7 +5,7 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <div className="text-center mb-16">
-            <h1 className="text-2xl md:text-4xl font-semibold mb-4">
+            <h1 className="text-2xl md:text-4xl font-serif italic mb-4">
               Contact Us
               <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
             </h1>
@@ -18,7 +18,7 @@ const Contact = () => {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div className="bg-white rounded-2xl p-8 shadow-md space-y-6">
-              <h2 className="text-2xl font-semibold">Get in Touch</h2>
+              <h2 className="text-2xl font-serif italic font-semibold">Get in Touch</h2>
 
               <div>
                 <h3 className="font-medium text-lg">Business Hours</h3>

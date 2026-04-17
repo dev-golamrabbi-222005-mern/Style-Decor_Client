@@ -43,7 +43,7 @@ const TopDecorators = () => {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-6">
+    <section className="max-w-7xl mx-auto px-4 md:px-6">
       {/* Consistent Header Style */}
       <div className="text-center mb-12">
         <span className="text-sm uppercase tracking-[0.3em] text-[#577F84] font-bold">
@@ -89,7 +89,7 @@ const TopDecorators = () => {
               <p className="text-slate-400 text-sm italic mb-4">
                 {decorator.email}
               </p>
-              <button className="w-full py-3 rounded-2xl bg-slate-900 text-white text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+              <button className="w-full py-3 rounded-2xl bg-[#577F84] hover:bg-primary text-white text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 Book Consultation
               </button>
             </div>

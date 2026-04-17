@@ -41,6 +41,11 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        <NavLink to="/coverage" style={getLinkStyle}>
+          Coverage
+        </NavLink>
+      </li>
+      <li>
         <NavLink to="/about" style={getLinkStyle}>
           About
         </NavLink>
@@ -61,7 +66,7 @@ const Navbar = () => {
   );
   return (
     <div className="sticky bg-[#FCFAE0] top-0 z-11111">
-      <div className="navbar max-w-7xl shadow-sm mx-auto">
+      <div className="navbar max-w-7xl shadow-sm mx-auto px-4 md:px-6">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -96,12 +101,12 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <button onClick={handleLogOut} className="btn bg-primary text-white rounded">
+            <button onClick={handleLogOut} className="btn bg-primary text-white rounded border-none">
               Sign Out
             </button>
           ) : (
             <Link to="/auth/login">
-              <button className="btn bg-primary text-white rounded">Sign In</button>
+              <button className="btn bg-primary text-white rounded border-none">Sign In</button>
             </Link>
           )}
         </div>

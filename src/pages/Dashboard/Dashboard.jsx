@@ -57,7 +57,7 @@ const AdminView = ({ stats }) => {
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-        <div className="bg-white p-6 rounded-xl border">
+        <div className="bg-white p-6 rounded-xl border h-96">
           <h3 className="font-bold mb-4 text-gray-500 uppercase text-sm">
             System Distribution
           </h3>
@@ -216,9 +216,9 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
-      <header className="mb-10">
-        <h2 className="text-3xl font-bold text-gray-800">
+    <div className="space-y-6 bg-gray-50 min-h-screen">
+      <header className="mb-10 text-center md:text-left">
+        <h2 className="text-2xl md:text-3xl font-bold font-serif text-gray-800">
           {role === "admin"
             ? "System Overview"
             : role === "decorator"

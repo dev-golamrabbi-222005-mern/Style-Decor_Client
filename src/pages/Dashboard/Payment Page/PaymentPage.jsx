@@ -24,6 +24,7 @@ const PaymentPage = () => {
   const {
     data: booking,
     error,
+    isLoading
   } = useQuery({
     queryKey: ["bookings", bookingId],
     queryFn: async () => {
@@ -32,6 +33,14 @@ const PaymentPage = () => {
       return res.data;
     },
   });
+
+  if(isLoading){
+    return(
+      <div className="flex justify-center items-center">
+        <h2 className="text-lg md:text-xl">Loading...</h2>
+      </div>
+    )
+  }
 
   if (error) {
     return (
@@ -83,16 +92,7 @@ const PaymentPage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-6 my-6 md:my-10">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
-          Payment Checkout
-        </h1>
-        <p className="text-gray-600">
-          Review your booking details and complete the payment
-        </p>
-      </div>
+    <div className="pb-10">
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Content - Left Side */}

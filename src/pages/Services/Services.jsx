@@ -86,7 +86,7 @@ const Services = () => {
       <title>Style Decor | Services</title>
 
       <section className="max-w-7xl mx-auto px-6 pb-11 text-center">
-        <h1 className="text-2xl md:text-4xl font-semibold mb-4">
+        <h1 className="text-2xl font-serif md:text-4xl italic mb-4">
           Our Decoration Services
           <div className="border-b-5 border-[#577F84] max-w-55 mx-auto mt-5"></div>
         </h1>
@@ -150,7 +150,7 @@ const Services = () => {
         className="py-16 max-w-7xl mx-auto rounded-2xl text-white"
       >
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-serif italic mb-4">
             Ready to Decorate Your Special Moment?
           </h2>
           <p className="mb-8">

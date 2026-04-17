@@ -10,10 +10,10 @@ const PaymentFailure = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center p-5">
+    <div className="min-h-screen flex items-center justify-center p-5">
       <div className="max-w-2xl w-full">
         {/* Failure Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center">
+        <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl shadow-2xl p-8 md:p-12 text-center">
           {/* Error Icon */}
           <div className="flex justify-center mb-6">
             <div className="relative">
@@ -32,8 +32,7 @@ const PaymentFailure = () => {
             Payment Failed
           </h1>
           <p className="text-lg text-gray-600 mb-8">
-            We couldn't process your payment. Your booking was not
-            completed.
+            We couldn't process your payment. Your booking was not completed.
           </p>
 
           {/* Error Details */}

@@ -61,12 +61,12 @@ const HeroBanner = () => {
           <div key={index} className="relative">
             <img
               src={slide.image}
-              className="w-full h-56 md:h-96 lg:h-[32rem] object-cover rounded-xl"
+              className="w-full h-56 md:h-96 lg:h-[32rem] object-cover"
               alt={slide.title}
             />
-            <div className="max-w-7xl">
+            <div className="max-w-7xl mx-auto px-4 md:px-6">
               <div className="absolute top-8 md:top-22 lg:top-11 left-8 z-50 text-left text-white pr-8 lg:p-27 space-y-3">
-                <h1 className="text-2xl md:text-4xl font-bold drop-shadow-lg md:max-w-2xl lg:max-w-5xl">
+                <h1 className="text-2xl md:text-4xl font-semibold font-serif italic tracking-wider drop-shadow-lg md:max-w-2xl lg:max-w-5xl">
                   {slide.title}
                 </h1>
                 <p className="text-sm md:max-w-lg lg:max-w-xl hidden md:block md:text-lg drop-shadow-md">

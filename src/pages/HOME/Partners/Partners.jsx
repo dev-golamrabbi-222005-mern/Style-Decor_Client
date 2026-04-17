@@ -12,7 +12,7 @@ const brandLogos = [amazon, casio, moonstar, randstad, star, startPeople];
 const ServedBrands = () => {
   return (
     <section className="overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Consistent Section Header */}
         <div className="text-center mb-16">
           <span className="text-sm uppercase tracking-[0.3em] text-[#577F84] font-bold">

@@ -26,7 +26,7 @@ const HowItWorks = () => {
 
   return (
     <section className="overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative">
         {/* Decorative Background Element */}
         <div className="absolute top-1/2 left-0 w-full h-px bg-slate-200 hidden lg:block -z-0"></div>
 

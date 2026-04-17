@@ -32,7 +32,7 @@ const Features = () => {
 
   return (
     <section>
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Consistent Header Style */}
         <div className="text-center mb-12">
           <span className="text-sm uppercase tracking-[0.3em] text-[#577F84] font-bold">
@@ -52,7 +52,7 @@ const Features = () => {
               className="group flex flex-col p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-[#577F84]/5 transition-all duration-500 transform hover:-translate-y-1"
             >
               {/* Icon Container */}
-              <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#577F84]/10 text-[#577F84] mb-6 group-hover:bg-[#577F84] group-hover:text-white transition-colors duration-300">
+              <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-[#577F84]/10 text-[#577F84] mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <BsCheckCircleFill className="text-xl" />
               </div>
 

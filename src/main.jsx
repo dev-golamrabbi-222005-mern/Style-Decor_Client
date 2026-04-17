@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")).render(
         </QueryClientProvider>
       </AuthProvider>
     </LoadingProvider>
-    <ToastContainer position="top-right" autoClose={2000} />
-    <Toaster position="top-right" toastOptions={{ duration: 2222 }} />
+    <ToastContainer position="bottom-right" autoClose={2000} />
+    <Toaster position="bottom-right" toastOptions={{ duration: 2222 }} />
   </StrictMode>
 );
