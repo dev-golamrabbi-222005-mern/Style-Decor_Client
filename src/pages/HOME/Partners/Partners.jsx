@@ -27,8 +27,8 @@ const ServedBrands = () => {
         {/* Marquee with Gradient Masking */}
         <div className="relative w-full">
           {/* Left & Right Fade Masks */}
-          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white/50 to-transparent rounded-lg z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white/50 to-transparent rounded-lg z-10 pointer-events-none"></div>
 
           <Marquee
             pauseOnHover={true}

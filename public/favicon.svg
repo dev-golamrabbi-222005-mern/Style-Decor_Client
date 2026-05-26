@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Smooth rounded corner clip path for a modern app-icon look -->
+    <clipPath id="icon-clip">
+      <rect x="0" y="0" width="512" height="512" rx="120" />
+    </clipPath>
+  </defs>
+
+  <!-- Background Layer: Premium Slate Sage Green -->
+  <rect width="512" height="512" fill="#577F84" clip-path="url(#icon-clip)" />
+
+  <!-- Monogram Group (Shifted up to balance the text below) -->
+  <g transform="translate(20, -15)">
+    <!-- Architectural 'S' (Crisp, clean structural line) -->
+    <path d="M 235 150 
+             L 165 150 
+             L 165 235 
+             L 235 235 
+             L 235 320 
+             L 165 320" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="24" 
+          stroke-linecap="square" 
+          stroke-linejoin="miter" />
+          
+    <!-- Architectural 'D' (Perfect geometric half-square/arch) -->
+    <path d="M 275 320 
+             L 275 150 
+             L 320 150 
+             A 85 85 0 0 1 320 320 
+             Z" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-width="24" 
+          stroke-linecap="square" 
+          stroke-linejoin="miter" />
+
+    <!-- Thin structural divider line representing architectural balance -->
+    <line x1="255" y1="130" x2="255" y2="340" stroke="#FFFFFF" stroke-width="4" opacity="0.3" />
+  </g>
+
+  <!-- Bottom Brand Typography: Clean, Modern Editorial Style -->
+  <text x="256" y="445" 
+        fill="#FFFFFF" 
+        font-family="'Inter', 'Helvetica Neue', sans-serif" 
+        font-size="30" 
+        font-weight="600" 
+        letter-spacing="14" 
+        text-anchor="middle" 
+        opacity="0.9">STYLE DECOR</text>
+</svg>
